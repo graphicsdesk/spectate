@@ -1,0 +1,20 @@
+{
+  "name": "spectate",
+  "version": "0.0.0",
+  "description": "Spectate is a generator for scaffolding a development environment to build freeform Spectator stories.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spec-journalism/spectate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spec-journalism/spectate/issues"
+  },
+  "homepage": "https://github.com/spec-journalism/spectate#readme"
+}
