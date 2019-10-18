@@ -10,37 +10,20 @@ spectate create   create a project in the current directory from a template
 
 ## Setup
 
-### 1. Git and GitHub permissions
+0. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
-Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+1. Make a [GitHub](https://github.com) account. Ask Jason or Raeedah to add you to this `spec-journalism` organization.
 
-Make a [GitHub](https://github.com) account. Ask Jason Kao or Raeedah Wahid to add you to this `spec-journalism` organization.
+2. Set up an SSH key to be able to contribute to repositories. Follow the instructions in the first five sections of [Connecting to GitHub with SSH](https://help.github.com/en/articles/connecting-to-github-with-ssh).
 
-Next, to be able to contribute to the repositories in this organization, set up an SSH key. Follow the instructions in the first five sections of [Connecting to GitHub with SSH](https://help.github.com/en/articles/connecting-to-github-with-ssh) (from "Checking for existing SSH keys" to "Testing your SSH connection").
+3. Install [Node](https://nodejs.org/en/).
 
-### 2. Install Node
-
-Install Node from https://nodejs.org/en/.
-
-### 3. Install Python and pipenv
-
-Make sure you have [Python 3](https://www.python.org/downloads/) installed.
-
-Then, install [pipenv](https://pipenv.readthedocs.io/en/latest/).
-
-### 4. Install Spectate
-
-Clone Spectate by running this command in the Terminal:
+4. Clone Spectate by running this command in the Terminal:
 ```
 git clone git@github.com:spec-journalism/spectate.git ~/spectate
 ```
 
-Go to the Spectate directory:
-```
-cd ~/spectate
-```
-
-Make the `spectate` command available everywhere:
+5. Go to the Spectate directory `cd ~/spectate`. Make the `spectate` command available everywhere:
 ```
 npm link
 ```
