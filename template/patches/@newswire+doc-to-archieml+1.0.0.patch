@@ -1,0 +1,25 @@
+diff --git a/node_modules/@newswire/doc-to-archieml/index.js b/node_modules/@newswire/doc-to-archieml/index.js
+index ca5c4d2..c6bc95f 100644
+--- a/node_modules/@newswire/doc-to-archieml/index.js
++++ b/node_modules/@newswire/doc-to-archieml/index.js
+@@ -9,12 +9,19 @@ function readParagraphElement(element) {
+   // sometimes it's not there, skip this all if so
+   if (textRun) {
+     // sometimes the content isn't there, and if so, make it an empty string
+-    const content = textRun.content || '';
++    let content = textRun.content || '';
+ 
+     // step through optional text styles to check for an associated URL
+     if (!textRun.textStyle) return content;
++
++    if (textRun.textStyle.bold)
++      content = `<b>${content}</b>`;
++    if (textRun.textStyle.italic)
++      content = `<i>${content}</i>`;
++
+     if (!textRun.textStyle.link) return content;
+     if (!textRun.textStyle.link.url) return content;
++    if (textRun.textStyle.link.url.includes('.jpg')) return content;
+ 
+     // if we got this far there's a URL key, grab it...
+     const url = textRun.textStyle.link.url;

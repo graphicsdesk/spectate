@@ -1,0 +1,19 @@
+{
+  "headline": "Decades of Uncertainty",
+  "deck": "A visual history of the linguistics major",
+  "date": "October 16, 2019",
+  "byline": "By Seyla Phan and Jason Kao",
+  "top": {},
+  "body": [
+    {
+      "type": "text",
+      "value": "Lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead lead. Here’s what happened."
+    },
+    {
+      "type": "graphic",
+      "value": {
+        "asset": "linguistics.html"
+      }
+    }
+  ]
+}

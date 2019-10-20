@@ -1,0 +1,51 @@
+$georgia: Georgia, serif;
+$graphik: Graphik, arial, helvetica, sans-serif;
+
+@font-face {
+  font-family: Georgia;
+  src: url('https://spectator-fonts.s3.amazonaws.com/Georgia.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Georgia;
+  src: url('https://spectator-fonts.s3.amazonaws.com/Georgia+Italic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Georgia;
+  src: url('https://spectator-fonts.s3.amazonaws.com/Georgia+Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Graphik;
+  src: url('https://spectator-fonts.s3.amazonaws.com/Graphik-400-Regular.otf') format('opentype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Graphik;
+  src: url('https://spectator-fonts.s3.amazonaws.com/Graphik-600-Semibold.otf') format('opentype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Graphik;
+  src: url('https://spectator-fonts.s3.amazonaws.com/Graphik-700-Bemibold.otf') format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Playfair Display;
+  src: url('https://spectator-fonts.s3.amazonaws.com/PlayfairDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Playfair Display;
+  src: url('https://spectator-fonts.s3.amazonaws.com/PlayfairDisplay-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
