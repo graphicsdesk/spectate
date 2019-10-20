@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "patch-package",
     "dev": "parcel src/index.html --global script",
-    "build": "parcel build src/index.html --global script --public-url https://spectator-static-assets.s3.amazonaws.com/ai2html/"
+    "build": "parcel build src/index.html --global script --public-url ."
   },
   "repository": {
     "type": "git",
