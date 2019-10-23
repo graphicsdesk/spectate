@@ -10,7 +10,6 @@ $fade-transition-duration: 0.25s;
 
 body {
   margin: 0;
-  padding-bottom: 40px; 
 }
 
 h1, p {
@@ -48,7 +47,7 @@ b {
   margin-bottom: 60px;
 
   header {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.6);
     max-width: 760px;
     color: #fff;
     transform: translateY(-150%); // TODO: do better;
@@ -141,6 +140,33 @@ header {
 
   .inline-credits {
     font-weight: 600;
+  }
+}
+
+@media (max-width: 500px) {
+  header .headline {
+    font-size: 46px;
+    margin-bottom: 7px;
+  }
+}
+
+.inline-credits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  margin-bottom: 30px;
+
+  span {
+    font-weight: 600;
+    font-family: $graphik;
+    font-size: 16px;
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  a {
+    color: #121212;
   }
 }
 
