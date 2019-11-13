@@ -1,4 +1,5 @@
 {
+  "html_output_path": "../src/",
   "fonts": [
     {
       "aifont": "Roboto-Regular",
