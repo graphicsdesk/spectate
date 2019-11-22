@@ -95,8 +95,7 @@ async function readDoc(auth) {
     LOCALS_FILLER_STR,
     JSON.stringify({
       ...doc,
-      DOC_URL: config.DOC_URL,
-      USE_COVER_HED: config.USE_COVER_HED,
+      ...config,
     }),
   );
 
