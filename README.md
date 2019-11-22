@@ -27,3 +27,13 @@ git clone git@github.com:spec-journalism/spectate.git ~/spectate
 ```
 npm link
 ```
+
+## Usage
+
+0. Configure config.yml and package.json.
+
+1. `npm install`
+
+2. `make`
+
+3. `npm run dev`
