@@ -30,9 +30,11 @@ npm link
 
 ## Usage
 
-0. Configure config.yml and package.json.
+0. Configure `config.yml` and `package.json`.
 
 1. `npm install`
+
+2. Copy over `credentials.json` and `token.json`
 
 2. `make`
 
