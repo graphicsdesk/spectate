@@ -39,3 +39,7 @@ npm link
 2. `make`
 
 3. `npm run dev`
+
+## ai2html
+
+1. Name each artboard the width it represents.
