@@ -18,6 +18,7 @@ spectate create   create a project in the current directory from a template
 
 3. Install [Node](https://nodejs.org/en/).
 
+<!--
 4. Clone Spectate by running this command in the Terminal:
 ```
 git clone git@github.com:spec-journalism/spectate.git ~/spectate
@@ -27,6 +28,7 @@ git clone git@github.com:spec-journalism/spectate.git ~/spectate
 ```
 npm link
 ```
+-->
 
 ## Usage
 
