@@ -1,4 +1,4 @@
-/* These stylels remove the Ellipsis default styles for a web page */
+/* These styles remove the Ellipsis default styles for a web page */
 
 .pb-container {
     width: 100%;
@@ -29,4 +29,9 @@
 
 .pb-f-eye-lead-template-article-text .tli-wrapper img {
     margin: 0 !important;
+}
+
+// So contributor pages don't embed the code
+.pb-f-author-story-list .twolines {
+    display: none;
 }
