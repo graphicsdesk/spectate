@@ -100,6 +100,12 @@ async function readDoc(auth) {
   );
 
   await fsPromise.writeFile(
+    path.join(process.cwd(), './data/doc.json'),
+    JSON.stringify(doc),
+  );
+  console.log('[download-doc] Successfully wrote ./data/doc.json');
+
+  await fsPromise.writeFile(
     path.join(process.cwd(), '.posthtmlrc'),
     phConfig
   );
