@@ -36,9 +36,9 @@ npm link
 
 1. `npm install`
 
-2. Copy over `credentials.json` and `token.json`
+2. Follow Step 1 of the [Node.js Google Docs API quickstart](https://developers.google.com/docs/api/quickstart/nodejs). Download `credentials.json` into the `process/` directory.
 
-2. `make`
+2. `make download`
 
 3. `npm run dev`
 
