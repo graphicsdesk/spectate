@@ -52,9 +52,17 @@ b {
     color: #fff;
     transform: translateY(-150%); // TODO: do better;
     align-items: center;
+    
+    p, h1 {
+       color: #fff;
+    }
 
     .byline {
       text-align: center;
+      
+      a {
+        color: #fff;
+      }
     }
   }
 }
