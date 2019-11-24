@@ -18,6 +18,8 @@ spectate create   create a project in the current directory from a template
 
 3. Install [Node](https://nodejs.org/en/).
 
+4. Install [ai2html](http://ai2html.org/)
+
 <!--
 4. Clone Spectate by running this command in the Terminal:
 ```
