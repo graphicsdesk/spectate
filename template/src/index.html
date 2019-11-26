@@ -81,12 +81,6 @@
                       });
                   }
               } catch(e) { console.log(e); }
-              if (window.innerWidth <= 460 && window.innerWidth >= 360) {
-                console.log('hi');
-                document.getElementById('g-linguistics-1-300').style.maxWidth = '360px';
-                document.getElementById('g-linguistics-2-300').style.maxWidth = '360px';
-                document.getElementById('g-linguistics-3-300').style.maxWidth = '360px';
-              }
           }
           document.addEventListener('DOMContentLoaded', resizer);
           // feel free to replace throttle with _.throttle, if available
@@ -113,7 +107,7 @@
                       previous = now;
                       result = func.apply(context, args);
                       if (!timeout) context = args = null;
-                  } else if (!timeout && options.trailing !== false) {
+                  } else if (!timeout /* && options.trailing !== false */ ) {
                       timeout = setTimeout(later, remaining);
                   }
                   return result;

@@ -20,6 +20,8 @@ spectate create   create a project in the current directory from a template
 
 4. Install [ai2html](http://ai2html.org/)
 
+5. Have a text editor like [Sublime](https://www.sublimetext.com/)
+
 <!--
 4. Clone Spectate by running this command in the Terminal:
 ```
