@@ -1,6 +1,6 @@
 # Spectate
 
-Spectate is a soon-to-be released generator for scaffolding a development environment to build freeform Spectator stories. Check out these examples: [Linguistics Major](https://github.com/spec-journalism/linguistics-major), [Interdisciplinary Departments](https://github.com/spec-journalism/interdisciplinary-departments). The template doc is [here](https://docs.google.com/document/d/1vs_o7MAt1vQ8X6-zCapFXne5B-wosLb__7opChId4J4/edit).
+Spectate is a soon-to-be released generator for scaffolding a development environment to build freeform Spectator stories. Check out these examples: [Linguistics Major](https://github.com/spec-journalism/linguistics-major), [Union Theological Seminary](https://github.com/spec-journalism/uts). The template doc is [here](https://docs.google.com/document/d/1vs_o7MAt1vQ8X6-zCapFXne5B-wosLb__7opChId4J4/edit).
 
 Spectate usage:
 ```
