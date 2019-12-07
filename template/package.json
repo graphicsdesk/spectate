@@ -10,8 +10,6 @@
     "build": "parcel build src/index.html --global script --public-url ."
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@newswire/doc-to-archieml": "^1.0.0",
     "cssnano": "^4.1.10",
