@@ -4,7 +4,7 @@
       <img src="{{ item.value.asset }}" />
       <div class="image-overlay" id="overlay">
         <div class="caption-text-container">
-          <p class="image-caption">
+          <p class="image-caption-text">
             {{ item.value.caption }}
           </p>
         </div>
@@ -16,13 +16,15 @@
 <else>
   <div class="image width-{{ item.value.width }}">
     <img src="{{ item.value.asset }}" />
-    <p class="image-caption">
-      {{ item.value.caption }}
-      <!--
-      <span class="image-credit">
-        Photography by {{ item.value.credit}}
-      </span>
-      -->
-    </p>
+    <if condition="item.value.image-caption">
+      <p class="image-caption-text">
+        {{ item.value.caption }}
+        <!--
+        <span class="image-credit">
+          Photography by {{ item.value.credit}}
+        </span>
+        -->
+      </p>
+    </if>
   </div>
 </else>

@@ -26,4 +26,4 @@ export function hamburgerTrigger() {
 
 // Text balance headline and deck
 
-textBalancer.balanceText('.headline, .deck, .image-overlay .image-caption');
+textBalancer.balanceText('.headline, .deck, .image-overlay .image-caption-text');
