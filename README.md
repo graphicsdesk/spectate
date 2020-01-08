@@ -37,11 +37,18 @@ spectate config-docs
 
 1. In the terminal, create a new directory with the article slug as the name.
 
-2. Move into the directory, and run `spectate create`.
+2. Move into the directory, and run:
+```
+spectate create
+```
 
 3. Configure `config.yml` and `package.json`. Then, you can run `npm run dev`.
 
-4. Create a new repository in **@spec-journalism** with the article slug as its name. Run `spectate init` and enter the name of the new slug.
+4. Create a new repository in **@spec-journalism** with the article slug as its name. Then, set up the remotes and push (make sure there is an initial commit).
+```
+spectate init # you will be prompted to enter the name of the new repository
+git push -u origin master
+```
 
 ## ai2html
 
