@@ -52,12 +52,10 @@ spectate_init() {
   git remote -v
 }
 
-# spectate_update
-
 case $COMMAND in
   init) spectate_init ;;
-  create) spectate_create ;;
+  create) spectate_update
+    spectate_create ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
-
   *) echo "Unknown command: $COMMAND" ;;
 esac
