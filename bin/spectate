@@ -12,17 +12,21 @@ log() {
   echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')] ${BOLD}$1${CLEAR}\n"
 }
 
+spectate_update() {
+  log "Updating Spectate..."
+}
+
 spectate_create() {
-  log "Copying default template"
+  log "Copying default template..."
   cp -vR "$SPECTATE_ROOT/template"/. .
 
   if [ -f package.json ]; then
-    log "Installing node packages"
+    log "Installing node packages..."
     npm install
   fi
 
   if [ ! -d ".git" ]; then
-    log "Initiating git repository"
+    log "Initiating git repository..."
     git init
   fi
 
@@ -31,5 +35,6 @@ spectate_create() {
 }
 
 case $COMMAND in
-  create) spectate_create ;;
+  create) spectate_update
+    spectate_create ;;
 esac
