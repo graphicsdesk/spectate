@@ -35,7 +35,7 @@ spectate_create() {
   git status
 }
 
-spectate_update
+# spectate_update
 
 case $COMMAND in
   create) spectate_create ;;
