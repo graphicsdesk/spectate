@@ -1,0 +1,35 @@
+#!/bin/bash
+
+OLDWD="$PWD"
+cd "$(dirname $(which spectate))" && cd "$(dirname $(readlink spectate))/.."
+SPECTATE_ROOT="$PWD"
+cd "$OLDWD"
+
+COMMAND=$1
+
+CYAN='\033[36m'; BOLD='\033[1m'; CLEAR='\033[0m'
+log() {
+  echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')] ${BOLD}$1${CLEAR}\n"
+}
+
+spectate_create() {
+  log "Copying default template"
+  cp -vR "$SPECTATE_ROOT/template"/. .
+
+  if [ -f package.json ]; then
+    log "Installing node packages"
+    npm install
+  fi
+
+  if [ ! -d ".git" ]; then
+    log "Initiating git repository"
+    git init
+  fi
+
+  git add .
+  git status
+}
+
+case $COMMAND in
+  create) spectate_create ;;
+esac
