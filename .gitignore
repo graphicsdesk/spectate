@@ -2,5 +2,7 @@
 .cache
 dist
 node_modules
+
+keys
 credentials.json
 token.json
