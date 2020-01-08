@@ -64,4 +64,6 @@ case $COMMAND in
   init) spectate_init ;;
   create) spectate_create ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
+
+  *) echo "Unknown command: $COMMAND" ;;
 esac
