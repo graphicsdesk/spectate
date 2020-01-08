@@ -7,9 +7,9 @@ cd "$OLDWD"
 
 COMMAND=$1
 
-CYAN='\033[36m'; BOLD='\033[1m'; CLEAR='\033[0m'
+CYAN='\033[36m'; BOLD='\033[1m'; NOCOLOR='\033[0m'
 log() {
-  echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')] ${BOLD}$1${CLEAR}\n"
+  echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')] ${BOLD}$1${NOCOLOR}\n"
 }
 
 spectate_update() {
@@ -17,8 +17,9 @@ spectate_update() {
 }
 
 spectate_create() {
-  log "Copying default template..."
+  log "Copying default template and keys..."
   cp -vR "$SPECTATE_ROOT/template"/. .
+  cp -vR "$SPECTATE_ROOT/keys"/*.json ./process
 
   if [ -f package.json ]; then
     log "Installing node packages..."
@@ -34,7 +35,9 @@ spectate_create() {
   git status
 }
 
+spectate_update
+
 case $COMMAND in
-  create) spectate_update
-    spectate_create ;;
+  create) spectate_create ;;
+  config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
 esac
