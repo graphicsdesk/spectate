@@ -37,13 +37,11 @@ spectate config-docs
 
 1. In the terminal, create a new directory with the article slug as the name.
 
-2. Move into the directory, and run `spectate create`
+2. Move into the directory, and run `spectate create`.
 
-3. TK: Set up remote
+3. Configure `config.yml` and `package.json`. Then, you can run `npm run dev`.
 
-4. Configure `config.yml` and `package.json`.
-
-5. `npm run dev`
+4. Create a new repository in **@spec-journalism** with the article slug as its name. Run `spectate init` and enter the name of the new slug.
 
 ## ai2html
 
