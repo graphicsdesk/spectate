@@ -1,7 +1,7 @@
 {
   "name": "spectate",
   "version": "0.0.0",
-  "description": "Spectate is a generator for scaffolding a development environment to build freeform Spectator stories.",
+  "description": "Spectate is a tool for building freeform Spectator stories.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/spec-journalism/spectate.git"
