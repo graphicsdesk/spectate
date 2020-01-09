@@ -53,9 +53,20 @@ spectate_init() {
 }
 
 case $COMMAND in
-  init) spectate_init ;;
   create) spectate_update
     spectate_create ;;
+  init) spectate_init ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
-  *) echo "Unknown command: $COMMAND" ;;
+
+  *) 
+    if [ -z $COMMAND ]; then
+      echo "usage: spectate <command>"
+      echo
+      echo "These are common Spectate commands:"
+      echo "  create        Create a project from a template"
+      echo "  init          Add git remotes"
+      echo "  config-docs   Reset Google Docs authentication"
+    else
+      echo "Unknown command: $COMMAND"
+    fi
 esac
