@@ -1,24 +1,25 @@
-# TK
+# SLUG
 
-## Setup
+This story was created with [Spectate](https://github.com/spec-journalism/spectate).
 
-0. Make sure you have first done the setup instructions for [Spectate](https://github.com/spec-journalism/spectate).
+## Usage
 
-1. Clone the repository
+Make sure you have completed the setup and creation instructions for Spectate. To start the development server, run:
 ```
-git clone git@github.com:spec-journalism/TK.git
+npm run dev
 ```
 
-2. Go into the repository: `cd TK`
+To download the Google Doc again, run:
+```
+make download
+```
 
-3. Run `npm install`
+## Deploying to Arc
 
-## Deploy
+1. Set the slug values in `make upload-assets`. In `package.json`, set `--public-url` to the S3 link. Delete `div#spectate-dev-footer`.
 
-0. Set the slug values in `make upload-assets`. In `package.json`, set `--public-url` to the S3 link. Delete `div#spectate-dev-footer`.
+2. Uncomment the appropriate override stylesheet in `styles.scss`.
 
-1. Uncomment the stylesheet for The Eye or News in `styles.scss`.
+3. Run `make deploy`.
 
-1. Run `make deploy`.
-
-2. Copy the contents of `dist/index.html` into Ellipsis.
+4. Copy the contents of `dist/index.html` into Ellipsis.
