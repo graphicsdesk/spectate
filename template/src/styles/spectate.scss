@@ -379,9 +379,10 @@ header {
 }
 
 .subhed {
-  margin-top: 40px;
+  margin: 40px auto 20px;
   font-family: $georgia;
-  font-size: 22px;
+  font-size: 25px;
+  text-align: center;
   line-height: 1.63;
   font-weight: bold;
 }
