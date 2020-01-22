@@ -14,6 +14,11 @@ To download the Google Doc again, run:
 make download
 ```
 
+To update the Makefile, run:
+```
+spectate update
+```
+
 ## Deploying to the web
 
 ### GitHub Pages
