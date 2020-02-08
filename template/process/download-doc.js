@@ -96,6 +96,7 @@ async function readDoc(auth) {
     JSON.stringify({
       top: {},
       credits: '',
+      footer: '',
       ...doc,
       ...config,
     }),

@@ -9,7 +9,7 @@ Make sure you have completed the setup and creation instructions for Spectate. T
 npm run dev
 ```
 
-To download the Google Doc again, run:
+After changing `config.ylm` values, or to download the Google Doc, run:
 ```
 make download
 ```
