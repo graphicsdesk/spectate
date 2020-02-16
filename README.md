@@ -44,7 +44,7 @@ spectate config-docs
 spectate create
 ```
 
-3. Clone the Spectate Doc template. Put the new doc's URL into the `DOC_URL` field in `config.yml`.
+3. Clone the [Spectate Doc template](https://docs.google.com/document/d/1vs_o7MAt1vQ8X6-zCapFXne5B-wosLb__7opChId4J4/edit). Put the new doc's URL into the `DOC_URL` field in `config.yml`.
 
 4. Set the `name` field in `package.json` to the article slug.
 
