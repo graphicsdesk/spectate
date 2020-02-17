@@ -56,7 +56,7 @@ spectate_init() {
 case $COMMAND in
   update) spectate_update ;;
   create) spectate_create ;;
-  # init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
+  init2) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
   init) spectate_init ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
 
