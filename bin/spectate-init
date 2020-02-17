@@ -17,7 +17,7 @@ spectate_init() {
   git remote -v
 }*/
 
-const fs = require('fs').promises;
+const fs = require('fs');
 const readline = require('readline');
 
 const rl = readline.createInterface(process.stdin, process.stdout);
@@ -38,7 +38,6 @@ function retry(fn, retries = 5, err = null) {
   return fn()
     .catch(err => retry(fn, (retries - 1), err))
 }
-console.log();
 retry(() => question('Enter a slug: '))
   .then(line => setFileKey('package.json', 'name', line))
   .then(() => question('Enter the Google Docs URL: '))
@@ -49,13 +48,13 @@ retry(() => question('Enter a slug: '))
     rl.close();
   });
 
-async function setFileKey(filename, key, value) {
-  let file = await fs.readFile(filename);
-  file = JSON.parse(file);
-  await fs.writeFile(filename, JSON.stringify(file, null, 2))
-    .then(() => console.log(JSON.stringify(file, null, 2)))
-    .catch(err => {
-      if (err)
-        console.error(err);
-    });
-};
+// TODO: Promisify
+function setFileKey(filename, key, value) {
+  const file = JSON.parse(fs.readFileSync(filename).toString());
+  file[key] = value;
+  fs.writeFile(filename, JSON.stringify(file, null, 2), err => {
+    if (err)
+      console.error(err);
+    console.log(JSON.stringify(file, null, 2));
+  });
+}
