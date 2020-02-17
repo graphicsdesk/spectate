@@ -36,10 +36,28 @@ spectate_create() {
   git status
 }
 
+spectate_init() {
+  SLUG=
+  # Slug prompt
+  while [ -z "$SLUG" ]; do
+    echo -n "Enter a slug: "
+    read SLUG
+
+    if [[ $(git ls-remote "git@github.com:spec-journalism/$SLUG" 2>&1 | head -n 1) == "ERROR:"* ]]; then
+      echo "@spec-journalism/$SLUG does not exist."
+      SLUG=
+    fi
+  done
+
+  git remote add origin "git@github.com:spec-journalism/$SLUG.git"
+  git remote -v
+}
+
 case $COMMAND in
   update) spectate_update ;;
   create) spectate_create ;;
-  init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
+  # init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
+  init) spectate_init ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
 
   *) 
