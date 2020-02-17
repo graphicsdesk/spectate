@@ -16,19 +16,21 @@ Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019
 
 4. Install [Node](https://nodejs.org/en/)
 
-5. Clone the Spectate repository:
+## Setup
+
+1. Clone the Spectate repository:
 ```
 git clone git@github.com:spec-journalism/spectate.git ~/spectate
 ```
 
-6. Move into the Spectate directory, install the necessary dependencies, and make the `spectate` command available everywhere:
+2. Move into the Spectate directory, install the necessary dependencies, and make the `spectate` command available everywhere:
 ```
 cd ~/spectate
 npm install
 npm link
 ```
 
-7. Lastly, we need to configure Google Docs access. Follow Step 1 of the [Node Google Docs quickstart](https://developers.google.com/docs/api/quickstart/nodejs), saving `credentials.json` into the `~/spectate/keys/` directory. Then, run:
+3. Lastly, we need to configure Google Docs access. Follow Step 1 of the [Node Google Docs quickstart](https://developers.google.com/docs/api/quickstart/nodejs), saving `credentials.json` into the `~/spectate/keys/` directory. Then, run:
 ```
 spectate config-docs
 ```
@@ -42,7 +44,7 @@ spectate config-docs
 spectate create
 ```
 
-3. Clone the Spectate Doc template. Put the new doc's URL into the `DOC_URL` field in `config.yml`.
+3. Clone the [Spectate Doc template](https://docs.google.com/document/d/1vs_o7MAt1vQ8X6-zCapFXne5B-wosLb__7opChId4J4/edit). Put the new doc's URL into the `DOC_URL` field in `config.yml`.
 
 4. Set the `name` field in `package.json` to the article slug.
 
