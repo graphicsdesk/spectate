@@ -1,7 +1,7 @@
 import enterView from 'enter-view';
 import textBalancer from 'text-balancer';
 
-import { USE_COVER_HED } from '../config.yml';
+import { USE_COVER_HED } from '../config.json';
 
 // Fade in navbar at scroll trigger
 

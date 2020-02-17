@@ -10,7 +10,7 @@ const { docToArchieML } = require('@newswire/doc-to-archieml');
 const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
 const TOKEN_PATH = 'token.json';
 
-const config = YAML.parse(fs.readFileSync(process.cwd() + '/config.yml').toString());
+const config = JSON.parse(fs.readFileSync(process.cwd() + '/config.json').toString());
 const documentId = config.DOC_URL.match(/[-\w]{25,}/)[0];
 
 // Load client secrets from a local file.
