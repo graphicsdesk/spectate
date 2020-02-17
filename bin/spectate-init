@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+/*
+spectate_init() {
+  SLUG=
+  # Slug prompt
+  while [ -z "$SLUG" ]; do
+    echo -n "Enter a slug: "
+    read SLUG
+
+    if [[ $(git ls-remote "git@github.com:spec-journalism/$SLUG" 2>&1 | head -n 1) == "ERROR:"* ]]; then
+      echo "@spec-journalism/$SLUG does not exist."
+      SLUG=
+    fi
+  done
+
+  git remote add origin "git@github.com:spec-journalism/$SLUG.git"
+  git remote -v
+}*/
+
+const fs = require('fs');
+// const fsPromise = fs.promises;
+const readline = require('readline');
+const rl = readline.createInterface(process.stdin, process.stdout);
+
+rl.setPrompt('Enter a slug: ');
+rl.prompt();
+rl.on('line', line => {
+  if (line.length > 0) {
+    rl.close();
+    setFileKey('./package.json', 'name', slug);
+    // TODO: GIT REMOTES
+  }
+  else
+    rl.prompt();
+});
+
+// TODO: Promisify
+function setFileKey(filename, key, value) {
+  const file = JSON.parse(fs.readFileSync(filename).toString());
+  file[key] = value;
+  fs.writeFile(filename, JSON.stringify(file, null, 2), err => {
+    if (err)
+      console.error(err);
+    console.log(JSON.stringify(file, null, 2));
+  });
+}
