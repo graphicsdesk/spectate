@@ -53,17 +53,17 @@ spectate create
 
 3. In GitHub, create a new repository in the `spec-journalism` organization with `SLUG` as the name.
 
-3. Clone the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit).
+4. Clone the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit).
 
-4. Run `spectate init`, which will ask you for the slug and the new Google Docs link.
+5. Run `spectate init`, which will ask you for the slug and the new Google Docs link.
 
-4. Create the first commit, and push it to GitHub.
+6. Create the first commit, and push it to GitHub.
 ```
 git commit -m "Initial commit"
 git push -u origin master
 ```
 
-6. Run `make download` to download the contents of the Google Doc. Run `npm run dev` to start the development server.
+7. Run `make download` to download the contents of the Google Doc. Run `npm run dev` to start the development server.
 
 ## ai2html
 
