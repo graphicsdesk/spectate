@@ -41,7 +41,7 @@ function retry(fn, retries = 5, err = null) {
 
 const { exec } = require('child_process');
 
-const googleDocsRegex = /docs\.google\.com\/document\/d\/[-\w]{25,}/;
+const googleDocsRegex = /docs\.google\.com\/document(\/u\/\d)?\/d\/[-\w]{25,}/;
 
 function main() {
   retry(() => question('Enter a slug: '))
