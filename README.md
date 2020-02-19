@@ -23,34 +23,42 @@ Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019
 git clone git@github.com:spec-journalism/spectate.git ~/spectate
 ```
 
-2. Move into the Spectate directory, install the necessary dependencies, and make the `spectate` command available everywhere:
+2. Move into the Spectate directory, and install the necessary dependencies
 ```
 cd ~/spectate
 npm install
+```
+
+3. Make the `spectate` command available everywhere:
+```
 npm link
 ```
 
-3. Lastly, we need to configure Google Docs access. Follow Step 1 of the [Node Google Docs quickstart](https://developers.google.com/docs/api/quickstart/nodejs), saving `credentials.json` into the `~/spectate/keys/` directory. Then, run:
+4. Lastly, we need to configure Google Docs access. Follow Step 1 of the [Node Google Docs quickstart](https://developers.google.com/docs/api/quickstart/nodejs), saving `credentials.json` into the `~/spectate/keys/` directory. Then, run:
 ```
 spectate config-docs
 ```
 
 ## Creating a Spectate project
 
-1. In the terminal, create a new directory with the article slug as the name.
+1. In the terminal, create a new directory with the article slug as the name (replace SLUG with the article slug).
+```
+mkdir SLUG
+```
 
-2. Move into the directory, and run:
+2. Move into that directory (`cd SLUG`) and run:
 ```
 spectate create
 ```
 
-3. Clone the [Spectate Doc template](https://docs.google.com/document/d/1vs_o7MAt1vQ8X6-zCapFXne5B-wosLb__7opChId4J4/edit). Put the new doc's URL into the `DOC_URL` field in `config.yml`.
+3. In GitHub, create a new repository in the `spec-journalism` organization with `SLUG` as the name.
 
-4. Set the `name` field in `package.json` to the article slug.
+3. Clone the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit).
 
-5. Create a new repository in **@spec-journalism** with the article slug as its name. Then, set up the remotes and push
+4. Run `spectate init`, which will ask you for the slug and the new Google Docs link.
+
+4. Create the first commit, and push it to GitHub.
 ```
-spectate init # you will be prompted to enter the name of the new repository
 git commit -m "Initial commit"
 git push -u origin master
 ```
