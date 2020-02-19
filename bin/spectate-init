@@ -1,24 +1,8 @@
 #!/usr/bin/env node
-/*
-spectate_init() {
-  SLUG=
-  # Slug prompt
-  while [ -z "$SLUG" ]; do
-    echo -n "Enter a slug: "
-    read SLUG
-
-    if [[ $(git ls-remote "git@github.com:spec-journalism/$SLUG" 2>&1 | head -n 1) == "ERROR:"* ]]; then
-      echo "@spec-journalism/$SLUG does not exist."
-      SLUG=
-    fi
-  done
-
-  git remote add origin "git@github.com:spec-journalism/$SLUG.git"
-  git remote -v
-}*/
 
 const fs = require('fs');
 const readline = require('readline');
+const { exec } = require('child_process');
 
 const rl = readline.createInterface(process.stdin, process.stdout);
 
@@ -38,8 +22,6 @@ function retry(fn, retries = 5, err = null) {
   return fn()
     .catch(err => retry(fn, (retries - 1), err))
 }
-
-const { exec } = require('child_process');
 
 const googleDocsRegex = /docs\.google\.com\/document(\/u\/\d)?\/d\/[-\w]{25,}/;
 

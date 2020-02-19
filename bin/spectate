@@ -41,6 +41,7 @@ case $COMMAND in
   create) spectate_create ;;
   init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
+  # download) node $SPECTATE_ROOT/bin/spectate-download "$@" ;;
 
   *) 
     if [ -z $COMMAND ]; then
