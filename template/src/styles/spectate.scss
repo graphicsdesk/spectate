@@ -480,6 +480,10 @@ header {
   margin: 30px auto;
 }
 
+.story-top .graphic:first-child {
+  margin-top: 0;
+}
+
 .spectate-dev-footer {
   position: fixed;
   bottom: 20px;

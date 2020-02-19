@@ -14,6 +14,20 @@
 
   <include src="partials/navbar.html"></include>
 
+  <div class="story-top">
+    <each loop="item in top">
+      <switch expression="item.type">
+        <case n="'graphic'">
+          <div class="graphic">
+            <if condition="item.value.asset === 'graphic-name.html'">
+              <include src="graphic-name.html"></include>
+            </if>
+          </div>
+        </case>
+      </switch>
+    </each>
+  </div>
+
   <if condition="USE_COVER_HED">    
     <include src="partials/header-cover.html"></include>
   </if>
