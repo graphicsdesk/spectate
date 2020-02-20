@@ -13,7 +13,8 @@
     "spectate": "./bin/spectate"
   },
   "homepage": "https://github.com/spec-journalism/spectate#readme",
-  "devDependencies": {
-    "googleapis": "^46.0.0"
+  "dependencies": {
+    "googleapis": "^47.0.0",
+    "opn": "^6.0.0"
   }
 }
