@@ -8,13 +8,15 @@ Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019
 
 ## Prerequisites
 
-1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
 2. Make a [GitHub](https://github.com) account. Ask Jason or Raeedah to add you to the `spec-journalism` organization.
 
 3. To be able to write to our repositories, set up an SSH key. Follow the instructions in the first five sections of [Connecting to GitHub with SSH](https://help.github.com/en/articles/connecting-to-github-with-ssh).
 
-4. Install [Node](https://nodejs.org/en/)
+4. Install [Node](https://nodejs.org/en/).
+
+5. Install a text editor to work with plaintext files. [Sublime Text](https://www.sublimetext.com/) and [Visual Studio Code](https://code.visualstudio.com/) are good options.
 
 ## Setup
 
