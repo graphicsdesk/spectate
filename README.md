@@ -67,6 +67,14 @@ git push -u origin master
 
 7. Run `make download` to download the contents of the Google Doc. Run `npm run dev` to start the development server.
 
+## Cloning a Spectate project
+
+_In progress._
+
+1. `git clone ...`
+
+2. `spectate copy-keys`?
+
 ## ai2html
 
 1. Name each artboard the width it represents.
