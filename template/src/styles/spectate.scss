@@ -351,10 +351,12 @@ header {
       box-shadow:
         0 -10px white, // White shadow to mask top box-shadow
         $navbar-shadow;
+      flex: 1 0 auto;
     }
 
     .logo-container {
       border-bottom: 1px solid #ddd;
+      flex: 1 0 auto;
     }
   }
 
