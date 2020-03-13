@@ -62,7 +62,7 @@ create_ghp_branch() {
   fi
 }
 
-spectate_gh_deploy() {
+gh_deploy() {
   create_ghp_branch
   if [[ $(git worktree list) != *"/dist "* ]]; then # No dist worktree
     rm -rf dist
@@ -79,16 +79,27 @@ spectate_gh_deploy() {
   cd ..
 }
 
+upload_assets() {
+  # set_aws_slug
+  # aws s3 rm s3://spectator-static-assets/$(slug)/ --recursive --exclude "*" --include "*" --profile=spec
+  # aws s3 cp dist/ s3://spectator-static-assets/$(slug)/ --recursive --exclude "*" --include "*" --acl=public-read --profile=spec
+}
+
+arc_deploy() {
+  spectate_build
+  upload_assets
+}
+
 case $COMMAND in
   update) spectate_update ;;
   create) spectate_create ;;
   clone) spectate_clone "$@" ;;
-  download) node process/download-doc.js ;;
+  download) node process/download-doc.js ;; # TODO: centralize this function so keys don't have to be copied
   build) spectate_build ;;
-  gh-deploy) spectate_gh_deploy ;;
+  gh-deploy) gh_deploy ;;
+  arc-deploy) arc_deploy ;;
   init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
-  # download) node $SPECTATE_ROOT/bin/spectate-download "$@" ;;
 
   *) 
     if [ -z $COMMAND ]; then
@@ -97,9 +108,12 @@ case $COMMAND in
       echo "These are common Spectate commands:"
       echo "  create        Create a project from a template"
       echo "  init          Set remote links"
-      echo "  config-docs   Reset Google Docs authentication"
-      echo "  build         Clear the contents of dist/ and run `npm run build` "
       echo "  download      Download the Google Doc"
+      echo "  update        Update Spectate itself"
+      echo "  gh-deploy     Deploy to GitHub Pages"
+      echo "  arc-deploy    Build and upload assets to S3"
+      echo "  build         Clear the contents of dist/ and build"
+      echo "  config-docs   Reset Google Docs authentication"
     else
       echo "Unknown command: $COMMAND"
     fi
