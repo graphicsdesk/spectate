@@ -49,7 +49,7 @@ spectate_clone() {
 }
 
 spectate_build() {
-  rm -rf dist/*
+  rm -rf dist/.*
   npm run build
 }
 
@@ -84,6 +84,7 @@ case $COMMAND in
   create) spectate_create ;;
   clone) spectate_clone "$@" ;;
   download) node process/download-doc.js ;;
+  build) spectate_build ;;
   gh-deploy) spectate_gh_deploy ;;
   init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
@@ -97,6 +98,7 @@ case $COMMAND in
       echo "  create        Create a project from a template"
       echo "  init          Set remote links"
       echo "  config-docs   Reset Google Docs authentication"
+      echo "  build         Clear the contents of dist/ and run `npm run build` "
       echo "  download      Download the Google Doc"
     else
       echo "Unknown command: $COMMAND"
