@@ -18,14 +18,7 @@ To re-download the Google Doc, run `make download`.
 
 ### GitHub Pages
 
-1. Create a `gh-pages` branch, return to `master`, and set up the worktree.
-```
-git checkout -b gh-pages
-git checkout master
-make clean
-```
-
-2. Run `make deploy-gh`.
+Run `spectate gh-deploy`, which will ensure that a `dist/` to `gh-pages` working tree exists, and then push changes to `gh-pages`.
 
 ### Arc
 

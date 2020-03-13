@@ -48,11 +48,43 @@ spectate_clone() {
   fi
 }
 
+spectate_build() {
+  rm -rf dist/*
+  npm run build
+}
+
+# Creates a gh-pages branch if it doesn't exist
+create_ghp_branch() {
+  if [[ $(git branch) != *"gh-pages"* ]]; then
+    old_branch=$(git rev-parse --abbrev-ref HEAD)
+    git checkout -b gh-pages
+    git checkout $old_branch
+  fi
+}
+
+spectate_gh_deploy() {
+  create_ghp_branch
+  if [[ $(git worktree list) != *"/dist "* ]]; then # No dist worktree
+    rm -rf dist
+    git worktree prune
+    mkdir dist
+    git worktree add dist gh-pages
+  fi
+
+  spectate_build
+  cd dist
+  git add .
+  git commit -m 'Deploy to gh-pages'
+  git push origin gh-pages
+  cd ..
+}
+
 case $COMMAND in
   update) spectate_update ;;
   create) spectate_create ;;
   clone) spectate_clone "$@" ;;
   download) node process/download-doc.js ;;
+  gh-deploy) spectate_gh_deploy ;;
   init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
   # download) node $SPECTATE_ROOT/bin/spectate-download "$@" ;;
