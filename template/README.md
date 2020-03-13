@@ -2,17 +2,13 @@
 
 This story was created with [Spectate](https://github.com/spec-journalism/spectate).
 
-## Usage
+## Setup and usage
 
-Make sure you have completed the setup and creation instructions for Spectate. To start the development server, run:
-```
-npm run dev
-```
+Run `spectate clone SLUG`, which will clone the repository `spec-journalism/SLUG` into a new directory named `SLUG` and copy over Google Docs keys. Make sure you have first completed the setup and creation instructions for Spectate.
 
-To re-download the Google Doc, run:
-```
-make download
-```
+To start the development server, run `npm run dev` inside the project directory.
+
+To re-download the Google Doc, run `make download` inside the project directory.
 
 ## Deploying to the web
 
