@@ -69,11 +69,7 @@ git push -u origin master
 
 ## Cloning a Spectate project
 
-_In progress._
-
-1. `git clone ...`
-
-2. `spectate copy-keys`?
+Run `spectate clone SLUG`, which will clone the repository `spec-journalism/SLUG` into a new directory named `SLUG` and copy over Google Docs keys.
 
 ## ai2html
 
