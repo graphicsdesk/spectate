@@ -2,9 +2,6 @@
 
 slug = TK
 
-download:
-	node process/download-doc.js
-
 build:
 	rm -rf dist/*
 	npm run build

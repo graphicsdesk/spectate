@@ -65,7 +65,7 @@ git commit -m "Initial commit"
 git push -u origin master
 ```
 
-7. Run `make download` to download the contents of the Google Doc. Run `npm run dev` to start the development server.
+7. Run `spectate download` to download the contents of the Google Doc. Run `npm run dev` to start the development server.
 
 ## Cloning a Spectate project
 
