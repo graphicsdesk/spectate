@@ -13,8 +13,10 @@ log() {
 }
 
 spectate_update() {
-  log "spectate update doesn't do anything yet."
-  # log "Updating Spectate..."
+  log "Updating the spectate repository..."
+  cd "$SPECTATE_ROOT"
+  git pull
+  cd "$OLDWD"
 }
 
 spectate_create() {
