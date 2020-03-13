@@ -13,8 +13,8 @@ log() {
 }
 
 spectate_update() {
+  log "spectate update doesn't do anything yet."
   # log "Updating Spectate..."
-  cp -vR "$SPECTATE_ROOT/template/Makefile" .
 }
 
 spectate_create() {
@@ -36,9 +36,20 @@ spectate_create() {
   git status
 }
 
+spectate_clone() {
+  log "Cloning repository..."
+  if git clone git@github.com:spec-journalism/$2.git ; then
+    log "Copying keys..."
+    cp -vR "$SPECTATE_ROOT/keys"/*.json $2/process
+    log "Installing node packages..."
+    npm --prefix $2 install $2
+  fi
+}
+
 case $COMMAND in
   update) spectate_update ;;
   create) spectate_create ;;
+  clone) spectate_clone "$@" ;;
   init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
   # download) node $SPECTATE_ROOT/bin/spectate-download "$@" ;;
