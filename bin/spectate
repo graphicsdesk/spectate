@@ -80,6 +80,7 @@ gh_deploy() {
 }
 
 upload_assets() {
+  log "NOT IMPLEMENTED: upload_assets to S3"
   # set_aws_slug
   # aws s3 rm s3://spectator-static-assets/$(slug)/ --recursive --exclude "*" --include "*" --profile=spec
   # aws s3 cp dist/ s3://spectator-static-assets/$(slug)/ --recursive --exclude "*" --include "*" --acl=public-read --profile=spec
