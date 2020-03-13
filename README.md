@@ -74,3 +74,19 @@ Run `spectate clone SLUG`, which will clone the repository `spec-journalism/SLUG
 ## ai2html
 
 1. Name each artboard the width it represents.
+
+## Command line options
+
+```
+usage: spectate <command>
+
+These are common Spectate commands:
+  create        Create a project from a template
+  init          Set remote links
+  download      Download the Google Doc
+  update        Update Spectate itself
+  gh-deploy     Deploy to GitHub Pages
+  arc-deploy    Build and upload assets to S3
+  build         Clear the contents of dist/ and build
+  config-docs   Reset Google Docs authentication
+  ```
