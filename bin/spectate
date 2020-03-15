@@ -49,7 +49,7 @@ spectate_clone() {
 }
 
 spectate_build() {
-  rm -rf dist/.*
+  rm -rf dist/*
   npm run build
 }
 
@@ -72,6 +72,7 @@ gh_deploy() {
   fi
 
   spectate_build
+  upload_assets # TODO: remove
   cd dist
   git add .
   git commit -m 'Deploy to gh-pages'
@@ -80,10 +81,10 @@ gh_deploy() {
 }
 
 upload_assets() {
-  log "NOT IMPLEMENTED: upload_assets to S3"
-  # set_aws_slug
-  # aws s3 rm s3://spectator-static-assets/$(slug)/ --recursive --exclude "*" --include "*" --profile=spec
-  # aws s3 cp dist/ s3://spectator-static-assets/$(slug)/ --recursive --exclude "*" --include "*" --acl=public-read --profile=spec
+  slug=$(cat package.json | python -c "import sys, json; print(json.load(sys.stdin)['name'])")
+  # TODO: input for changing aws slug
+  aws s3 rm "s3://spectator-static-assets/$slug/" --recursive --exclude "*" --include "*" --profile=spec
+  aws s3 cp dist/ "s3://spectator-static-assets/$slug/" --recursive --exclude "*" --include "*" --acl=public-read --profile=spec
 }
 
 arc_deploy() {
@@ -99,6 +100,7 @@ case $COMMAND in
   build) spectate_build ;;
   gh-deploy) gh_deploy ;;
   arc-deploy) arc_deploy ;;
+  upload-assets) upload_assets ;;
   init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
 
