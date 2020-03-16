@@ -53,26 +53,42 @@ spectate_build() {
   npm run build
 }
 
-# Creates a gh-pages branch if it doesn't exist
-create_ghp_branch() {
+upload_assets() {
+  build_script=$(cat package.json | python -c "import sys, json; print(json.load(sys.stdin)['scripts']['build'])")
+  if [[ build_script != *"https://spectator-static-assets.s3.amazonaws.com" ]]; then
+    echo "Skipping dist-to-S3 upload because build script does not include S3 public URL."
+    return
+  fi
+
+  slug=$(cat package.json | python -c "import sys, json; print(json.load(sys.stdin)['name'])")
+  aws s3 rm "s3://spectator-static-assets/$slug/" --recursive --exclude "*" --include "*" --profile=spec
+  aws s3 cp dist/ "s3://spectator-static-assets/$slug/" --recursive --exclude "*" --include "*" --acl=public-read --profile=spec
+}
+
+publish() {
+  spectate_build
+  upload_assets
+}
+
+gh_publish() {
+  # Creates a gh-pages branch if it doesn't exist
   if [[ $(git branch) != *"gh-pages"* ]]; then
     old_branch=$(git rev-parse --abbrev-ref HEAD)
     git checkout -b gh-pages
     git checkout $old_branch
   fi
-}
 
-gh_deploy() {
-  create_ghp_branch
-  if [[ $(git worktree list) != *"/dist "* ]]; then # No dist worktree
+  # Creates a dist worktree if it doesn't exist
+  if [[ $(git worktree list) != *"/dist "* ]]; then
     rm -rf dist
     git worktree prune
     mkdir dist
     git worktree add dist gh-pages
   fi
 
-  spectate_build
-  upload_assets # TODO: remove
+  publish
+
+  # Commit and push changes to origin gh-pages
   cd dist
   git add .
   git commit -m 'Deploy to gh-pages'
@@ -80,43 +96,31 @@ gh_deploy() {
   cd ..
 }
 
-upload_assets() {
-  slug=$(cat package.json | python -c "import sys, json; print(json.load(sys.stdin)['name'])")
-  # TODO: input for changing aws slug
-  aws s3 rm "s3://spectator-static-assets/$slug/" --recursive --exclude "*" --include "*" --profile=spec
-  aws s3 cp dist/ "s3://spectator-static-assets/$slug/" --recursive --exclude "*" --include "*" --acl=public-read --profile=spec
-}
-
-arc_deploy() {
-  spectate_build
-  upload_assets
-}
-
 case $COMMAND in
-  update) spectate_update ;;
   create) spectate_create ;;
+  init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
   clone) spectate_clone "$@" ;;
   download) node process/download-doc.js ;; # TODO: centralize this function so keys don't have to be copied
   build) spectate_build ;;
-  gh-deploy) gh_deploy ;;
-  arc-deploy) arc_deploy ;;
-  upload-assets) upload_assets ;;
-  init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
+  publish) publish ;;
+  gh-publish) gh_publish ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
+  update) spectate_update ;;
 
   *) 
     if [ -z $COMMAND ]; then
       echo "usage: spectate <command>"
       echo
       echo "These are common Spectate commands:"
-      echo "  create        Create a project from a template"
-      echo "  init          Set remote links"
+      echo "  create        Create a Spectate project"
+      echo "  init          Set remote links for a newly created project"
+      echo "  clone         Clone an existing Spectate project"
       echo "  download      Download the Google Doc"
-      echo "  update        Update Spectate itself"
-      echo "  gh-deploy     Deploy to GitHub Pages"
-      echo "  arc-deploy    Build and upload assets to S3"
-      echo "  build         Clear the contents of dist/ and build"
+      echo "  build         Clear the contents of dist/ and npm run build"
+      echo "  publish       Build and upload assets"
+      echo "  gh-publish    Publish and push to a gh-pages branch"
       echo "  config-docs   Reset Google Docs authentication"
+      echo "  update        Update Spectate itself"
     else
       echo "Unknown command: $COMMAND"
     fi

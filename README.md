@@ -81,12 +81,13 @@ Run `spectate clone SLUG`, which will clone the repository `spec-journalism/SLUG
 usage: spectate <command>
 
 These are common Spectate commands:
-  create        Create a project from a template
-  init          Set remote links
+  create        Create a Spectate project
+  init          Set remote links for a newly created project
+  clone         Clone an existing Spectate project
   download      Download the Google Doc
-  update        Update Spectate itself
-  gh-deploy     Deploy to GitHub Pages
-  arc-deploy    Build and upload assets to S3
-  build         Clear the contents of dist/ and build
+  build         Clear the contents of dist/ and npm run build
+  publish       Build and upload assets
+  gh-publish    Publish and push to a gh-pages branch
   config-docs   Reset Google Docs authentication
-  ```
+  update        Update Spectate itself
+```
