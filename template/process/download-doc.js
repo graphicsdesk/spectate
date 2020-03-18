@@ -104,7 +104,7 @@ async function readDoc(auth) {
 
   await fsPromise.writeFile(
     path.join(process.cwd(), './data/doc.json'),
-    JSON.stringify(doc),
+    JSON.stringify(doc, null, 2),
   );
   console.log('[download-doc] Successfully wrote ./data/doc.json');
 
