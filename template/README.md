@@ -12,7 +12,7 @@ Make sure you are inside the project directory.
 
 To start the development server, run `npm run dev`.
 
-To re-download the Google Doc, run `make download`.
+To re-download the Google Doc, run `spectate download`.
 
 ## Deploying to the web
 
@@ -22,7 +22,7 @@ Run `spectate gh-publish`, which will ensure that a `dist/` to `gh-pages` workin
 
 ### Arc
 
-1. In `package.json`, set `--public-url` to the S3 link `https://spectator-static-assets.s3.amazonaws.com/SLUG`, where SLUG is the package name.
+1. In `package.json`, set `--public-url` to the S3 link `https://spectator-static-assets.s3.amazonaws.com/SLUG`.
 
 2. Uncomment the appropriate override stylesheet in `styles.scss`.
 
