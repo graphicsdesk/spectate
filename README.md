@@ -59,8 +59,9 @@ spectate create
 
 5. Run `spectate init`, which will ask you for the slug and the new Google Docs link.
 
-6. Create the first commit, and push it to GitHub.
+6. Add all the new files, create the first commit, and push it to GitHub.
 ```
+git add .
 git commit -m "Initial commit"
 git push -u origin master
 ```
