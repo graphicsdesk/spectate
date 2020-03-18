@@ -14,7 +14,7 @@ if (USE_COVER_HED || USE_EYE_NAV) {
     enter: () => {
       navbar.classList.remove('only-logo');
     },
-    exit: () => {    
+    exit: () => {
       navbar.classList.remove('show-nav-links');
       navbar.classList.add('only-logo');
     },
