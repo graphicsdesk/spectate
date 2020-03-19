@@ -50,21 +50,13 @@ spectate_clone() {
 
 spectate_build() {
   log "Creating production build..."
-  rm -rf dist/*
+  rm -f dist/*
   npm run build
 }
 
 upload_assets() {
-  log "Uploading assets to S3..."
-  build_script=$(cat package.json | python -c "import sys, json; print(json.load(sys.stdin)['scripts']['build'])")
-  if [[ $build_script != *"https://spectator-static-assets.s3.amazonaws.com"* ]]; then
-    echo "Skipping dist-to-S3 upload because build script does not include S3 public URL."
-    return
-  fi
-
-  slug=$(cat package.json | python -c "import sys, json; print(json.load(sys.stdin)['name'])")
-  aws s3 rm "s3://spectator-static-assets/$slug/" --recursive --exclude "*" --include "*" --profile=spec
-  aws s3 cp dist/ "s3://spectator-static-assets/$slug/" --recursive --exclude "*" --include "*" --acl=public-read --profile=spec
+  log "Uploading assets"
+  node $SPECTATE_ROOT/bin/upload-assets.js
 }
 
 publish() {
@@ -73,23 +65,16 @@ publish() {
 }
 
 gh_publish() {
-  # Creates a gh-pages branch if it doesn't exist
-  if [[ $(git branch) != *"gh-pages"* ]]; then
-    old_branch=$(git rev-parse --abbrev-ref HEAD)
-    git checkout -b gh-pages
-    git checkout $old_branch
-  fi
-
-  # Creates a dist worktree if it doesn't exist
+  # Check out gh-pages into a new working tree in dist
   if [[ $(git worktree list) != *"/dist "* ]]; then
-    rm -rf dist
-    git worktree prune
-    mkdir dist
-    git worktree add dist gh-pages
+    log "Checking out new gh-pages branch into dist working tree"
+    mkdir -p dist
+    git worktree add dist -B gh-pages
+    rm -rf dist/* dist/.gitignore dist/.posthtmlrc
   fi
 
   publish
-
+  return
   # Commit and push changes to origin gh-pages
   cd dist
   git add .
@@ -104,6 +89,7 @@ case $COMMAND in
   clone) spectate_clone "$@" ;;
   download) node process/download-doc.js ;; # TODO: centralize this function so keys don't have to be copied
   build) spectate_build ;;
+  upload-assets) upload_assets ;;
   publish) publish ;;
   gh-publish) gh_publish ;;
   config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;

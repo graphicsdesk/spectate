@@ -72,7 +72,13 @@ git push -u origin master
 
 Run `spectate clone SLUG`, which will clone the repository `spec-journalism/SLUG` into a new directory named `SLUG` and copy over Google Docs keys.
 
+## Setup for AWS
+
+[Configure credentials for AWS](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) under the profile name `spec`. (Ask Jason for an access key.)
+
 ## ai2html
+
+_In progress._
 
 1. Name each artboard the width it represents.
 

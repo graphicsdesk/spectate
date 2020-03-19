@@ -14,6 +14,7 @@
   },
   "homepage": "https://github.com/spec-journalism/spectate#readme",
   "dependencies": {
+    "aws-sdk": "^2.642.0",
     "googleapis": "^47.0.0",
     "opn": "^6.0.0"
   }
