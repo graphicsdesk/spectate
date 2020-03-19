@@ -22,10 +22,10 @@ Run `spectate gh-publish`, which will ensure that a `dist/` to `gh-pages` workin
 
 ### Arc
 
-1. In `package.json`, set `--public-url` to the S3 link `https://spectator-static-assets.s3.amazonaws.com/SLUG`.
+1. In `package.json`, set the value of `--public-url` to the S3 link `https://spectator-static-assets.s3.amazonaws.com/SLUG`.
 
 2. Uncomment the appropriate override stylesheet in `styles.scss`.
 
-3. Run `spectate publish`.
+3. Run `spectate publish`. (Whenever you want to update JS or CSS assets after publication, just run this command again.)
 
 4. Copy the contents of `dist/index.html` into Ellipsis.

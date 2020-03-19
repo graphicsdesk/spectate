@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "patch-package",
     "dev": "parcel src/index.html --global script",
-    "build": "parcel build src/index.html --global script --public-url ."
+    "build": "parcel build src/index.html --global script --no-content-hash --public-url ."
   },
   "keywords": [],
   "devDependencies": {
