@@ -55,7 +55,7 @@ spectate_build() {
 }
 
 upload_assets() {
-  log "Uploading assets"
+  log "Uploading assets..."
   node $SPECTATE_ROOT/bin/upload-assets.js
 }
 
@@ -74,8 +74,8 @@ gh_publish() {
   fi
 
   publish
-  return
-  # Commit and push changes to origin gh-pages
+
+  log "Pushing changes to origin gh-pages..."
   cd dist
   git add .
   git commit -m 'Deploy to gh-pages'
