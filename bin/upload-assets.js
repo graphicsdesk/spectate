@@ -41,7 +41,7 @@ const putObject = filename =>
     filename = Prefix + '/' + filename;
     const params = {
       Bucket,
-      'x-amz-acl': 'public-read', // TODO: THIS DOESNT WORK
+      ACL: 'public-read',
       Key: filename,
       Body: fileStream,
     };
