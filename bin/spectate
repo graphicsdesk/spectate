@@ -35,8 +35,10 @@ spectate_create() {
   cp -vR "$TEMPLATE_PATH"/. .
   cp -vR "$SPECTATE_ROOT/keys"/*.json ./process
 
-  log "Installing node packages..."
-  npm install
+  if [ -f "package.json" ]; then
+    log "Installing node packages..."
+    npm install
+  fi
 
   if [ ! -d ".git" ]; then
     log "Initiating git repository..."
