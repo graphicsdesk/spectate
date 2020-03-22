@@ -20,14 +20,23 @@ spectate_update() {
 }
 
 spectate_create() {
-  log "Copying default template and keys..."
-  cp -vR "$SPECTATE_ROOT/template"/. .
+  TEMPLATE_NAME="$2"
+  if [ -z "$TEMPLATE_NAME" ]; then
+    TEMPLATE_NAME="default"
+  fi
+
+  TEMPLATE_PATH="$SPECTATE_ROOT/templates/$TEMPLATE_NAME"
+  if [ ! -d "$TEMPLATE_PATH" ]; then
+    echo "Template $TEMPLATE_NAME does not exist."
+    return
+  fi
+
+  log "Copying template $TEMPLATE_NAME and keys..."
+  cp -vR "$TEMPLATE_PATH"/. .
   cp -vR "$SPECTATE_ROOT/keys"/*.json ./process
 
-  if [ -f package.json ]; then
-    log "Installing node packages..."
-    npm install
-  fi
+  log "Installing node packages..."
+  npm install
 
   if [ ! -d ".git" ]; then
     log "Initiating git repository..."
@@ -40,11 +49,11 @@ spectate_create() {
 
 spectate_clone() {
   log "Cloning repository..."
-  if git clone git@github.com:spec-journalism/$2.git ; then
+  if "git clone git@github.com:spec-journalism/$2.git" ; then
     log "Copying keys..."
-    cp -vR "$SPECTATE_ROOT/keys"/*.json $2/process
+    cp -vR "$SPECTATE_ROOT/keys"/*.json "$2/process"
     log "Installing node packages..."
-    npm --prefix $2 install $2
+    npm --prefix "$2" install "$2"
   fi
 }
 
@@ -76,15 +85,11 @@ gh_publish() {
   publish
 
   log "Pushing changes to origin gh-pages..."
-  cd dist
-  git add .
-  git commit -m 'Deploy to gh-pages'
-  git push origin gh-pages
-  cd ..
+  (cd dist; git add .; git commit -m 'Deploy to gh-pages'; git push origin gh-pages)
 }
 
 case $COMMAND in
-  create) spectate_create ;;
+  create) spectate_create "$@" ;;
   init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
   clone) spectate_clone "$@" ;;
   download) node process/download-doc.js ;; # TODO: centralize this function so keys don't have to be copied
@@ -96,7 +101,7 @@ case $COMMAND in
   update) spectate_update ;;
 
   *) 
-    if [ -z $COMMAND ]; then
+    if [ -z "$COMMAND" ]; then
       echo "usage: spectate <command>"
       echo
       echo "These are common Spectate commands:"
