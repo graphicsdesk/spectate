@@ -16,7 +16,7 @@ Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019
 
 4. Install [Node](https://nodejs.org/en/).
 
-5. Install a text editor to work with plaintext files. [Sublime Text](https://www.sublimetext.com/) and [Visual Studio Code](https://code.visualstudio.com/) are good options.
+5. Install a text editor to work with plaintext files. [Sublime Text](https://www.sublimetext.com/) is one good option (if you use Sublime, also check out the command line tool [`subl`](https://www.sublimetext.com/docs/3/osx_command_line.html)).
 
 ## Setup
 
