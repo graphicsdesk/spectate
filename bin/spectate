@@ -79,7 +79,8 @@ gh_publish() {
   # Check out gh-pages into a new working tree in dist
   if [[ $(git worktree list) != *"/dist "* ]]; then
     log "Checking out new gh-pages branch into dist working tree"
-    mkdir -p dist
+    rm -rf dist
+    mkdir dist
     git worktree add dist -B gh-pages
     rm -rf dist/* dist/.gitignore dist/.posthtmlrc
   fi
