@@ -1,17 +1,18 @@
 #!/bin/bash
 
+# Find and record where spectate is installed, then go back to old location
 OLDWD="$PWD"
 cd "$(dirname $(which spectate))" && cd "$(dirname $(readlink spectate))/.."
 SPECTATE_ROOT="$PWD"
 cd "$OLDWD"
 
-COMMAND=$1
-
+# Utility function for logging
 CYAN='\033[36m'; BOLD='\033[1m'; NOCOLOR='\033[0m'
 log() {
   echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')] ${BOLD}$1${NOCOLOR}\n"
 }
 
+# Updating spectate is just git pulling in the spectate repo
 spectate_update() {
   log "Updating the spectate repository..."
   cd "$SPECTATE_ROOT"
@@ -19,7 +20,9 @@ spectate_update() {
   cd "$OLDWD"
 }
 
+# Creates a Spectate project from scratch
 spectate_create() {
+  # Identify a template to be used
   TEMPLATE_NAME="$2"
   if [ -z "$TEMPLATE_NAME" ]; then
     TEMPLATE_NAME="default"
@@ -31,24 +34,28 @@ spectate_create() {
     return
   fi
 
+  # Copy template into current directory
   log "Copying template $TEMPLATE_NAME and keys..."
   cp -vR "$TEMPLATE_PATH"/. .
   cp -vR "$SPECTATE_ROOT/keys"/*.json ./process
 
+  # Install node packages
   if [ -f "package.json" ]; then
     log "Installing node packages..."
     npm install
   fi
 
+  # Create a git repo
   if [ ! -d ".git" ]; then
     log "Initiating git repository..."
     git init
   fi
 
-  git add .
   git status
 }
 
+# Clones a spectate project repository, then copy keys
+# TODO: keys should only be stored in the central spectate repo
 spectate_clone() {
   log "Cloning repository..."
   if "git clone git@github.com:spec-journalism/$2.git" ; then
@@ -59,24 +66,28 @@ spectate_clone() {
   fi
 }
 
+# Clears dist folder and builds for production
 spectate_build() {
   log "Creating production build..."
   rm -f dist/*
   npm run build
 }
 
+# Uploads assets to S3 if S3 is the public build URL
 upload_assets() {
   log "Uploading assets..."
   node $SPECTATE_ROOT/bin/upload-assets.js
 }
 
+# Builds and uploads assets
 publish() {
   spectate_build
   upload_assets
 }
 
+# Publishes on a gh-pages branch which lives in a working tree in dist
 gh_publish() {
-  # Check out gh-pages into a new working tree in dist
+  # Check out gh-pages into a new working tree in dist if one doesn't already exist
   if [[ $(git worktree list) != *"/dist "* ]]; then
     log "Checking out new gh-pages branch into dist working tree"
     rm -rf dist
@@ -90,6 +101,9 @@ gh_publish() {
   log "Pushing changes to origin gh-pages..."
   (cd dist; git add .; git commit -m 'Deploy to gh-pages'; git push origin gh-pages)
 }
+
+# Takes intended command
+COMMAND=$1
 
 case $COMMAND in
   create) spectate_create "$@" ;;
