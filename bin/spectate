@@ -58,7 +58,7 @@ spectate_create() {
 # TODO: keys should only be stored in the central spectate repo
 spectate_clone() {
   log "Cloning repository..."
-  if "git clone git@github.com:spec-journalism/$2.git" ; then
+  if git clone git@github.com:spec-journalism/$2.git ; then
     log "Copying keys..."
     cp -vR "$SPECTATE_ROOT/keys"/*.json "$2/process"
     log "Installing node packages..."
