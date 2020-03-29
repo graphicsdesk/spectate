@@ -72,15 +72,13 @@ git push -u origin master
 
 Run `spectate clone SLUG`, which will clone the repository `spec-journalism/SLUG` into a new directory named `SLUG` and copy over Google Docs keys.
 
-## Setup for AWS
-
-[Configure credentials for AWS](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) under the profile name `spec`. (Ask Jason for an access key.)
-
 ## ai2html
 
-_In progress._
+1. Install [ai2html](http://ai2html.org/).
 
-1. Name each artboard the width it represents.
+2. Keep Illustrator files in `ai/`. Name each artboard the width it represents.
+
+3. Run the ai2html script. The output HTML and images are put into `src/`.
 
 ## Command line options
 
@@ -98,3 +96,5 @@ These are common Spectate commands:
   config-docs   Reset Google Docs authentication
   update        Update Spectate itself
 ```
+
+To be able to use `spectate publish` with a S3 public URL, you must first [configure credentials for AWS](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) under the profile name `spec`. (Ask Jason for an access key.)
