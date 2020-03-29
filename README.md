@@ -10,7 +10,7 @@ Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019
 
 1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
-2. Make a [GitHub](https://github.com) account. Ask Jason or Raeedah to add you to the `spec-journalism` organization.
+2. Make a [GitHub](https://github.com) account. Ask Jason, Charlotte, or Raeedah to add you to the `spec-journalism` organization.
 
 3. To be able to write to our repositories, set up an SSH key. Follow the instructions in the first five sections of [Connecting to GitHub with SSH](https://help.github.com/en/articles/connecting-to-github-with-ssh).
 
