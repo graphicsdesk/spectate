@@ -71,7 +71,7 @@ $ git push -u origin master
 
 ## Cloning a Spectate project
 
-Make sure you have first completed the prerequisites and setup instructions.
+Make sure you have first completed the [prerequisites and setup instructions](#prerequisites).
 
 To clone a Spectate project, run:
 <pre>
