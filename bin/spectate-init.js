@@ -12,11 +12,14 @@ const FGCYAN = '\x1b[36m';
 
 const rl = readline.createInterface(process.stdin, process.stdout);
 
+// Prompts a question and validates answer
 const question = (message, defaultAnswer, validate = x => x.length > 0, options) =>
   new Promise((resolve, reject) => {
     message = FGCYAN + message;
-    if (defaultAnswer) message += ` (${defaultAnswer})`;
-    if (options) message += ` [${Object.keys(options).join('|')}]`;
+    if (defaultAnswer) // Leaving line empty will default this answer
+      message += ` (${defaultAnswer})`;
+    if (options) // Options to perform certain actions
+      message += ` [${Object.keys(options).join('|')}]`;
     rl.question(message + ': ' + RESET, line => {
       if (options && line in options) {
         options[line]();
@@ -29,7 +32,8 @@ const question = (message, defaultAnswer, validate = x => x.length > 0, options)
     });
   });
 
-const retry = (fn, retries = 4, err = null) =>
+// Allows retries with promise resolves
+const retry = (fn, retries = 4, err = 'Ran out of retries.') =>
   !retries ? Promise.reject(err) : fn().catch(err => retry(fn, (retries - 1), err));
 
 const googleDocsRegex = /docs\.google\.com\/document(\/u\/\d)?\/d\/[-\w]{25,}/;
@@ -87,7 +91,7 @@ function main() {
 
 main();
 
-function setFileKey(filename, key, value) { // TODO: Promisify
+function setFileKey(filename, key, value) {
   const file = JSON.parse(fs.readFileSync(filename).toString());
   file[key] = value;
   fs.writeFile(filename, JSON.stringify(file, null, 2), err => {
