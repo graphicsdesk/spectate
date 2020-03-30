@@ -1,8 +1,8 @@
 # Spectate
 
-Spectate provides a complete workflow for building freeform stories. It allows users to write stories and code locally, and then publish the HTML in Arc. Spectate uploads CSS, JS, and other assets separately.
+Spectate provides a workflow for building freeform stories. It allows users to write stories and code locally, and then publish the HTML in Arc. Spectate uploads CSS, JS, and other assets separately.
 
-Every story is stored in a repository on GitHub and is created from Spectate's template. The template uses a Google Doc to drive the content of the story.
+Every story is stored in a repository on GitHub and is based on a Spectate template. The template can use a Google Doc to drive the content of the story.
 
 Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019/11/15/students-and-faculty-say-gender-based-harassment-and-discrimination-at-columbia-is-systemic-why-are-they-turning-away-from-the-system-built-to-address-it/) (interactive), [Linguistics Major](https://github.com/spec-journalism/linguistics-major) (multimedia), [Union Theological Seminary](https://github.com/spec-journalism/uts) (_The Eye_)
 
@@ -20,40 +20,41 @@ Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019
 
 ## Setup
 
-1. Clone the Spectate repository:
+1. Clone the Spectate repository and move into it:
 ```
-git clone git@github.com:spec-journalism/spectate.git ~/spectate
+$ git clone git@github.com:spec-journalism/spectate.git ~/spectate
+$ cd ~/spectate
 ```
 
-2. Move into the Spectate directory, and install the necessary dependencies:
+2. Install the necessary dependencies:
 ```
-cd ~/spectate
-npm install
+$ npm install
 ```
 
 3. Make the `spectate` command available everywhere:
 ```
-npm link
+$ npm link
 ```
 
 4. Lastly, we need to configure Google Docs access. Follow Step 1 of the [Node Google Docs quickstart](https://developers.google.com/docs/api/quickstart/nodejs), saving `credentials.json` into the `~/spectate/keys/` directory. Then, run:
 ```
-spectate config-docs
+$ spectate config-docs
 ```
 
 ## Creating a Spectate project
 
-1. In the terminal, create a new directory with the article slug as the name (replace SLUG with the article slug).
+1. In the terminal, create a new directory with the article slug as the name and move into it.
+<pre>
+$ mkdir <var>SLUG</var>
+$ cd <var>SLUG</var>
+</pre>
+
+2. Next, run:
 ```
-mkdir SLUG
+$ spectate create
 ```
 
-2. Move into that directory (`cd SLUG`) and run:
-```
-spectate create
-```
-
-3. In GitHub, create a new repository in the `spec-journalism` organization with `SLUG` as the name.
+3. In GitHub, create a new repository in the `spec-journalism` organization with _`SLUG`_ as the name.
 
 4. Clone the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit).
 
@@ -61,9 +62,9 @@ spectate create
 
 6. Add all the new files, create the first commit, and push it to GitHub.
 ```
-git add .
-git commit -m "Initial commit"
-git push -u origin master
+$ git add .
+$ git commit -m "Initial commit"
+$ git push -u origin master
 ```
 
 7. See [Usage](#usage).
@@ -72,19 +73,21 @@ git push -u origin master
 
 Make sure you have first completed the prerequisites and setup instructions.
 
-Run `spectate clone SLUG`, which will clone the repository `spec-journalism/SLUG` into a new directory named `SLUG` and copy over Google Docs keys. See [Usage](#usage).
+To clone a Spectate project, run:
+<pre>
+$ spectate clone <var>SLUG</var>
+</pre>
+This will clone the repository `git@github.com:spec-journalism/SLUG.git` into a new directory named _`SLUG`_, install node modules, and copy over Google Docs keys. See [Usage](#usage).
 
 ## Usage
+
+_In progress._
 
 To start the development server, run `npm run dev`.
 
 To re-download the Google Doc, run `spectate download`.
 
-### Project Files
-
-_In progress._
-
-## ai2html
+### ai2html
 
 Make sure [ai2html](http://ai2html.org/) is installed.
 
@@ -98,9 +101,13 @@ Run `spectate gh-publish`, which will ensure that a `dist/` to `gh-pages` workin
 
 ### Arc
 
-1. In the build script of `package.json`, set the value of `--public-url` to the S3 link `https://spectator-static-assets.s3.amazonaws.com/SLUG`. It should look something like this:
+1. In the build script of `package.json`, set the value of `--public-url` to the S3 link, which should take this format:
 <pre>
-  parcel build src/index.html --global script --no-content-hash --public-url https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var>
+https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var>
+</pre>
+Add a `--no-content-hash` flag as well. The final build script should look something like this:
+<pre>
+parcel build src/index.html --global script --public-url https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var> --no-content-hash
 </pre>
 
 2. Uncomment the appropriate override stylesheet in `styles.scss` (either for a News or Eye page).
