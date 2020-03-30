@@ -98,9 +98,9 @@ Run `spectate gh-publish`, which will ensure that a `dist/` to `gh-pages` workin
 
 ### Arc
 
-1. In the build script of `package.json`, set the value of `--public-url` to the S3 link `https://spectator-static-assets.s3.amazonaws.com/SLUG`. Add a `--no-content-hash` flag as well. It should look something like this:
+1. In the build script of `package.json`, set the value of `--public-url` to the S3 link `https://spectator-static-assets.s3.amazonaws.com/SLUG`. It should look something like this:
 <pre>
-  parcel build src/index.html --global script --public-url https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var> --no-content-hash
+  parcel build src/index.html --global script --no-content-hash --public-url https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var>
 </pre>
 
 2. Uncomment the appropriate override stylesheet in `styles.scss` (either for a News or Eye page).
