@@ -42,7 +42,7 @@ $ spectate config-docs
 ```
 ## Creating a Spectate project
 
-1. In the terminal, create a new directory with the article slug as the name (replace SLUG with the article slug) and move into it.
+1. In the terminal, create a new directory with the article slug as the name and move into it.
 <pre>
 $ mkdir <var>SLUG</var>
 $ cd <var>SLUG</var>
