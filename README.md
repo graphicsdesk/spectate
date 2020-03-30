@@ -40,7 +40,6 @@ npm link
 ```
 spectate config-docs
 ```
-
 ## Creating a Spectate project
 
 1. In the terminal, create a new directory with the article slug as the name (replace SLUG with the article slug).
@@ -80,15 +79,13 @@ To start the development server, run `npm run dev`.
 
 To re-download the Google Doc, run `spectate download`.
 
-### Project Files
-
-_In progress._
-
-## ai2html
+### ai2html
 
 Make sure [ai2html](http://ai2html.org/) is installed.
 
 Keep Illustrator files in `ai/`. Name each artboard the width it represents. When the ai2html script is run, the output HTML and images will be put into `src/` (this is configured in `ai/ai2html-config.json`).
+
+_In progress._
 
 ## Publishing
 
