@@ -18,7 +18,7 @@ Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019
 
 5. Install a text editor to work with plaintext files. [Sublime Text](https://www.sublimetext.com) is one good option (if you use Sublime, also check out the command line tool [`subl`](https://www.sublimetext.com/docs/3/osx_command_line.html)).
 
-## Usage
+## Setup
 
 1. Clone the Spectate repository:
 ```
