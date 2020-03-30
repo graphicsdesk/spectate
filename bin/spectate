@@ -24,6 +24,8 @@ spectate_update() {
 
 # Creates a Spectate project from scratch
 spectate_create() {
+  spectate_update
+
   # Identify a template to be used
   TEMPLATE_NAME="$2"
   if [ -z "$TEMPLATE_NAME" ]; then
@@ -43,7 +45,7 @@ spectate_create() {
 
   # Install node packages
   if [ -f "package.json" ]; then
-    log "Installing node packages..."
+    log "Installing node modules..." 0
     npm install
   fi
 
