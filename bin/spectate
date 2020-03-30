@@ -9,15 +9,17 @@ cd "$OLDWD"
 # Utility function for logging
 CYAN='\033[36m'; BOLD='\033[1m'; NOCOLOR='\033[0m'
 log() {
-  echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')] ${BOLD}$1${NOCOLOR}\n"
+  echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')] ${BOLD}$1${NOCOLOR}"
+  # Append newline unless otherwise noted
+  if [ -z "$2" ]; then
+    echo ""
+  fi
 }
 
 # Updating spectate is just git pulling in the spectate repo
 spectate_update() {
   log "Updating the spectate repository..."
-  cd "$SPECTATE_ROOT"
-  git pull
-  cd "$OLDWD"
+  (cd "$SPECTATE_ROOT"; git pull)
 }
 
 # Creates a Spectate project from scratch
@@ -68,15 +70,21 @@ spectate_clone() {
 
 # Clears dist folder and builds for production
 spectate_build() {
-  log "Creating production build..."
+  log "Creating production build..." 0
   rm -f dist/*
   npm run build
 }
 
 # Uploads assets to S3 if S3 is the public build URL
 upload_assets() {
-  log "Uploading assets..."
-  node $SPECTATE_ROOT/bin/upload-assets.js
+  log "Uploading assets (temporarily using AWS CLI)..."
+
+  SLUG=$(cat package.json | \
+    python3 -c "import sys, json; print(json.load(sys.stdin)['name'])")
+  aws s3 rm "s3://spectator-static-assets/$SLUG/" --recursive --exclude "*" --include "*" --profile=spec
+  aws s3 cp dist/ "s3://spectator-static-assets/$SLUG/" --recursive --exclude "*" --include "*" --acl=public-read --profile=spec
+
+  # node $SPECTATE_ROOT/bin/upload-assets.js
 }
 
 # Builds and uploads assets
