@@ -22,34 +22,35 @@ Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019
 
 1. Clone the Spectate repository:
 ```
-git clone git@github.com:spec-journalism/spectate.git ~/spectate
+$ git clone git@github.com:spec-journalism/spectate.git ~/spectate
 ```
 
 2. Move into the Spectate directory, and install the necessary dependencies:
 ```
-cd ~/spectate
-npm install
+$ cd ~/spectate
+$ npm install
 ```
 
 3. Make the `spectate` command available everywhere:
 ```
-npm link
+$ npm link
 ```
 
 4. Lastly, we need to configure Google Docs access. Follow Step 1 of the [Node Google Docs quickstart](https://developers.google.com/docs/api/quickstart/nodejs), saving `credentials.json` into the `~/spectate/keys/` directory. Then, run:
 ```
-spectate config-docs
+$ spectate config-docs
 ```
 ## Creating a Spectate project
 
-1. In the terminal, create a new directory with the article slug as the name (replace SLUG with the article slug).
-```
-mkdir SLUG
-```
+1. In the terminal, create a new directory with the article slug as the name (replace SLUG with the article slug) and move into it.
+<pre>
+$ mkdir <var>SLUG</var>
+$ cd <var>SLUG</var>
+</pre>
 
-2. Move into that directory (`cd SLUG`) and run:
+2. Next, run:
 ```
-spectate create
+$ spectate create
 ```
 
 3. In GitHub, create a new repository in the `spec-journalism` organization with `SLUG` as the name.
@@ -60,9 +61,9 @@ spectate create
 
 6. Add all the new files, create the first commit, and push it to GitHub.
 ```
-git add .
-git commit -m "Initial commit"
-git push -u origin master
+$ git add .
+$ git commit -m "Initial commit"
+$ git push -u origin master
 ```
 
 7. See [Usage](#usage).
@@ -97,7 +98,7 @@ Run `spectate gh-publish`, which will ensure that a `dist/` to `gh-pages` workin
 
 1. In the build script of `package.json`, set the value of `--public-url` to the S3 link `https://spectator-static-assets.s3.amazonaws.com/SLUG`. Add a `--no-content-hash` flag as well. It should look something like this:
 <pre>
-  parcel build src/index.html --global script --public-url https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var> --no-content-hash
+parcel build src/index.html --global script --public-url https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var> --no-content-hash
 </pre>
 
 2. Uncomment the appropriate override stylesheet in `styles.scss` (either for a News or Eye page).
