@@ -1,3 +1,5 @@
+/* These styles hide default site elements for a News story except the navbar and footer */
+
 #main > .pb-container > .pb-layout-item.pb-chain.pb-c-default-chain.col-xs-12.col-md-3 {
     display: none;
 }
@@ -42,17 +44,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 header {
     padding-top: 0;
 }
 
-// Hide preview on contributor pages
-.pb-f-author-story-list .twolines {
-    display: none;
-}
-
 .row {
     margin: 0;
+}
+
+// Links are server-side rendered into paragraphs that shouldn't take any space
+.ab-article-content > article > p:first-child {
+  margin-bottom: 0;
+}
+.ab-article-content > article > p:last-child {
+  margin-bottom: 0;
 }

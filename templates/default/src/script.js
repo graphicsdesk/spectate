@@ -1,7 +1,7 @@
 import enterView from 'enter-view';
 import textBalancer from 'text-balancer';
-
 import { USE_COVER_HED, USE_EYE_NAV } from '../config.json';
+import './scripts/page.js';
 
 // Fade in navbar at scroll trigger
 
@@ -27,6 +27,6 @@ export function hamburgerTrigger() {
   navbar.classList.toggle('show-nav-links');
 }
 
-// Text balance headline and deck
+// Text balance headline, deck, and image captions
 
 textBalancer.balanceText('.headline, .deck, .image-overlay .image-caption-text');

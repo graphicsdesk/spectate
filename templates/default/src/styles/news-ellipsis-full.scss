@@ -1,0 +1,28 @@
+/* These styles hide all default site elements for a News story */
+
+@import 'news-ellipsis-partial';
+
+section#top, section#bottom {
+  display: none;
+}
+
+.pb-f-article-article-title, .pb-f-article-next-story, .pb-f-article-disqus-new {
+  display: none;
+}
+
+.pb-container {
+  width: 100%;
+
+  .pb-chain:nth-child(2) {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.pb-f-article-article-body .ab-article-body {
+  margin-top: 0 !important;
+}
+
+.at-share-dock-outer {
+  display: none;
+}
