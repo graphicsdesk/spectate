@@ -20,14 +20,14 @@ Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019
 
 ## Setup
 
-1. Clone the Spectate repository:
+1. Clone the Spectate repository and move into it:
 ```
 $ git clone git@github.com:spec-journalism/spectate.git ~/spectate
+$ cd ~/spectate
 ```
 
-2. Move into the Spectate directory, and install the necessary dependencies:
+2. Install the necessary dependencies:
 ```
-$ cd ~/spectate
 $ npm install
 ```
 
@@ -40,6 +40,7 @@ $ npm link
 ```
 $ spectate config-docs
 ```
+
 ## Creating a Spectate project
 
 1. In the terminal, create a new directory with the article slug as the name and move into it.
