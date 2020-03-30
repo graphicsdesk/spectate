@@ -1,8 +1,8 @@
 # Spectate
 
-Spectate provides a complete workflow for building freeform stories. It allows users to write stories and code locally, and then publish the HTML in Arc. Spectate uploads CSS, JS, and other assets separately.
+Spectate provides a workflow for building freeform stories. It allows users to write stories and code locally, and then publish the HTML in Arc. Spectate uploads CSS, JS, and other assets separately.
 
-Every story is stored in a repository on GitHub and is created from Spectate's template. The template uses a Google Doc to drive the content of the story.
+Every story is stored in a repository on GitHub and is based on a Spectate template. The template can use a Google Doc to drive the content of the story.
 
 Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019/11/15/students-and-faculty-say-gender-based-harassment-and-discrimination-at-columbia-is-systemic-why-are-they-turning-away-from-the-system-built-to-address-it/) (interactive), [Linguistics Major](https://github.com/spec-journalism/linguistics-major) (multimedia), [Union Theological Seminary](https://github.com/spec-journalism/uts) (_The Eye_)
 
@@ -18,7 +18,7 @@ Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019
 
 5. Install a text editor to work with plaintext files. [Sublime Text](https://www.sublimetext.com) is one good option (if you use Sublime, also check out the command line tool [`subl`](https://www.sublimetext.com/docs/3/osx_command_line.html)).
 
-## Setup
+## Usage
 
 1. Clone the Spectate repository:
 ```
