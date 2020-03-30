@@ -56,6 +56,12 @@ spectate_create() {
   git status
 }
 
+# Set remote links for a newly created project
+spectate_init() {
+  log "Prompting for remote links..."
+  node $SPECTATE_ROOT/bin/spectate-init.js "$@"
+}
+
 # Clones a spectate project repository, then copy keys
 # TODO: keys should only be stored in the central spectate repo
 spectate_clone() {
@@ -77,7 +83,7 @@ spectate_build() {
 
 # Uploads assets to S3 if S3 is the public build URL
 upload_assets() {
-  log "Uploading assets (temporarily using AWS CLI)..."
+  log "Uploading assets with the AWS CLI..."
 
   SLUG=$(cat package.json | \
     python3 -c "import sys, json; print(json.load(sys.stdin)['name'])")
@@ -110,19 +116,24 @@ gh_publish() {
   (cd dist; git add .; git commit -m 'Deploy to gh-pages'; git push origin gh-pages)
 }
 
+spectate_config_docs() {
+  log "Authorizing Google user..."
+  node $SPECTATE_ROOT/bin/config-docs.js
+}
+
 # Takes intended command
 COMMAND=$1
 
 case $COMMAND in
   create) spectate_create "$@" ;;
-  init) node $SPECTATE_ROOT/bin/spectate-init "$@" ;;
+  init) spectate_init ;;
   clone) spectate_clone "$@" ;;
   download) node process/download-doc.js ;; # TODO: centralize this function so keys don't have to be copied
   build) spectate_build ;;
   upload-assets) upload_assets ;;
   publish) publish ;;
   gh-publish) gh_publish ;;
-  config-docs) node $SPECTATE_ROOT/bin/config-docs.js "$@" ;;
+  config-docs) spectate_config_docs ;;
   update) spectate_update ;;
 
   *) 
