@@ -25,7 +25,7 @@ Check out these examples: [EOAA](https://www.columbiaspectator.com/eye-lead/2019
 git clone git@github.com:spec-journalism/spectate.git ~/spectate
 ```
 
-2. Move into the Spectate directory, and install the necessary dependencies
+2. Move into the Spectate directory, and install the necessary dependencies:
 ```
 cd ~/spectate
 npm install
@@ -66,17 +66,48 @@ git commit -m "Initial commit"
 git push -u origin master
 ```
 
-7. Run `spectate download` to download the contents of the Google Doc. Run `npm run dev` to start the development server.
+7. See [Usage](#usage).
 
 ## Cloning a Spectate project
 
-Run `spectate clone SLUG`, which will clone the repository `spec-journalism/SLUG` into a new directory named `SLUG` and copy over Google Docs keys.
+Make sure you have first completed the prerequisites and setup instructions.
+
+Run `spectate clone SLUG`, which will clone the repository `spec-journalism/SLUG` into a new directory named `SLUG` and copy over Google Docs keys. See [Usage](#usage).
+
+## Usage
+
+To start the development server, run `npm run dev`.
+
+To re-download the Google Doc, run `spectate download`.
+
+### Project Files
+
+_In progress._
 
 ## ai2html
 
 Make sure [ai2html](http://ai2html.org/) is installed.
 
 Keep Illustrator files in `ai/`. Name each artboard the width it represents. When the ai2html script is run, the output HTML and images will be put into `src/` (this is configured in `ai/ai2html-config.json`).
+
+## Publishing
+
+### GitHub Pages
+
+Run `spectate gh-publish`, which will ensure that a `dist/` to `gh-pages` working tree exists, and then push changes to `gh-pages`.
+
+### Arc
+
+1. In the build script of `package.json`, set the value of `--public-url` to the S3 link `https://spectator-static-assets.s3.amazonaws.com/SLUG`. Add a `--no-content-hash` flag as well. It should look something like this:
+<pre>
+  parcel build src/index.html --global script --public-url https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var> --no-content-hash
+</pre>
+
+2. Uncomment the appropriate override stylesheet in `styles.scss` (either for a News or Eye page).
+
+3. Run `spectate publish`. (Whenever you want to update JS or CSS assets after publication, just run this command again.)
+
+4. Copy the contents of `dist/index.html` into Ellipsis.
 
 ## Command line options
 
