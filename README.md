@@ -72,7 +72,11 @@ $ git push -u origin master
 
 Make sure you have first completed the prerequisites and setup instructions.
 
-Run `spectate clone SLUG`, which will clone the repository `spec-journalism/SLUG` into a new directory named `SLUG` and copy over Google Docs keys. See [Usage](#usage).
+To clone a Spectate project, run:
+<pre>
+$ spectate clone <var>SLUG</var>
+</pre>
+This will clone the repository `@spec-journalism/SLUG` into a new directory named `SLUG`, install node modules, and copy over Google Docs keys. See [Usage](#usage).
 
 ## Usage
 
