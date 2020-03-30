@@ -54,7 +54,7 @@ $ cd <var>SLUG</var>
 $ spectate create
 ```
 
-3. In GitHub, create a new repository in the `spec-journalism` organization with `SLUG` as the name.
+3. In GitHub, create a new repository in the `spec-journalism` organization with _`SLUG`_ as the name.
 
 4. Clone the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit).
 
@@ -77,9 +77,11 @@ To clone a Spectate project, run:
 <pre>
 $ spectate clone <var>SLUG</var>
 </pre>
-This will clone the repository `@spec-journalism/SLUG` into a new directory named `SLUG`, install node modules, and copy over Google Docs keys. See [Usage](#usage).
+This will clone the repository `git@github.com:spec-journalism/SLUG.git` into a new directory named _`SLUG`_, install node modules, and copy over Google Docs keys. See [Usage](#usage).
 
 ## Usage
+
+_In progress._
 
 To start the development server, run `npm run dev`.
 
@@ -91,8 +93,6 @@ Make sure [ai2html](http://ai2html.org/) is installed.
 
 Keep Illustrator files in `ai/`. Name each artboard the width it represents. When the ai2html script is run, the output HTML and images will be put into `src/` (this is configured in `ai/ai2html-config.json`).
 
-_In progress._
-
 ## Publishing
 
 ### GitHub Pages
@@ -101,7 +101,11 @@ Run `spectate gh-publish`, which will ensure that a `dist/` to `gh-pages` workin
 
 ### Arc
 
-1. In the build script of `package.json`, set the value of `--public-url` to the S3 link `https://spectator-static-assets.s3.amazonaws.com/SLUG`. Add a `--no-content-hash` flag as well. It should look something like this:
+1. In the build script of `package.json`, set the value of `--public-url` to the S3 link, which should take this format:
+<pre>
+https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var>
+</pre>
+Add a `--no-content-hash` flag as well. The final build script should look something like this:
 <pre>
 parcel build src/index.html --global script --public-url https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var> --no-content-hash
 </pre>
