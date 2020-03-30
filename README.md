@@ -74,11 +74,9 @@ Run `spectate clone SLUG`, which will clone the repository `spec-journalism/SLUG
 
 ## ai2html
 
-1. Install [ai2html](http://ai2html.org/).
+Make sure [ai2html](http://ai2html.org/) is installed.
 
-2. Keep Illustrator files in `ai/`. Name each artboard the width it represents.
-
-3. Run the ai2html script. The output HTML and images are put into `src/`.
+Keep Illustrator files in `ai/`. Name each artboard the width it represents. When the ai2html script is run, the output HTML and images will be put into `src/` (this is configured in `ai/ai2html-config.json`).
 
 ## Command line options
 
