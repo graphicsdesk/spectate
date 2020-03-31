@@ -2,23 +2,25 @@ const fs = require('fs');
 const fsPromise = fs.promises;
 const readline = require('readline');
 const path = require('path');
-const YAML = require('yaml');
 const { google } = require('googleapis');
 const { docToArchieML } = require('@newswire/doc-to-archieml');
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
 const TOKEN_PATH = 'token.json';
+const { DOC_URL } = JSON.parse(fs.readFileSync(process.cwd() + '/config.json').toString());
+let documentId = null;
 
-const config = JSON.parse(fs.readFileSync(process.cwd() + '/config.json').toString());
-const documentId = config.DOC_URL.match(/[-\w]{25,}/)[0];
+if (DOC_URL) {
+  documentId = config.DOC_URL.match(/[-\w]{25,}/)[0];
 
-// Load client secrets from a local file.
-fs.readFile(__dirname + '/credentials.json', (err, content) => {
-  if (err) return console.log('Error loading client secret file:', err);
-  // Authorize a client with credentials, then call the Google Sheets API.
-  authorize(JSON.parse(content), readDoc);
-});
+  // Load client secrets from a local file.
+  fs.readFile(__dirname + '/credentials.json', (err, content) => {
+    if (err) return console.log('Error loading client secret file:', err);
+    // Authorize a client with credentials, then call the Google Sheets API.
+    authorize(JSON.parse(content), readDoc);
+  });
+}
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
