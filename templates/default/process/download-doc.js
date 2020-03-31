@@ -5,13 +5,24 @@ const path = require('path');
 const { google } = require('googleapis');
 const { docToArchieML } = require('@newswire/doc-to-archieml');
 
+const phConfig = {
+  plugins: {
+    'posthtml-include': {
+      root: './src',
+    },
+    'posthtml-expressions': {
+      root: './src/partials',
+    },
+  },
+};
+
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
 const TOKEN_PATH = 'token.json';
 const { DOC_URL } = JSON.parse(fs.readFileSync(process.cwd() + '/config.json').toString());
 let documentId = null;
 
-if (DOC_URL) {
+if (DOC_URL) { // If DOC_URL is set, authorize user and download Google Doc
   documentId = config.DOC_URL.match(/[-\w]{25,}/)[0];
 
   // Load client secrets from a local file.
@@ -20,6 +31,8 @@ if (DOC_URL) {
     // Authorize a client with credentials, then call the Google Sheets API.
     authorize(JSON.parse(content), readDoc);
   });
+} else { // If DOC_URL is not set, just write the default .posthtmlrc
+  writeDefaultPostHTMLConfig(phConfig);
 }
 
 /**
@@ -72,19 +85,6 @@ function getNewToken(oAuth2Client, callback) {
   });
 }
 
-
-const LOCALS_FILLER_STR = 'BODY_LOCALS';
-const PH_CONFIG = `{
-  "plugins": {
-    "posthtml-include": {
-      "root": "./src"
-    },
-    "posthtml-expressions": {
-      "root": "./src/partials",
-      "locals": ${LOCALS_FILLER_STR}
-    }
-  }
-}`;
 /**
  * Read Doc.
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
@@ -93,16 +93,13 @@ async function readDoc(auth) {
   const client = google.docs({ version: 'v1', auth });
   const doc = await docToArchieML({ documentId, client });
 
-  const phConfig = PH_CONFIG.replace(
-    LOCALS_FILLER_STR,
-    JSON.stringify({
-      top: {},
-      credits: '',
-      footer: '',
-      ...doc,
-      ...config,
-    }),
-  );
+  phConfig.plugins['posthtml-expressions'].locals = {
+    top: {},
+    credits: '',
+    footer: '',
+    ...doc,
+    ...config,
+  };
 
   await fsPromise.writeFile(
     path.join(process.cwd(), './data/doc.json'),
@@ -112,7 +109,15 @@ async function readDoc(auth) {
 
   await fsPromise.writeFile(
     path.join(process.cwd(), '.posthtmlrc'),
-    phConfig
+    JSON.stringify(phConfig),
+  );
+  console.log('[download-doc] Successfully wrote .posthtmlrc');
+}
+
+async function writeDefaultPostHTMLConfig(phConfig) {
+  await fsPromise.writeFile(
+    path.join(process.cwd(), '.posthtmlrc'),
+    JSON.stringify(phConfig),
   );
   console.log('[download-doc] Successfully wrote .posthtmlrc');
 }

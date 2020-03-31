@@ -22,6 +22,12 @@ spectate_update() {
   (cd "$SPECTATE_ROOT"; git pull)
 }
 
+# Download Google Doc and write .posthtmlrlc
+spectate_download() {
+  log "Writing .posthtmlrc..."
+  node process/download-doc.js "$@"
+}
+
 # Creates a Spectate project from scratch
 spectate_create() {
   spectate_update
@@ -45,7 +51,7 @@ spectate_create() {
 
   # Install node packages
   if [ -f "package.json" ]; then
-    log "Installing node modules..." 0
+    log "Installing node modules..."
     npm install
   fi
 
@@ -55,6 +61,9 @@ spectate_create() {
     git init
   fi
 
+  spectate_download
+
+  log "Displaying git status..."
   git status
 }
 
@@ -130,7 +139,7 @@ case $COMMAND in
   create) spectate_create "$@" ;;
   init) spectate_init ;;
   clone) spectate_clone "$@" ;;
-  download) node process/download-doc.js ;; # TODO: centralize this function so keys don't have to be copied
+  download) spectate_download ;; # TODO: centralize this function so keys don't have to be copied
   build) spectate_build ;;
   upload-assets) upload_assets ;;
   publish) publish ;;
