@@ -54,7 +54,7 @@ $ cd <var>SLUG</var>
 $ spectate create
 ```
 
-3. In GitHub, create a new repository in the `spec-journalism` organization with _`SLUG`_ as the name.
+3. On GitHub, create a new repository in the `spec-journalism` organization with _`SLUG`_ as the name.
 
 4. Clone the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit).
 
@@ -81,11 +81,13 @@ This will clone the repository `git@github.com:spec-journalism/SLUG.git` into a 
 
 ## Usage
 
-_In progress._
-
 To start the development server, run `npm run dev`.
 
 To re-download the Google Doc, run `spectate download`.
+
+## Project Structure
+
+_In Progress._
 
 ### ai2html
 
@@ -93,13 +95,7 @@ Make sure [ai2html](http://ai2html.org/) is installed.
 
 Keep Illustrator files in `ai/`. Name each artboard the width it represents. When the ai2html script is run, the output HTML and images will be put into `src/` (this is configured in `ai/ai2html-config.json`).
 
-## Publishing
-
-### GitHub Pages
-
-Run `spectate gh-publish`, which will ensure that a `dist/` to `gh-pages` working tree exists, and then push changes to `gh-pages`.
-
-### Arc
+## Publishing on Arc
 
 1. In the build script of `package.json`, set the value of `--public-url` to the S3 link, which should take this format:
 <pre>
@@ -113,6 +109,8 @@ parcel build src/index.html --global script --public-url https://spectator-stati
 2. Uncomment the appropriate override stylesheet in `styles.scss` (either for a News or Eye page).
 
 3. Run `spectate publish`. (Whenever you want to update JS or CSS assets after publication, just run this command again.)
+
+To be able to use `spectate publish` with a S3 public URL, you must first [configure credentials for AWS](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) under the profile name `spec`. (Ask Jason for an access key.)
 
 4. Copy the contents of `dist/index.html` into Ellipsis.
 
@@ -132,5 +130,3 @@ These are common Spectate commands:
   config-docs   Reset Google Docs authentication
   update        Update Spectate itself
 ```
-
-To be able to use `spectate publish` with a S3 public URL, you must first [configure credentials for AWS](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) under the profile name `spec`. (Ask Jason for an access key.)
