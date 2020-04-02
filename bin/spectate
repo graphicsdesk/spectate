@@ -46,7 +46,7 @@ spectate_create() {
 
   # Copy template into current directory
   log "Copying template $TEMPLATE_NAME and keys..."
-  cp -vR "$TEMPLATE_PATH"/. .
+  cp -vRn "$TEMPLATE_PATH"/. . || true # Copy without overwrite
   cp -vR "$SPECTATE_ROOT/keys"/*.json ./process
 
   # Install node packages
@@ -94,10 +94,17 @@ spectate_build() {
 
 # Uploads assets to S3 if S3 is the public build URL
 upload_assets() {
-  log "Uploading assets with the AWS CLI..."
+  BUILD_SCRIPT=$(cat package.json | \
+    python3 -c "import sys, json; print(json.load(sys.stdin)['scripts']['build'])")
+  if [[ $BUILD_SCRIPT != *'https://spectator-static-assets.s3.amazonaws.com'* ]]; then
+    log "Skipping S3 upload." 0
+    return
+  fi
 
   SLUG=$(cat package.json | \
     python3 -c "import sys, json; print(json.load(sys.stdin)['name'])")
+
+  log "Uploading assets, temporarily with the AWS CLI..."
   aws s3 rm "s3://spectator-static-assets/$SLUG/" --recursive --exclude "*" --include "*" --profile=spec
   aws s3 cp dist/ "s3://spectator-static-assets/$SLUG/" --recursive --exclude "*" --include "*" --acl=public-read --profile=spec
 
