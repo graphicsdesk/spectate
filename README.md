@@ -110,8 +110,6 @@ parcel build src/index.html --global script --public-url https://spectator-stati
 
 3. Run `spectate publish`. (Whenever you want to update JS or CSS assets after publication, just run this command again.)
 
-To be able to use `spectate publish` with a S3 public URL, you must first install the [AWS Command Line Interface](https://aws.amazon.com/cli/) and [configure AWS credentials](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) under the profile name `spec` (refer to [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit)).
-
 4. Copy the contents of `dist/index.html` into Ellipsis.
 
 ## Publishing on GitHub Pages
@@ -144,3 +142,17 @@ These are common Spectate commands:
   config-docs   Reset Google Docs authentication
   update        Update Spectate itself
 ```
+
+## AWS Setup
+
+To be able to use `spectate publish` with a S3 public URL, you must create a credentials file.
+
+1. In your home directory (`cd ~`), create a directory called `.aws` (`mkdir .aws`).
+
+2. Write a file `.aws/credentials` with the contents below:
+<pre>
+[default]
+aws_access_key_id = <var><YOUR_ACCESS_KEY_ID></var>
+aws_secret_access_key = <var><YOUR_SECRET_ACCESS_KEY></var>
+</pre>
+See [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit) for your access key.
