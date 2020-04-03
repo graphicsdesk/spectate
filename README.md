@@ -101,16 +101,16 @@ Keep Illustrator files in `ai/`. Name each artboard the width it represents. Whe
 <pre>
 https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var>
 </pre>
-Add a `--no-content-hash` flag as well. The final build script should look something like this:
+The final build script should look something like this:
 <pre>
 parcel build src/index.html --global script --public-url https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var> --no-content-hash
 </pre>
 
-2. Uncomment the appropriate override stylesheet in `styles.scss` (either for a News or Eye page).
+2. If applicable, uncomment the appropriate override stylesheet in `styles.scss` (either for a News or Eye page).
 
 3. Run `spectate publish`. (Whenever you want to update JS or CSS assets after publication, just run this command again.)
 
-To be able to use `spectate publish` with a S3 public URL, you must first [configure credentials for AWS](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) under the profile name `spec`. (Ask Jason for an access key.)
+To be able to use `spectate publish` with a S3 public URL, you must first install the [AWS Command Line Interface](https://aws.amazon.com/cli/) and [configure AWS credentials](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) under the profile name `spec` (refer to [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit)).
 
 4. Copy the contents of `dist/index.html` into Ellipsis.
 
