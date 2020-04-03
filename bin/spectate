@@ -143,9 +143,9 @@ spectate_config_docs() {
 COMMAND=$1
 
 case $COMMAND in
-  create) spectate_create "${@:2}" ;;
+  create) spectate_create "$@" ;;
   init) spectate_init ;;
-  clone) spectate_clone "${@:2}" ;;
+  clone) spectate_clone "$@" ;;
   download) spectate_download ;; # TODO: centralize this function so keys don't have to be copied
   build) spectate_build ;;
   upload-assets) upload_assets ;;
