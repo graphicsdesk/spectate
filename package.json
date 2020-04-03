@@ -16,6 +16,7 @@
   "dependencies": {
     "aws-sdk": "^2.642.0",
     "googleapis": "^47.0.0",
+    "mime-types": "^2.1.26",
     "opn": "^6.0.0"
   }
 }
