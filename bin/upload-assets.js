@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-const fs =require('fs');
+const fs = require('fs');
 const AWS = require('aws-sdk');
+const mime = require('mime-types');
+
 DIST_DIR = './dist';
-BUCKET_NAME = 'spectator-static-assets';
 S3_WEBSITE_BASE = 'https://spectator-static-assets.s3.amazonaws.com';
 
 AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: 'spec' });
@@ -42,6 +43,7 @@ const putObject = filename =>
     const params = {
       Bucket,
       ACL: 'public-read',
+      ContentType: mime.lookup(filename) || 'application/octet-stream',
       Key: filename,
       Body: fileStream,
     };
@@ -63,6 +65,7 @@ async function uploadDir() {
   // Remove all objects in current prefix
   await listObjects()
     .then(({ Contents }) => Promise.all(Contents.map(deleteObject)));
+  
   // Upload all objects in dist to prefix
   await Promise.all(fs.readdirSync('./dist').map(putObject));
 };

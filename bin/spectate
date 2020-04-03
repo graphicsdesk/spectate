@@ -22,6 +22,13 @@ spectate_update() {
   (cd "$SPECTATE_ROOT"; git pull)
 }
 
+# Spectate update with npm install
+spectate_update_install() {
+  spectate_update
+  log "Installing dependencies..."
+  (cd "$SPECTATE_ROOT"; npm install)
+}
+
 # Download Google Doc and write .posthtmlrlc
 spectate_download() {
   log "Writing .posthtmlrc..."
@@ -92,8 +99,8 @@ spectate_build() {
   npm run build
 }
 
-# Uploads assets to S3 if S3 is the public build URL
-upload_assets() {
+# Uploads assets to S3 using AWS CLI
+upload_assets_awscli() {
   BUILD_SCRIPT=$(cat package.json | \
     python3 -c "import sys, json; print(json.load(sys.stdin)['scripts']['build'])")
   if [[ $BUILD_SCRIPT != *'https://spectator-static-assets.s3.amazonaws.com'* ]]; then
@@ -107,8 +114,12 @@ upload_assets() {
   log "Uploading assets, temporarily with the AWS CLI..."
   aws s3 rm "s3://spectator-static-assets/$SLUG/" --recursive --exclude "*" --include "*" --profile=spec
   aws s3 cp dist/ "s3://spectator-static-assets/$SLUG/" --recursive --exclude "*" --include "*" --acl=public-read --profile=spec
+}
 
-  # node $SPECTATE_ROOT/bin/upload-assets.js
+# Uploads assets to S3 using AWS Node SDK
+upload_assets() {
+  log "Uploading assets..."
+  node $SPECTATE_ROOT/bin/upload-assets.js
 }
 
 # Builds and uploads assets
@@ -153,6 +164,7 @@ case $COMMAND in
   gh-publish) gh_publish ;;
   config-docs) spectate_config_docs ;;
   update) spectate_update ;;
+  update-install) spectate_update_install ;;
 
   *) 
     if [ -z "$COMMAND" ]; then
