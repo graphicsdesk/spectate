@@ -114,6 +114,20 @@ To be able to use `spectate publish` with a S3 public URL, you must first [confi
 
 4. Copy the contents of `dist/index.html` into Ellipsis.
 
+## Publishing on GitHub Pages
+
+1. In the project directory, run `spectate gh-publish`.
+
+2. Go to the repository's apge on GitHub. Go to the Settings tab. Scroll down to the GitHub Pages section. You should see this:
+
+![](https://i.imgur.com/uNZsD8V.png)
+
+That means GitHub is starting up the page, but it's not ready yet. Once you see this screen…
+
+![](https://i.imgur.com/ZxcH7ES.png)
+
+…the link should work. It will show whatever is in your `dist/` directory.
+
 ## Command line options
 
 ```
