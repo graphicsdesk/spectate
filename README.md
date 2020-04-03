@@ -154,8 +154,8 @@ To be able to use `spectate publish` with a S3 public URL, you must create a cre
 3. Inside `.aws`, write a file named `credentials` with the contents below:
 <pre>
 [spec]
-aws_access_key_id = <var><YOUR_ACCESS_KEY_ID></var>
-aws_secret_access_key = <var><YOUR_SECRET_ACCESS_KEY></var>
+aws_access_key_id = <var>YOUR_ACCESS_KEY_ID>/var>
+aws_secret_access_key = <var>YOUR_SECRET_ACCESS_KEY</var>
 </pre>
 See [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit) for your access key.
 
