@@ -131,7 +131,7 @@ gh_publish() {
   publish
 
   log "Pushing changes to origin gh-pages..."
-  (cd dist; git add .; git commit -m 'Deploy to gh-pages'; git push origin gh-pages)
+  (cd dist; git add .; git commit -m 'Deploy to gh-pages'; git push origin gh-pages "$@")
 }
 
 spectate_config_docs() {
@@ -150,7 +150,7 @@ case $COMMAND in
   build) spectate_build ;;
   upload-assets) upload_assets ;;
   publish) publish ;;
-  gh-publish) gh_publish ;;
+  gh-publish) gh_publish "$@" ;;
   config-docs) spectate_config_docs ;;
   update) spectate_update ;;
 
