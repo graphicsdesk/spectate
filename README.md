@@ -145,7 +145,7 @@ These are common Spectate commands:
 
 ## AWS Setup
 
-To be able to use `spectate publish` with a S3 public URL, you must create a credentials file.
+To be able to use `spectate publish` or `spectate gh-publish` with a S3 public URL, you must create a credentials file.
 
 1. Navigate to your home directory: `cd ~`
 
@@ -159,4 +159,4 @@ aws_secret_access_key = <var>YOUR_SECRET_ACCESS_KEY</var>
 </pre>
 See [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit) for your access key.
 
-4. Run `cat ~/.aws/credentials`. If the output is the contents of the file you just made, you should now be able to run `spectate publish`.
+4. Run `cat ~/.aws/credentials`. If the output is the contents of the file you just made, you should now be able to run any publish command.
