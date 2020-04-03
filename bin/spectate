@@ -131,7 +131,7 @@ gh_publish() {
   publish
 
   log "Pushing changes to origin gh-pages..."
-  (cd dist; git add .; git commit -m 'Deploy to gh-pages'; git push origin gh-pages "${@:2}")
+  (cd dist; git add .; git commit -m 'Deploy to gh-pages'; git push origin gh-pages -f)
 }
 
 spectate_config_docs() {
@@ -143,14 +143,14 @@ spectate_config_docs() {
 COMMAND=$1
 
 case $COMMAND in
-  create) spectate_create "$@" ;;
+  create) spectate_create "${@:2}" ;;
   init) spectate_init ;;
-  clone) spectate_clone "$@" ;;
+  clone) spectate_clone "${@:2}" ;;
   download) spectate_download ;; # TODO: centralize this function so keys don't have to be copied
   build) spectate_build ;;
   upload-assets) upload_assets ;;
   publish) publish ;;
-  gh-publish) gh_publish "$@" ;;
+  gh-publish) gh_publish ;;
   config-docs) spectate_config_docs ;;
   update) spectate_update ;;
 
