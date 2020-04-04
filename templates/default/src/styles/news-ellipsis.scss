@@ -21,74 +21,6 @@
   // display: none;
 }
 
-#main {
-  padding: 0;
-
-  // Override bootstrap's margin: 0 -15px;
-  .row {
-    margin: 0 !important;
-  }
-
-  .pb-container {
-    width: 100%;
-
-    &>.pb-f-article-article-title {
-      // UNCOMMENT to hide banner and headline
-      // display: none;
-
-      // Hide headline
-      .title-wrapper .article-title h1 {
-        display: none;
-      }
-
-      // Center the article banner (the blue banner box that shows the section)
-      .row.banner-wrapper {
-        display: flex;
-      }
-    }
-
-    &>.pb-chain.col-md-9 {
-      padding: 0;
-      width: 100%;
-
-      // Hide featured image and social buttons
-      .pb-f-article-article-image, .pb-f-article-social-buttons {
-        display: none;
-      }
-
-      .pb-f-article-article-body {
-        width: 100% !important; // Sometimes arc sets a hardcoded inline width for responsiveness
-
-        .row .col-xs-12 {
-          padding: 0;
-
-          .ab-article-body {
-            width: 100% !important; // Sometimes arc sets a hardcoded inline width for responsiveness
-            margin-top: 0 !important;
-
-            .ab-byline { // Hide byline
-              display: none;
-            }
-              // Links and metadata are SSR'd into this first paragraph
-            .ab-article-content > article > p:first-child {
-              margin: 0;
-            }
-          }
-        }
-      }
-
-      // Hide Next Story component
-      .pb-f-article-next-story {
-        display: none;
-      }
-    }
-
-    &>.pb-chain.col-md-3 { // Hide sidebar on the right
-      display: none;
-    }
-  }
-}
-
 // Hide mobile share buttons at the bottom
 .at-share-dock-outer {
   display: none;
@@ -96,5 +28,10 @@
 
 // Hide advertisements that get server-side-rendered into the middle of the page
 #hor-in-article-ad-placement, #ver-in-article-ad-placement {
+  display: none;
+}
+
+// Hide section#main before it is replaced
+#main {
   display: none;
 }
