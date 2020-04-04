@@ -35,7 +35,7 @@ class Asker {
 
   // Allows retries with promise resolves
   retry(fn, retries = 4, err = 'Ran out of retries.') {
-    return !retries ? Promise.reject(err) : fn().catch(err => retry(fn, (retries - 1), err));
+    return !retries ? Promise.reject(err) : fn().catch(err => this.retry(fn, (retries - 1), err));
   }
 
   close() {

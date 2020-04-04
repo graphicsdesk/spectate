@@ -73,7 +73,6 @@ async function retrieveDoc(config, auth) {
 
   // Write new config to .posthtmlrc, which triggers hot module replacement
   await writePostHTMLConfig(PH_CONFIG);
-  console.log('[download-doc] Successfully wrote .posthtmlrc');
 
   // Write doc data again to data/doc.json. (Example use case: accessing
   // information in the doc in client-side JavaScript).
@@ -90,6 +89,7 @@ async function writePostHTMLConfig(config) {
     path.join(process.cwd(), '.posthtmlrc'),
     JSON.stringify(config),
   );
+  console.log('[download-doc] Successfully wrote .posthtmlrc');
 }
 
 // Read in local config file
