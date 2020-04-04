@@ -1,14 +1,43 @@
-/* These styles hide default site elements for a News story except the navbar and footer */
+/* These styles help hide default site elements for a News story */
+
+#top {
+  // UNCOMMENT to hide navbar
+  // display: none;
+  padding: 0;
+}
+
+#bottom {
+  // UNCOMMENT to hide footer
+  // display: none
+}
+
+.pb-f-article-disqus-new {
+  // UNCOMMENT to hide comment section
+  // display: none;
+}
+
+#article-tags {
+  // UNCOMMENT to hide article tags
+  // display: none;
+}
 
 #main {
   padding: 0;
 
+  // Override bootstrap's margin: 0 -15px;
+  .row {
+    margin: 0 !important;
+  }
+
   .pb-container {
     width: 100%;
 
-    &>.pb-f-article-article-title .title-wrapper {
+    &>.pb-f-article-article-title {
+      // UNCOMMENT to hide banner and headline
+      // display: none;
+
       // Hide headline
-      .article-title h1 {
+      .title-wrapper .article-title h1 {
         display: none;
       }
 
@@ -35,6 +64,8 @@
 
           .ab-article-body {
             width: 100% !important; // Sometimes arc sets a hardcoded inline width for responsiveness
+            margin-top: 0 !important;
+
             .ab-byline { // Hide byline
               display: none;
             }
@@ -45,6 +76,11 @@
           }
         }
       }
+
+      // Hide Next Story component
+      .pb-f-article-next-story {
+        display: none;
+      }
     }
 
     &>.pb-chain.col-md-3 { // Hide sidebar on the right
@@ -53,12 +89,12 @@
   }
 }
 
-// Hide advertisements that get server-side-rendered into the middle of the page
-#hor-in-article-ad-placement, #ver-in-article-ad-placement {
+// Hide mobile share buttons at the bottom
+.at-share-dock-outer {
   display: none;
 }
 
-// Override bootstrap's margin: 0 -15px;
-.row {
-  margin: 0;
+// Hide advertisements that get server-side-rendered into the middle of the page
+#hor-in-article-ad-placement, #ver-in-article-ad-placement {
+  display: none;
 }
