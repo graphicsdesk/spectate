@@ -135,3 +135,19 @@ These are common Spectate commands:
   config-docs   Reset Google Docs authentication
   update        Update Spectate itself
 ```
+
+## AWS Setup
+
+1. Navigate to your home directory: `cd ~`
+
+2. Make a directory named `.aws`
+
+3. Inside `.aws`, write a file named `credentials` with the contents below:
+<pre>
+[spec]
+aws_access_key_id = <var>YOUR_ACCESS_KEY_ID</var>
+aws_secret_access_key = <var>YOUR_SECRET_ACCESS_KEY</var>
+</pre>
+See [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit) for your access key.
+
+4. Run `cat ~/.aws/credentials`. If the output is the contents of the file you just made, you should now be able to run any publish command.
