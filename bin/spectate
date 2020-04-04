@@ -43,10 +43,7 @@ spectate_download() {
 # Download data
 spectate_download_data() {
   log "Downloading data..."
-  (
-    set -x ;
-    node --no-warnings process/download-data.js --spectate-root="$SPECTATE_ROOT" "$@"
-  )
+  ( set -x ; node --no-warnings process/download-data.js )
 }
 
 # Creates a Spectate project from scratch
