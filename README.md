@@ -97,16 +97,9 @@ Keep Illustrator files in `ai/`. Name each artboard the width it represents. Whe
 
 ## Publishing on Arc
 
-1. In the build script of `package.json`, set the value of `--public-url` to the S3 link, which should take this format:
-<pre>
-https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var>
-</pre>
-The final build script should look something like this:
-<pre>
-parcel build src/index.html --global script --public-url https://spectator-static-assets.s3.amazonaws.com/<var>SLUG</var> --no-content-hash
-</pre>
+1. Run `spectate prepublish`, which will help you set up the S3 URL. Make sure you have completed the [AWS setup](#aws-setup).
 
-2. If applicable, uncomment the appropriate override stylesheet in `styles.scss` (either for a News or Eye page).
+2. Uncomment the appropriate override stylesheet at the top of `src/styles.scss`.
 
 3. Run `spectate publish`. (Whenever you want to update JS or CSS assets after publication, just run this command again.)
 
@@ -116,7 +109,7 @@ parcel build src/index.html --global script --public-url https://spectator-stati
 
 1. In the project directory, run `spectate gh-publish`.
 
-2. Go to the repository's apge on GitHub. Go to the Settings tab. Scroll down to the GitHub Pages section. You should see this:
+2. Go to the Settings tab in the repository's GitHub page. Scroll down to the GitHub Pages section. You should see this:
 
 ![](https://i.imgur.com/uNZsD8V.png)
 
@@ -142,17 +135,3 @@ These are common Spectate commands:
   config-docs   Reset Google Docs authentication
   update        Update Spectate itself
 ```
-
-## AWS Setup
-
-To be able to use `spectate publish` with a S3 public URL, you must create a credentials file.
-
-1. In your home directory (`cd ~`), create a directory called `.aws` (`mkdir .aws`).
-
-2. Write a file `.aws/credentials` with the contents below:
-<pre>
-[default]
-aws_access_key_id = <var><YOUR_ACCESS_KEY_ID></var>
-aws_secret_access_key = <var><YOUR_SECRET_ACCESS_KEY></var>
-</pre>
-See [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit) for your access key.
