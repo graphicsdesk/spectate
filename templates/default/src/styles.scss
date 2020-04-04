@@ -6,7 +6,7 @@
 // @import 'styles/news-ellipsis';
 
 body {
-  // Arc's overflow: hidden on >body? messes up position sticky
+  // Arc's overflow hidden on <body> messes up position sticky
   overflow-x: visible !important;
 }
 
