@@ -1,64 +1,64 @@
 /* These styles hide default site elements for a News story except the navbar and footer */
 
-#main > .pb-container > .pb-layout-item.pb-chain.pb-c-default-chain.col-xs-12.col-md-3 {
-    display: none;
-}
+#main {
+  padding: 0;
 
-.ab-byline {
-    display: none;
-}
-
-.wrapper.pb-feature.pb-layout-item.pb-f-article-article-image {
-    display: none;
-}
-
-.wrapper.pb-feature.pb-layout-item.pb-f-article-social-buttons {
-    display: none;
-}
-
-.article-title h1 {
-    display: none;
-}
-
-#hor-in-article-ad-placement, #ver-in-article-ad-placement {
-    display: none;
-}
-
-.row.banner-wrapper {
-    display: flex;
-}
-
-.wrapper.pb-feature.pb-layout-item.pb-f-article-article-body .col-xs-12 {
-    padding: 0;
-}
-
-#main.col-xs-12.flat-layout {
-    padding: 0;
-}
-
-.ab-article-body {
-    width: 100% !important;
-}
-
-.pb-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .pb-container {
     width: 100%;
+
+    &>.pb-f-article-article-title .title-wrapper {
+      // Hide headline
+      .article-title h1 {
+        display: none;
+      }
+
+      // Center the article banner (the blue banner box that shows the section)
+      .row.banner-wrapper {
+        display: flex;
+      }
+    }
+
+    &>.pb-chain.col-md-9 {
+      padding: 0;
+      width: 100%;
+
+      // Hide featured image and social buttons
+      .pb-f-article-article-image, .pb-f-article-social-buttons {
+        display: none;
+      }
+
+      .pb-f-article-article-body {
+        width: 100% !important; // Sometimes arc sets a hardcoded inline width for responsiveness
+
+        .row .col-xs-12 {
+          padding: 0;
+
+          .ab-article-body {
+            width: 100% !important; // Sometimes arc sets a hardcoded inline width for responsiveness
+            .ab-byline { // Hide byline
+              display: none;
+            }
+              // Links and metadata are SSR'd into this first paragraph
+            .ab-article-content > article > p:first-child {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+
+    &>.pb-chain.col-md-3 { // Hide sidebar on the right
+      display: none;
+    }
+  }
 }
 
-header {
-    padding-top: 0;
+// Hide advertisements that get server-side-rendered into the middle of the page
+#hor-in-article-ad-placement, #ver-in-article-ad-placement {
+  display: none;
 }
 
+// Override bootstrap's margin: 0 -15px;
 .row {
-    margin: 0;
-}
-
-// Links are server-side rendered into paragraphs that shouldn't take any space
-.ab-article-content > article > p:first-child {
-  margin-bottom: 0;
-}
-.ab-article-content > article > p:last-child {
-  margin-bottom: 0;
+  margin: 0;
 }
