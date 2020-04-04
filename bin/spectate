@@ -40,6 +40,15 @@ spectate_download() {
   )
 }
 
+# Download data
+spectate_download_data() {
+  log "Downloading data..."
+  (
+    set -x ;
+    node --no-warnings process/download-data.js --spectate-root="$SPECTATE_ROOT" "$@"
+  )
+}
+
 # Creates a Spectate project from scratch
 spectate_create() {
   spectate_update
@@ -167,6 +176,7 @@ case $COMMAND in
   init) spectate_init ;;
   clone) spectate_clone "$@" ;;
   download) spectate_download ;;
+  download-data) spectate_download_data ;;
   build) spectate_build ;;
   upload-assets) upload_assets ;;
   prepublish) prepublish ;;
