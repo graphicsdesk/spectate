@@ -64,4 +64,5 @@ function ready(timestamp) {
 };
 
 // Initialize our ready() function.
-window.requestAnimationFrame(ready);
+if (window.location.host === 'www.columbiaspectator.com')
+  window.requestAnimationFrame(ready);
