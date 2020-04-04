@@ -4,8 +4,8 @@ const fs = require('fs');
 const AWS = require('aws-sdk');
 const mime = require('mime-types');
 
+const { S3_WEBSITE_BASE } = require('./constants');
 DIST_DIR = './dist';
-S3_WEBSITE_BASE = 'https://spectator-static-assets.s3.amazonaws.com';
 
 AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: 'spec' });
 const {

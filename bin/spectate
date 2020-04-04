@@ -128,6 +128,12 @@ publish() {
   upload_assets
 }
 
+# Uploads assets to S3 using AWS Node SDK
+prepublish() {
+  log "Setting public S3 URL..."
+  node --no-warnings $SPECTATE_ROOT/bin/prepublish.js # suppress fs.promises warning
+}
+
 # Publishes on a gh-pages branch which lives in a working tree in dist
 gh_publish() {
   # Check out gh-pages into a new working tree in dist if one doesn't already exist
@@ -160,6 +166,7 @@ case $COMMAND in
   download) spectate_download ;; # TODO: centralize this function so keys don't have to be copied
   build) spectate_build ;;
   upload-assets) upload_assets ;;
+  prepublish) prepublish ;;
   publish) publish ;;
   gh-publish) gh_publish ;;
   config-docs) spectate_config_docs ;;
@@ -176,6 +183,7 @@ case $COMMAND in
       echo "  clone         Clone an existing Spectate project"
       echo "  download      Download the Google Doc"
       echo "  build         Clear the contents of dist/ and npm run build"
+      echo "  prepublish    Configure public S3 URL"
       echo "  publish       Build and upload assets"
       echo "  gh-publish    Publish and push to a gh-pages branch"
       echo "  config-docs   Reset Google Docs authentication"
