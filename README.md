@@ -77,7 +77,7 @@ To clone a Spectate project, run:
 <pre>
 $ spectate clone <var>SLUG</var>
 </pre>
-This will clone the repository `git@github.com:spec-journalism/SLUG.git` into a new directory named _`SLUG`_, install node modules, and copy over Google Docs keys. See [Usage](#usage).
+This will clone the repository `git@github.com:spec-journalism/SLUG.git` into a new directory named _`SLUG`_ and install the project's node modules. See [Usage](#usage).
 
 ## Usage
 

@@ -57,9 +57,8 @@ spectate_create() {
   fi
 
   # Copy template into current directory
-  log "Copying template $TEMPLATE_NAME and keys..."
+  log "Copying template $TEMPLATE_NAME..."
   cp -vRn "$TEMPLATE_PATH"/. . || true # Copy without overwrite
-  cp -vR "$SPECTATE_ROOT/keys"/*.json ./process
 
   # Install node packages
   if [ -f "package.json" ]; then
@@ -85,15 +84,12 @@ spectate_init() {
   node $SPECTATE_ROOT/bin/spectate-init.js "$@"
 }
 
-# Clones a spectate project repository, then copy keys
-# TODO: keys should only need to be stored in the central spectate repo
+# Clones a spectate project repository and installs node packages
 spectate_clone() {
   spectate_update
 
   log "Cloning repository..."
   if git clone git@github.com:spec-journalism/$2.git ; then
-    log "Copying keys..."
-    cp -vR "$SPECTATE_ROOT/keys"/*.json "$2/process"
     log "Installing node packages..."
     npm --prefix "$2" install "$2"
   fi
@@ -170,7 +166,7 @@ case $COMMAND in
   create) spectate_create "$@" ;;
   init) spectate_init ;;
   clone) spectate_clone "$@" ;;
-  download) spectate_download ;; # TODO: centralize this function so keys don't have to be copied
+  download) spectate_download ;;
   build) spectate_build ;;
   upload-assets) upload_assets ;;
   prepublish) prepublish ;;
