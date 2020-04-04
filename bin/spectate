@@ -1,16 +1,18 @@
 #!/bin/bash
 
-# Find and record where spectate is installed, then go back to old location
-OLDWD="$PWD"
-cd "$(dirname $(which spectate))" && cd "$(dirname $(readlink spectate))/.."
-SPECTATE_ROOT="$PWD"
-cd "$OLDWD"
+# Store where spectate is installed to be able to run bin/ scripts
+
+SPECTATE_ROOT=$( \
+  cd "$(dirname $(which spectate))" && \
+  cd "$(dirname $(readlink spectate))/.." && \
+  pwd \
+)
 
 # Utility function for logging
 CYAN='\033[36m'; BOLD='\033[1m'; NOCOLOR='\033[0m'
 log() {
   echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')] ${BOLD}$1${NOCOLOR}"
-  # Append newline unless otherwise noted
+  # Append newline unless otherwise noted by the existence of a second arg
   if [ -z "$2" ]; then
     echo ""
   fi
@@ -26,13 +28,16 @@ spectate_update() {
 spectate_update_install() {
   spectate_update
   log "Installing dependencies..."
-  (cd "$SPECTATE_ROOT"; npm install)
+  (cd "$SPECTATE_ROOT" ; npm install)
 }
 
 # Download Google Doc and write .posthtmlrlc
 spectate_download() {
   log "Writing .posthtmlrc..."
-  node process/download-doc.js "$@"
+  (
+    set -x ;
+    node --no-warnings process/download-doc.js --spectate-root="$SPECTATE_ROOT" "$@"
+  )
 }
 
 # Creates a Spectate project from scratch
@@ -81,8 +86,10 @@ spectate_init() {
 }
 
 # Clones a spectate project repository, then copy keys
-# TODO: keys should only be stored in the central spectate repo
+# TODO: keys should only need to be stored in the central spectate repo
 spectate_clone() {
+  spectate_update
+
   log "Cloning repository..."
   if git clone git@github.com:spec-journalism/$2.git ; then
     log "Copying keys..."

@@ -1,11 +1,16 @@
-const fs = require('fs');
-const fsPromise = fs.promises;
+const fs = require('fs').promises;
 const readline = require('readline');
 const path = require('path');
+const YAML = require('yaml');
 const { google } = require('googleapis');
 const { docToArchieML } = require('@newswire/doc-to-archieml');
 
-const phConfig = {
+// TODO: Centralize these paths (they are used in spectate config-docs as well)
+CREDENTIALS_PATH = '/keys/credentials.json';
+TOKEN_PATH = '/keys/token.json';
+
+// Default PostHTML config
+const PH_CONFIG = {
   plugins: {
     'posthtml-include': {
       root: './src',
@@ -16,84 +21,50 @@ const phConfig = {
   },
 };
 
-// If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
-const TOKEN_PATH = 'token.json';
-const { DOC_URL } = JSON.parse(fs.readFileSync(process.cwd() + '/config.json').toString());
-let documentId = null;
-
-if (DOC_URL) { // If DOC_URL is set, authorize user and download Google Doc
-  documentId = config.DOC_URL.match(/[-\w]{25,}/)[0];
-
-  // Load client secrets from a local file.
-  fs.readFile(__dirname + '/credentials.json', (err, content) => {
-    if (err) return console.log('Error loading client secret file:', err);
-    // Authorize a client with credentials, then call the Google Sheets API.
-    authorize(JSON.parse(content), readDoc);
-  });
-} else { // If DOC_URL is not set, just write the default .posthtmlrc
-  writeDefaultPostHTMLConfig(phConfig);
+// Gets value of the --spectate-root flag (spectate download provides this)
+function getSpectateRoot() {
+  const pattern = /(?<=--spectate-root=).*?(?=\s|$)/;
+  for (const arg of process.argv.slice(2)) {
+    const match = arg.match(pattern);
+    if (match)
+      return match[0];
+  }
 }
 
-/**
- * Create an OAuth2 client with the given credentials, and then execute the
- * given callback function.
- * @param {Object} credentials The authorization client credentials.
- * @param {function} callback The callback to call with the authorized client.
- */
-function authorize(credentials, callback) {
-  const {client_secret, client_id, redirect_uris} = credentials.installed;
-  const oAuth2Client = new google.auth.OAuth2(
-      client_id, client_secret, redirect_uris[0]);
+// Authorizes user with OAuth2 and downloads the Google Doc
+async function authorizeAndDownload(config) {
+  const spectateRoot = getSpectateRoot();
 
-  // Check if we have previously stored a token.
-  fs.readFile(__dirname + '/' + TOKEN_PATH, (err, token) => {
-    if (err) return getNewToken(oAuth2Client, callback);
-    oAuth2Client.setCredentials(JSON.parse(token));
-    callback(oAuth2Client);
-  });
+  // Load client secrets from a local file
+  const credentials = JSON.parse(await fs.readFile(spectateRoot + CREDENTIALS_PATH));
+
+  // Create OAuth2 client
+  const { client_secret, client_id, redirect_uris } = credentials.installed;
+  const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+  try {
+    const token = JSON.parse(await fs.readFile(spectateRoot + TOKEN_PATH));
+    oAuth2Client.setCredentials(token);
+  } catch (e) {
+    // Token file does not exist.
+    console.error('Could not find token. Run spectate config-docs to generate it.');
+    console.error(e.message);
+    return;
+  }
+
+  // Download the doc
+  await retrieveDoc(config, oAuth2Client);
 }
 
-/**
- * Get and store new token after prompting for user authorization, and then
- * execute the given callback with the authorized OAuth2 client.
- * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
- * @param {getEventsCallback} callback The callback for the authorized client.
- */
-function getNewToken(oAuth2Client, callback) {
-  const authUrl = oAuth2Client.generateAuthUrl({
-    access_type: 'offline',
-    scope: SCOPES,
-  });
-  console.log('Authorize this app by visiting this url:', authUrl);
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-  rl.question('Enter the code from that page here: ', (code) => {
-    rl.close();
-    oAuth2Client.getToken(code, (err, token) => {
-      if (err) return console.error('Error while trying to retrieve access token', err);
-      oAuth2Client.setCredentials(token);
-      // Store the token to disk for later program executions
-      fs.writeFile(__dirname + '/' + TOKEN_PATH, JSON.stringify(token), (err) => {
-        if (err) return console.error(err);
-        console.log('Token stored to', __dirname + '/' + TOKEN_PATH);
-      });
-      callback(oAuth2Client);
-    });
-  });
-}
-
-/**
- * Read Doc.
- * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
- */
-async function readDoc(auth) {
+// Download and store doc data
+async function retrieveDoc(config, auth) {
   const client = google.docs({ version: 'v1', auth });
-  const doc = await docToArchieML({ documentId, client });
+  const doc = await docToArchieML({
+    client,
+    documentId: config.DOC_URL.match(/[-\w]{25,}/)[0]
+  });
 
-  phConfig.plugins['posthtml-expressions'].locals = {
+  // Set local variables for HTML
+  PH_CONFIG.plugins['posthtml-expressions'].locals = {
     top: {},
     credits: '',
     footer: '',
@@ -101,23 +72,34 @@ async function readDoc(auth) {
     ...config,
   };
 
-  await fsPromise.writeFile(
+  // Write new config to .posthtmlrc, which triggers hot module replacement
+  await writePostHTMLConfig(PH_CONFIG);
+  console.log('[download-doc] Successfully wrote .posthtmlrc');
+
+  // Write doc data again to data/doc.json. (Example use case: accessing
+  // information in the doc in client-side JavaScript).
+  await fs.writeFile(
     path.join(process.cwd(), './data/doc.json'),
     JSON.stringify(doc, null, 2),
   );
   console.log('[download-doc] Successfully wrote ./data/doc.json');
-
-  await fsPromise.writeFile(
-    path.join(process.cwd(), '.posthtmlrc'),
-    JSON.stringify(phConfig),
-  );
-  console.log('[download-doc] Successfully wrote .posthtmlrc');
 }
 
-async function writeDefaultPostHTMLConfig(phConfig) {
-  await fsPromise.writeFile(
+// Writes a config to .posthtmlrc
+async function writePostHTMLConfig(config) {
+  await fs.writeFile(
     path.join(process.cwd(), '.posthtmlrc'),
-    JSON.stringify(phConfig),
+    JSON.stringify(config),
   );
-  console.log('[download-doc] Successfully wrote .posthtmlrc');
 }
+
+// Read in local config file
+fs.readFile(process.cwd() + '/config.json')
+  .then(content => {
+    const config = JSON.parse(content);
+    if (config.DOC_URL)
+      return authorizeAndDownload(config);
+    // If DOC_URL is not set, write the default .posthtmlrc
+    return writePostHTMLConfig(PH_CONFIG);
+  })
+  .catch(console.error);
