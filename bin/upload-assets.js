@@ -7,7 +7,7 @@ const mime = require('mime-types');
 const { S3_WEBSITE_BASE } = require('./constants');
 DIST_DIR = './dist';
 
-AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: 'spec' });
+AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: 'spectate' });
 const {
   name: Prefix,
   scripts: { build: buildScript },

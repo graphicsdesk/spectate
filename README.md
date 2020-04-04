@@ -144,7 +144,7 @@ These are common Spectate commands:
 
 3. Inside `.aws`, write a file named `credentials` with the contents below:
 <pre>
-[spec]
+[spectate]
 aws_access_key_id = <var>YOUR_ACCESS_KEY_ID</var>
 aws_secret_access_key = <var>YOUR_SECRET_ACCESS_KEY</var>
 </pre>
