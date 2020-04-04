@@ -5,7 +5,7 @@ const path = require('path');
 const readline = require('readline');
 const { google } = require('googleapis');
 
-// If modifying these scopes, delete token.json.
+// If modifying these scopes, delete token.json and regenerate it with spectate config-docs
 const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
 const TOKEN_PATH = path.join(__dirname, '../keys/token.json');
 
@@ -30,6 +30,7 @@ function authorize(credentials) {
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
     if (err) return getNewToken(oAuth2Client);
+    console.log('Token already exists.');
   });
 }
 
@@ -56,7 +57,7 @@ function getNewToken(oAuth2Client) {
       // Store the token to disk for later program executions
       fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
         if (err) return console.error(err);
-        console.log('Token stored to', TOKEN_PATH);
+        console.log('Token stored at', TOKEN_PATH);
       });
     });
   });
