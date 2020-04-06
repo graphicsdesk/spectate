@@ -1,12 +1,16 @@
 /* Scripts that should be on every Spectate page */
 
+const isOnSpectatorPage = window.location.host === 'www.columbiaspectator.com';
+const isOnContributorPage = isOnSpectatorPage &&
+  window.location.pathname.indexOf('/contributors') === 0;
+
 /**
  * Disable stylesheets on contributor page. Stylesheets are included in the
  * server-side render and styles in files like news-ellipsis.scss
  * still override the site.
  */
 
-if (window.location.pathname.indexOf('/contributors') === 0) {
+if (isOnContributorPage) {
   // Disable stylesheets
   document.querySelectorAll('.story-summary > .twolines > link').forEach(link => link.disabled = true);
   // Add styles to hide content preview
@@ -64,5 +68,5 @@ function ready(timestamp) {
 };
 
 // Initialize our ready() function.
-if (window.location.host === 'www.columbiaspectator.com')
+if (isOnSpectatorPage)
   window.requestAnimationFrame(ready);
