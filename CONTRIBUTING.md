@@ -2,6 +2,8 @@
 
 Make sure you have completed the [prequisite and setup instructions](https://github.com/spec-journalism/spectate#prerequisites) for Spectate. Then, create a Spectate project with a slug like `test-feature-nerdbox`.
 
+We use ESLint for JavaScript linting. Please [integrate it](https://eslint.org/docs/user-guide/integrations) into your text editor.
+
 To add a new HTML partial (visual element) onto the site, see the section [Writing components](#writing-components).
 
 ## Writing components
