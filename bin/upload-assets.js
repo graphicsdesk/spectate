@@ -3,9 +3,9 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
 const mime = require('mime-types');
-
 const { S3_WEBSITE_BASE } = require('./constants');
-DIST_DIR = './dist';
+
+const DIST_DIR = './dist';
 
 AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: 'spectate' });
 const {
@@ -65,9 +65,9 @@ async function uploadDir() {
   // Remove all objects in current prefix
   await listObjects()
     .then(({ Contents }) => Promise.all(Contents.map(deleteObject)));
-  
+
   // Upload all objects in dist to prefix
   await Promise.all(fs.readdirSync('./dist').map(putObject));
-};
+}
 
 uploadDir();

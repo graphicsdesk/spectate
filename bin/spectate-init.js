@@ -11,10 +11,10 @@ const googleDocsRegex = /docs\.google\.com\/document(\/u\/\d)?\/d\/[-\w]{25,}/;
 
 function init() {
   const asker = new Asker();
-  asker.question(`Enter a slug`, path.basename(process.cwd()))
+  asker.question('Enter a slug', path.basename(process.cwd()))
     .then(line => {
       setFileKeySync('package.json', 'name', line);
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         exec(`git ls-remote "git@github.com:spec-journalism/${line}"`, (err, stdout, stderr) => {
           if (err) {
             console.log(stderr);
@@ -24,8 +24,8 @@ function init() {
         });
       });
     })
-    .then(line => {
-      return new Promise((resolve, reject) => {
+    .then(line =>
+      new Promise(resolve => {
         if (line === false) return resolve(line);
         exec(`git remote add origin "git@github.com:spec-journalism/${line}.git"`, (err, stdout, stderr) => {
           if (err) {
@@ -34,17 +34,15 @@ function init() {
           }
           resolve(stdout);
         });
-      });
-    })
-    .then(line => {
-      return new Promise((resolve, reject) => {
+      }))
+    .then(line =>
+      new Promise((resolve, reject) => {
         if (line === false) return resolve(line);
-        exec('git remote -v', (err, stdout, stderr) => {
+        exec('git remote -v', (err, stdout) => {
           if (err) return reject(err);
           resolve(stdout);
         });
-      });
-    })
+      }))
     .then(stdout => {
       if (stdout !== false) console.log(stdout);
       return asker.retry(
@@ -59,6 +57,6 @@ function init() {
     .then(line => setFileKeySync('config.json', 'DOC_URL', line))
     .catch(console.error)
     .finally(() => asker.close());
-};
+}
 
 init();

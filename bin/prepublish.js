@@ -27,7 +27,7 @@ async function main() {
 
   // Rewrite current build script with the S3 public URL
   const purl = S3_WEBSITE_BASE + '/' + slug;
-  packageJSON.scripts.build = build.replace(/(?<=--public-url )\.(?=\s|$)/, purl);  
+  packageJSON.scripts.build = build.replace(/(?<=--public-url )\.(?=\s|$)/, purl);
   await fs.writeFile('package.json', JSON.stringify(packageJSON, null, 2));
   console.log('Set public URL to', purl);
 }

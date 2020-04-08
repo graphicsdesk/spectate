@@ -53,4 +53,4 @@ function setFileKeySync(filename, key, value) {
   });
 }
 
-module.exports = { Asker, setFileKeySync }
+module.exports = { Asker, setFileKeySync };

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Store where spectate is installed to be able to run bin/ scripts
-
+# Store where spectate is installed to be able to run scripts in bin/
 SPECTATE_ROOT=$( \
   cd "$(dirname $(which spectate))" && \
   cd "$(dirname $(readlink spectate))/.." && \
@@ -12,7 +11,7 @@ SPECTATE_ROOT=$( \
 CYAN='\033[36m'; BOLD='\033[1m'; NOCOLOR='\033[0m'
 log() {
   echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')] ${BOLD}$1${NOCOLOR}"
-  # Append newline unless otherwise noted by the existence of a second arg
+  # Append newline, unless otherwise noted by the existence of a second arg
   if [ -z "$2" ]; then
     echo ""
   fi
@@ -24,11 +23,11 @@ spectate_update() {
   (cd "$SPECTATE_ROOT"; git pull)
 }
 
-# Spectate update with npm install
+# spectate update with npm install
 spectate_update_install() {
   spectate_update
   log "Installing dependencies..."
-  (cd "$SPECTATE_ROOT" ; npm install)
+  (cd "$SPECTATE_ROOT"; npm install)
 }
 
 # Download Google Doc and write .posthtmlrlc
@@ -43,7 +42,7 @@ spectate_download() {
 # Download data
 spectate_download_data() {
   log "Downloading data..."
-  ( set -x ; node --no-warnings process/download-data.js )
+  (set -x ; node --no-warnings process/download-data.js)
 }
 
 # Creates a Spectate project from scratch
@@ -55,7 +54,6 @@ spectate_create() {
   if [ -z "$TEMPLATE_NAME" ]; then
     TEMPLATE_NAME="default"
   fi
-
   TEMPLATE_PATH="$SPECTATE_ROOT/templates/$TEMPLATE_NAME"
   if [ ! -d "$TEMPLATE_PATH" ]; then
     echo "Template $TEMPLATE_NAME does not exist."
@@ -64,7 +62,7 @@ spectate_create() {
 
   # Copy template into current directory
   log "Copying template $TEMPLATE_NAME..."
-  cp -vRn "$TEMPLATE_PATH"/. . || true # Copy without overwrite
+  cp -vRn "$TEMPLATE_PATH"/. . # Copy without overwrite
 
   # Install node packages
   if [ -f "package.json" ]; then
@@ -78,6 +76,7 @@ spectate_create() {
     git init
   fi
 
+  # Write default .posthtmlrc
   spectate_download
 
   log "Displaying git status..."
@@ -87,7 +86,7 @@ spectate_create() {
 # Set remote links for a newly created project
 spectate_init() {
   log "Prompting for remote links..."
-  node $SPECTATE_ROOT/bin/spectate-init.js "$@"
+  node "$SPECTATE_ROOT"/bin/spectate-init.js
 }
 
 # Clones a spectate project repository and installs node packages
@@ -95,7 +94,7 @@ spectate_clone() {
   spectate_update
 
   log "Cloning repository..."
-  if git clone git@github.com:spec-journalism/$2.git ; then
+  if git clone git@github.com:spec-journalism/"$2".git ; then
     log "Installing node packages..."
     npm --prefix "$2" install "$2"
   fi
@@ -108,27 +107,10 @@ spectate_build() {
   npm run build
 }
 
-# Uploads assets to S3 using AWS CLI
-upload_assets_awscli() {
-  BUILD_SCRIPT=$(cat package.json | \
-    python3 -c "import sys, json; print(json.load(sys.stdin)['scripts']['build'])")
-  if [[ $BUILD_SCRIPT != *'https://spectator-static-assets.s3.amazonaws.com'* ]]; then
-    log "Skipping S3 upload." 0
-    return
-  fi
-
-  SLUG=$(cat package.json | \
-    python3 -c "import sys, json; print(json.load(sys.stdin)['name'])")
-
-  log "Uploading assets, temporarily with the AWS CLI..."
-  aws s3 rm "s3://spectator-static-assets/$SLUG/" --recursive --exclude "*" --include "*" --profile=spec
-  aws s3 cp dist/ "s3://spectator-static-assets/$SLUG/" --recursive --exclude "*" --include "*" --acl=public-read --profile=spec
-}
-
 # Uploads assets to S3 using AWS Node SDK
 upload_assets() {
   log "Uploading assets..."
-  node $SPECTATE_ROOT/bin/upload-assets.js
+  node "$SPECTATE_ROOT"/bin/upload-assets.js
 }
 
 # Builds and uploads assets
@@ -140,7 +122,7 @@ publish() {
 # Uploads assets to S3 using AWS Node SDK
 prepublish() {
   log "Setting public S3 URL..."
-  node --no-warnings $SPECTATE_ROOT/bin/prepublish.js # suppress fs.promises warning
+  node --no-warnings "$SPECTATE_ROOT"/bin/prepublish.js # suppress fs.promises warning
 }
 
 # Publishes on a gh-pages branch which lives in a working tree in dist
@@ -162,7 +144,7 @@ gh_publish() {
 
 spectate_config_docs() {
   log "Authorizing Google user..."
-  node $SPECTATE_ROOT/bin/config-docs.js
+  node "$SPECTATE_ROOT"/bin/config-docs.js
 }
 
 # Takes intended command
@@ -172,7 +154,7 @@ case $COMMAND in
   create) spectate_create "$@" ;;
   init) spectate_init ;;
   clone) spectate_clone "$@" ;;
-  download) spectate_download ;;
+  download) spectate_download "$@" ;;
   download-data) spectate_download_data ;;
   build) spectate_build ;;
   upload-assets) upload_assets ;;
@@ -183,7 +165,7 @@ case $COMMAND in
   update) spectate_update ;;
   update-install) spectate_update_install ;;
 
-  *) 
+  *)
     if [ -z "$COMMAND" ]; then
       echo "usage: spectate <command>"
       echo
