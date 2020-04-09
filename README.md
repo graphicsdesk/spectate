@@ -58,7 +58,7 @@ $ spectate create
 
 4. Clone the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit).
 
-5. Run `spectate init`, which will ask you for the slug and the new Google Docs link.
+5. Run `spectate init`. It will first prompt you for the article slug. If you leave the answer blank, it will use the project directory name by default. It will then ask you the new Google Docs link. To skip this step, input `s`.
 
 6. Add all the new files, create the first commit, and push it to GitHub.
 ```
