@@ -1,8 +1,7 @@
+*.sublime-workspace
 .DS_Store
-.cache
-dist
-node_modules
+.idea
 
-keys
+node_modules
 credentials.json
 token.json
