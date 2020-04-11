@@ -119,7 +119,19 @@ That means GitHub is starting up the page, but it's not ready yet. Once you see 
 
 …the link should work. It will show whatever is in your `dist/` directory.
 
-## Command line options
+## AWS Setup
+
+Write a new file at `~/.aws/credentials` with the contents below:
+<pre>
+[spectate]
+aws_access_key_id = <var>YOUR_ACCESS_KEY_ID</var>
+aws_secret_access_key = <var>YOUR_SECRET_ACCESS_KEY</var>
+</pre>
+See [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit) for your access key.
+
+Run `cat ~/.aws/credentials`. If the output is the contents of the file you just made, you should now be able to run any publish command.
+
+## API Reference
 
 ```
 usage: spectate <command>
@@ -136,14 +148,10 @@ These are common Spectate commands:
   update        Update Spectate itself
 ```
 
-## AWS Setup
+#### `spectate download`
 
-Write a new file at `~/.aws/credentials` with the contents below:
-<pre>
-[spectate]
-aws_access_key_id = <var>YOUR_ACCESS_KEY_ID</var>
-aws_secret_access_key = <var>YOUR_SECRET_ACCESS_KEY</var>
-</pre>
-See [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit) for your access key.
+Runs `/process/download-doc.js`, which lives in your project, with keys stored in the Spectate directory (TODO: centralize the script). The script downloads the Google Doc and processes its contents with ArchieML.
 
-Run `cat ~/.aws/credentials`. If the output is the contents of the file you just made, you should now be able to run any publish command.
+The ArchieML output is prettified and written to `/data/doc.json`. Sometimes you may want to import variables stored in the Google Doc to the script, but often I just have this file to debug formatting errors from the doc download.
+
+The ArchieML output is also stored in the PostHTML config (`.posthtmlrc`) as the [`locals` object](https://github.com/posthtml/posthtml-expressions#options) for the [Expressions plugin](https://github.com/posthtml/posthtml-expressions). (When changing locals for posthtml-expressions, live reload [seems](https://github.com/parcel-bundler/parcel/issues/2317) to only invalidate the cache of `.posthtmlrc` and not JavaScript configs.)
