@@ -111,11 +111,11 @@ Keep Illustrator files in `ai/`. Name each artboard the width it represents. Whe
 
 2. Go to the Settings tab in the repository's GitHub page. Scroll down to the GitHub Pages section. You should see this:
 
-![](https://i.imgur.com/uNZsD8V.png)
+<img height="60px" src="https://i.imgur.com/EFYIIXa.png" />
 
 That means GitHub is starting up the page, but it's not ready yet. Once you see this screen…
 
-![](https://i.imgur.com/ZxcH7ES.png)
+<img height="60px" src="https://i.imgur.com/UgxOXKJ.png" />
 
 …the link should work. It will show whatever is in your `dist/` directory.
 
