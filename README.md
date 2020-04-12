@@ -152,6 +152,6 @@ These are common Spectate commands:
 
 Runs `/process/download-doc.js`, which lives in your project, with keys stored in the Spectate directory (TODO: centralize the script). The script downloads the Google Doc and processes its contents with ArchieML.
 
-The ArchieML output is prettified and written to `/data/doc.json`. Sometimes you may want to import variables stored in the Google Doc to the script, but often I just have this file to debug formatting errors from the doc download.
+The ArchieML output is prettified and written to `/data/doc.json`. Sometimes you may want to import variables stored in the Google Doc to the script, but this may be a bad idea if your doc is large because it would be put into the JavaScript build. I basically just have this file to debug formatting errors from the doc download.
 
 The ArchieML output is also stored in the PostHTML config (`.posthtmlrc`) as the [`locals` object](https://github.com/posthtml/posthtml-expressions#options) for the [Expressions plugin](https://github.com/posthtml/posthtml-expressions). (When changing locals for posthtml-expressions, live reload [seems](https://github.com/parcel-bundler/parcel/issues/2317) to only invalidate the cache of `.posthtmlrc` and not JavaScript configs.)
