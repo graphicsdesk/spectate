@@ -100,9 +100,6 @@ b {
 }
 
 header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0 auto;
   padding: 36px 15px;
 
@@ -110,19 +107,15 @@ header {
     margin: 0;
     font-family: $graphik;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 26px;
     font-weight: 400;
   }
 
   .headline {
-    margin: 0;
-    margin-top: 50px;
-    font-size: 65px;
-    line-height: 1;
-    font-weight: bold;
-    margin-bottom: 14px;
-    text-align: center;
-    font-weight: 700;
+    margin: 50px 0 20px;
+    font-size: 45px;
+    line-height: 1.15;
+    font-weight: 500;
     font-family: Playfair Display;
   }
 
@@ -153,24 +146,20 @@ header {
 
 @media (max-width: 500px) {
   header .headline {
-    font-size: 46px;
-    margin-bottom: 7px;
+    font-size: 38px;
+    margin-bottom: 10px;
   }
 }
 
 .inline-credits {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0;
-  margin-bottom: 30px;
 
   span {
+    display: block;
     font-weight: 600;
     font-family: $graphik;
     font-size: 16px;
-    line-height: 1.7;
-    text-align: center;
+    line-height: 26px;
   }
 
   a {
@@ -480,8 +469,8 @@ header {
   margin: 30px auto;
 }
 
-.story-top .graphic:first-child {
-  margin-top: 0;
+.story-top .graphic:only-child {
+  margin: 0;
 }
 
 .spectate-dev-footer {

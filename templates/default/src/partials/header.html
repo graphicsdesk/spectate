@@ -1,6 +1,12 @@
 <header class="g-body">
   <h1 class="headline">{{ headline }}</h1>
-  <p class="deck">{{ deck }}</p>
-  <p class="byline">{{{ byline }}}</p>
+  <if condition="deck.length > 0">
+    <p class="deck">{{ deck }}</p>
+  </if>
+  <p class="byline inline-credits">
+    <each loop="item in byline.split('\n')">
+      <span>{{{ item }}}</span>
+    </each>
+  </p>
   <p class="pub-date">{{ date }}</p>
 </header>

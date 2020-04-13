@@ -3,7 +3,9 @@
 
   <header>
     <h1 class="headline">{{ headline }}</h1>
-    <p class="deck">{{ deck }}</p>
+    <if condition="deck.length > 0">
+      <p class="deck">{{ deck }}</p>
+    </if>
     <p class="byline">{{{ byline }}}</p>
     <p class="pub-date">{{ date }}</p>
   </header>
@@ -12,10 +14,12 @@
 
 <p class="cover-caption">{{ top.caption }}</p>
 
-<div class="g-body">
-  <p class="inline-credits">
-    <each loop="item in credits.split('\n')">
-      <span>{{{ item }}}</span>
-    </each>
-  </p>
-</header>
+<if condition="credits.length > 0">
+  <div class="g-body">
+    <p class="inline-credits">
+      <each loop="item in credits.split('\n')">
+        <span>{{{ item }}}</span>
+      </each>
+    </p>
+  </div>
+</if>

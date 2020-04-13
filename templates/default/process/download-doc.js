@@ -65,8 +65,9 @@ async function retrieveDoc(config, auth) {
   // Set local variables for HTML
   PH_CONFIG.plugins['posthtml-expressions'].locals = {
     top: {},
-    credits: '',
     footer: '',
+    deck: '',
+    credits: '',
     ...doc,
     ...config,
   };
@@ -87,18 +88,22 @@ async function retrieveDoc(config, auth) {
 async function writePostHTMLConfig(config) {
   await fs.writeFile(
     path.join(process.cwd(), '.posthtmlrc'),
-    JSON.stringify(config),
+    JSON.stringify(config, null, 2),
   );
   console.log('[download-doc] Successfully wrote .posthtmlrc');
 }
 
-// Read in local config file
-fs.readFile(process.cwd() + '/config.json')
-  .then(content => {
-    const config = JSON.parse(content);
-    if (config.DOC_URL)
-      return authorizeAndDownload(config);
-    // If DOC_URL is not set, write the default .posthtmlrc
-    return writePostHTMLConfig(PH_CONFIG);
-  })
-  .catch(console.error);
+function init() {
+  // Read in local config file
+  fs.readFile(process.cwd() + '/config.json')
+    .then(content => {
+      const config = JSON.parse(content);
+      if (config.DOC_URL)
+        return authorizeAndDownload(config);
+      // If DOC_URL is not set, write the default .posthtmlrc
+      return writePostHTMLConfig(PH_CONFIG);
+    })
+    .catch(console.error);
+}
+
+init();
