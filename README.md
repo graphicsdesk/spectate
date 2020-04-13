@@ -85,15 +85,11 @@ To start the development server, run `npm run dev`.
 
 To re-download the Google Doc, run `spectate download`.
 
-## Project Structure
+### Using [ai2html](http://ai2html.org/)
 
-_In Progress._
+Keep Illustrator files in the `ai/` directory. Each file should contain one graphic with one or more artboards for different screen sizes. Every graphic must have a `300` (an artboard named "300" with width 300px) for mobile. A `600` will fit inline with Spectate text. Larger sizes include `960`, `1050`, and `1200`.
 
-### ai2html
-
-Make sure [ai2html](http://ai2html.org/) is installed.
-
-Keep Illustrator files in `ai/`. Name each artboard the width it represents. When the ai2html script is run, the output HTML and images will be put into `src/` (this is configured in `ai/ai2html-config.json`).
+When the ai2html script is run, the output HTML and images will be put into `src/` (this is configured in `ai/ai2html-config.json`). You can include those files in your HTML with [`<include>`](https://github.com/posthtml/posthtml-include) tags.
 
 ## Publishing on Arc
 
