@@ -15,6 +15,7 @@
   "homepage": "https://github.com/spec-journalism/spectate#readme",
   "dependencies": {
     "aws-sdk": "^2.642.0",
+    "chalk": "^4.0.0",
     "googleapis": "^47.0.0",
     "mime-types": "^2.1.26",
     "opn": "^6.0.0"
@@ -23,5 +24,9 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true
   }
 }

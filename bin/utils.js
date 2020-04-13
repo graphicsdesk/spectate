@@ -1,8 +1,6 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const readline = require('readline');
-
-const RESET = '\x1b[0m';
-const FGCYAN = '\x1b[36m';
+const chalk = require('chalk');
 
 class Asker {
   constructor() {
@@ -10,9 +8,8 @@ class Asker {
   }
 
   // Prompts a question and validates answer
-  question(message, defaultAnswer, validate = x => x.length > 0, options) {
+  question(message, defaultAnswer, validate = nonEmpty, options) {
     return new Promise((resolve, reject) => {
-      message = FGCYAN + message;
       if (options) // Options to perform certain actions
         message += ` [${Object.keys(options).join('|')}]`;
       if (![ '?', ')' ].includes(message.charAt(message.length - 1)))
@@ -20,22 +17,20 @@ class Asker {
       message += ' ';
       if (defaultAnswer) // Leaving line empty will default this answer
         message += `(${defaultAnswer}) `;
-      this.rl.question(message + RESET, line => {
+      this.rl.question(chalk.cyan(message), line => {
         if (options && line in options) {
           options[line]();
-          return reject();
+          return resolve(null);
         }
-        if (validate && validate(line)) {
+        if (defaultAnswer && line.length === 0) {
+          return resolve(defaultAnswer);
+        }
+        const validation = validate(line);
+        if (validation.success)
           return resolve(line);
-        }
-        return defaultAnswer ? resolve(defaultAnswer) : reject();
+        return reject(validation.error);
       });
     });
-  }
-
-  // Allows retries with promise resolves
-  retry(fn, retries = 4, err = 'Ran out of retries.') {
-    return !retries ? Promise.reject(err) : fn().catch(err => this.retry(fn, (retries - 1), err));
   }
 
   close() {
@@ -44,13 +39,16 @@ class Asker {
 }
 
 // Rewrites a file with an updated key value pair
-function setFileKeySync(filename, key, value) {
-  const file = JSON.parse(fs.readFileSync(filename).toString());
+async function setFileKey(filename, key, value) {
+  const file = JSON.parse((await fs.readFile(filename)).toString());
   file[key] = value;
-  fs.writeFileSync(filename, JSON.stringify(file, null, 2), err => {
-    if (err)
-      console.error(err);
-  });
+  await fs.writeFile(filename, JSON.stringify(file, null, 2));
 }
 
-module.exports = { Asker, setFileKeySync };
+function nonEmpty(s) {
+  if (s.length > 0)
+    return { success: true };
+  return { error: 'User gave empty string.' };
+}
+
+module.exports = { Asker, setFileKey };
