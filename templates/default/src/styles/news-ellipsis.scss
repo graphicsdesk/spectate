@@ -1,8 +1,13 @@
 /* These styles help hide default site elements for a News story */
 
+// By default, unset Arc's Bootstrap box-sizing style
+#pb-root > article * {
+  box-sizing: unset;
+}
+
 #top {
   // UNCOMMENT to hide navbar
-  // display: none;
+  display: none;
   padding: 0;
 }
 
@@ -35,3 +40,21 @@
 #main {
   display: none;
 }
+
+// Prevents scrollama from complaining about overflow error
+html {
+  overflow-x: visible;
+}
+
+// The only reason why html needed overflow-x hidden in the first place
+.bottom-footer {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+
+  .pb-f-global-footer .footer {
+    // Just for styling
+    margin: 0;
+  }
+}
+
