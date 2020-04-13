@@ -35,7 +35,7 @@ spectate_download() {
   log "Writing .posthtmlrc..."
   (
     set -x ;
-    node --no-warnings process/download-doc.js --spectate-root="$SPECTATE_ROOT" "$@"
+    node --no-warnings process/download-doc.js --spectate-root="$SPECTATE_ROOT"
   )
 }
 
@@ -154,7 +154,7 @@ case $COMMAND in
   create) spectate_create "$@" ;;
   init) spectate_init ;;
   clone) spectate_clone "$@" ;;
-  download) spectate_download "$@" ;;
+  download) spectate_download ;;
   download-data) spectate_download_data ;;
   build) spectate_build ;;
   upload-assets) upload_assets ;;
