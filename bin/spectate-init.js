@@ -67,7 +67,12 @@ async function init() {
   let tries = 3;
   while (!url && tries > 0) {
     try {
-      url = await asker.question('Enter the Google Docs URL', null, isValidGoogleDocsURL, { o: () => opn(TEMPLATE_DOC_URL) });
+      url = await asker.question(
+        'Enter the Google Docs URL',
+        null,
+        isValidGoogleDocsURL,
+        { o: () => opn(TEMPLATE_DOC_URL) },
+      );
     } catch (err) {
       console.error(err, --tries, 'tries left');
     }
@@ -76,11 +81,13 @@ async function init() {
   // Set google doc url in config
   if (url) {
     await setFileKey('config.json', 'DOC_URL', url);
-    console.log('Successfully set DOC_URL in config.json.')
+    console.log('Successfully set DOC_URL in config.json.');
   }
 }
 
-init().catch(console.error).finally(() => asker.close());
+init()
+  .catch(console.error)
+  .finally(() => asker.close());
 
 function isValidRepoName(s) {
   if (s.match(/^[A-Za-z0-9_.-]+$/)) return { success: true };
