@@ -1,12 +1,8 @@
-const fs = require('fs').promises;
-const readline = require('readline');
-const path = require('path');
-const { google } = require('googleapis');
-const { docToArchieML } = require('@newswire/doc-to-archieml');
-
-// TODO: Centralize these paths (they are used in spectate config-docs as well)
-CREDENTIALS_PATH = '/keys/credentials.json';
-TOKEN_PATH = '/keys/token.json';
+// Default locals values
+const LOCAL_DEFAULTS = {
+  top: {},
+  credits: '',
+}
 
 // Default PostHTML config
 const PH_CONFIG = {
@@ -19,6 +15,16 @@ const PH_CONFIG = {
     },
   },
 };
+
+const fs = require('fs').promises;
+const readline = require('readline');
+const path = require('path');
+const { google } = require('googleapis');
+const { docToArchieML } = require('@newswire/doc-to-archieml');
+
+// TODO: Centralize these path values (they are used in spectate config-docs as well)
+CREDENTIALS_PATH = '/keys/credentials.json';
+TOKEN_PATH = '/keys/token.json';
 
 // Gets value of the --spectate-root flag (spectate download provides this)
 function getSpectateRoot() {
@@ -64,10 +70,7 @@ async function retrieveDoc(config, auth) {
 
   // Set local variables for HTML
   PH_CONFIG.plugins['posthtml-expressions'].locals = {
-    top: {},
-    footer: '',
-    deck: '',
-    credits: '',
+    ...LOCAL_DEFAULTS,
     ...doc,
     ...config,
   };

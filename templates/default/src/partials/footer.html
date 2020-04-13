@@ -1,10 +1,8 @@
 <div class="footer g-body">
   <div class="article-credits">
-    <if condition="footer.length > 0">
-      <each loop="item in footer.split('\n')">
-        <p>{{{ item }}}</p>
-      </each>
-    </if>
+    <each loop="item in (typeof footer === 'undefined' ? [] : footer.split('\n'))">
+      <p>{{{ item }}}</p>
+    </each>
     <p>
       Produced with <a href="https://github.com/spec-journalism/spectate">Spectate</a>
       by the <a href="https://github.com/spec-journalism/">Spectator Graphics</a> team.
