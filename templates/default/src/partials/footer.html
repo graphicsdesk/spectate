@@ -1,13 +1,13 @@
 <div class="footer g-body">
   <div class="article-credits">
     <if condition="footer.length > 0">
-      <p>{{{ footer }}}</p>
+      <each loop="item in footer.split('\n')">
+        <p>{{{ item }}}</p>
+      </each>
     </if>
-    <else>
-      <p>
-        Produced with <a href="https://github.com/spec-journalism/spectate">Spectate</a>
-        by the <a href="https://github.com/spec-journalism/">Spectator Graphics</a> team.
-      </p>
-    </else>
+    <p>
+      Produced with <a href="https://github.com/spec-journalism/spectate">Spectate</a>
+      by the <a href="https://github.com/spec-journalism/">Spectator Graphics</a> team.
+    </p>
   </div>
 </div>
