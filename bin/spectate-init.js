@@ -14,7 +14,6 @@ const googleDocsRegex = /docs\.google\.com\/document(\/u\/\d)?\/d\/[-\w]{25,}/;
 const asker = new Asker();
 
 async function init() {
-  console.log();
   let slug;
   while (!slug) {
     try {
