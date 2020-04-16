@@ -17,7 +17,6 @@ const PH_CONFIG = {
 };
 
 const fs = require('fs').promises;
-const readline = require('readline');
 const path = require('path');
 const { google } = require('googleapis');
 const { docToArchieML } = require('@newswire/doc-to-archieml');
