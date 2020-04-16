@@ -8,18 +8,20 @@ index ca5c4d2..c6bc95f 100644
      // sometimes the content isn't there, and if so, make it an empty string
 -    const content = textRun.content || '';
 +    let content = textRun.content || '';
- 
+
      // step through optional text styles to check for an associated URL
      if (!textRun.textStyle) return content;
 +
-+    if (textRun.textStyle.bold)
-+      content = `<b>${content}</b>`;
-+    if (textRun.textStyle.italic)
-+      content = `<i>${content}</i>`;
++    // add inline style tags
++    if (textRun.textStyle.italic) {
++      content = content.replace(/([^\n]+)(\n)?/,'<i>$1</i>$2');
++    } else if (textRun.textStyle.bold) {
++      content = content.replace(/([^\n]+)(\n)?/,'<b>$1</b>$2');
++    }
 +
      if (!textRun.textStyle.link) return content;
      if (!textRun.textStyle.link.url) return content;
 +    if (textRun.textStyle.link.url.includes('.jpg')) return content;
- 
+
      // if we got this far there's a URL key, grab it...
      const url = textRun.textStyle.link.url;
