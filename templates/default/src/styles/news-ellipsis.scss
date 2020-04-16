@@ -1,13 +1,15 @@
 /* These styles help hide default site elements for a News story */
 
 // By default, unset Arc's Bootstrap box-sizing style
-#pb-root > article * {
+#pb-root > article, #pb-root > article * {
   box-sizing: unset;
 }
 
 #top {
   // UNCOMMENT to hide navbar
-  display: none;
+  // display: none;
+
+  float: none;
   padding: 0;
 }
 
@@ -58,3 +60,7 @@ html {
   }
 }
 
+// Overflows the page
+.pb-f-global-leaderboard-ad {
+  display: none;
+}
