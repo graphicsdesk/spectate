@@ -4,7 +4,7 @@ const opn = require('opn');
 const path = require('path');
 const chalk = require('chalk');
 const { execSync } = require('child_process');
-const { Asker, setFileKey } = require('./utils');
+const { Asker, setPackageKey } = require('./utils');
 
 const TEMPLATE_DOC_URL =
   'https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit';
@@ -28,7 +28,7 @@ async function init() {
   }
 
   // Set name in package.json to slug
-  await setFileKey('package.json', 'name', slug);
+  await setPackageKey('name', slug);
 
   // Check if repository exists
   let repositoryExists;
@@ -63,8 +63,8 @@ async function init() {
 
   // Ask for Google Doc
   let url;
-  let tries = 3;
-  while (!url && tries > 0) {
+  let numTries = 3;
+  while (!url && numTries > 0) {
     try {
       url = await asker.question(
         'Enter the Google Docs URL',
@@ -73,14 +73,14 @@ async function init() {
         { o: () => opn(TEMPLATE_DOC_URL) },
       );
     } catch (err) {
-      console.error(err, --tries, 'tries left');
+      console.error(err, --numTries, 'tries left');
     }
   }
 
   // Set google doc url in config
   if (url) {
-    await setFileKey('config.json', 'DOC_URL', url);
-    console.log('Successfully set DOC_URL in config.json.');
+    await setPackageKey('DOC_URL', url, true);
+    console.log('Successfully set DOC_URL in the "spectate" key in package.json.');
   }
 }
 

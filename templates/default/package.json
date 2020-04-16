@@ -16,7 +16,7 @@
     "parcel-bundler": "^1.12.4",
     "patch-package": "^6.2.0",
     "posthtml-expressions": "^1.1.1",
-    "posthtml-include": "^1.3.0",
+    "posthtml-include": "^1.4.0",
     "sass": "^1.23.0"
   },
   "dependencies": {
@@ -25,5 +25,10 @@
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "spectate": {
+    "USE_EYE_NAV": false,
+    "USE_COVER_HED": false,
+    "DOC_URL": null
+  }
 }

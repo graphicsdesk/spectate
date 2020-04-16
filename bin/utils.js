@@ -39,9 +39,15 @@ class Asker {
 }
 
 // Rewrites a file with an updated key value pair
-async function setFileKey(filename, key, value) {
+// Can set key inside "spectate" key if isSpectateKey
+async function setPackageKey(key, value, isSpectateKey) {
+  const filename = 'package.json'
   const file = JSON.parse((await fs.readFile(filename)).toString());
-  file[key] = value;
+  let fileRoot = file;
+  if (isSpectateKey) {
+    fileRoot = file.spectate;
+  }
+  fileRoot[key] = value;
   await fs.writeFile(filename, JSON.stringify(file, null, 2));
 }
 
@@ -51,4 +57,4 @@ function nonEmpty(s) {
   return { error: 'User gave empty string.' };
 }
 
-module.exports = { Asker, setFileKey };
+module.exports = { Asker, setPackageKey };

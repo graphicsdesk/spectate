@@ -97,10 +97,10 @@ async function writePostHTMLConfig(config) {
 
 function init() {
   // Read in local config file
-  fs.readFile(process.cwd() + '/config.json')
+  fs.readFile(process.cwd() + '/package.json')
     .then(content => {
-      const config = JSON.parse(content);
-      if (config.DOC_URL)
+      const { spectate: config } = JSON.parse(content);
+      if (config && config.DOC_URL)
         return authorizeAndDownload(config);
       // If DOC_URL is not set, write the default .posthtmlrc
       return writePostHTMLConfig(PH_CONFIG);
