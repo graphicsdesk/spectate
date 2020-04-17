@@ -83,9 +83,9 @@ To start the development server, run `npm run dev`.
 
 To re-download the Google Doc, run `spectate download`.
 
-### Using [ai2html](http://ai2html.org/)
+### Illustrator and [ai2html](http://ai2html.org/)
 
-Keep Illustrator files in the `ai/` directory. Each file should contain one graphic with one or more artboards for different screen sizes. Every graphic must have a `300` (an artboard named "300" with width 300px) for mobile. A `600` will fit inline with Spectate text. Larger sizes include `960`, `1050`, and `1200`.
+Illustrator files must be kept in the `ai/` directory. Each file represents one graphic with one or more artboards for different screen sizes. Every graphic must have a `300` (an artboard named "300" with width 300px) for mobile screens. A `600` will fit inline with Spectate text. Larger sizes include `960`, `1050`, and `1200`.
 
 When the ai2html script is run, the output HTML and images will be put into `src/` (this is configured in `ai/ai2html-config.json`). You can include those files in your HTML with [`<include>`](https://github.com/posthtml/posthtml-include) tags.
 

@@ -1,6 +1,6 @@
 <header class="g-body">
   <h1 class="headline">{{ headline }}</h1>
-  <if condition="deck.length > 0">
+  <if condition="typeof deck !== 'undefined'">
     <p class="deck">{{ deck }}</p>
   </if>
   <p class="byline inline-credits">
