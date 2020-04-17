@@ -94,7 +94,7 @@ spectate_clone() {
   spectate_update
 
   log "Cloning repository..."
-  if git clone git@github.com:spec-journalism/"$2".git ; then
+  if git clone git@github.com:graphicsdesk/"$2".git ; then
     log "Installing node packages..."
     npm --prefix "$2" install "$2"
   fi

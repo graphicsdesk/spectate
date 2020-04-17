@@ -33,23 +33,23 @@ async function init() {
   // Check if repository exists
   let repositoryExists;
   try {
-    execSync(`git ls-remote git@github.com:spec-journalism/${slug}.git`, {
+    execSync(`git ls-remote git@github.com:graphicsdesk/${slug}.git`, {
       stdio: 'ignore',
     });
     repositoryExists = true;
   } catch (err) {
-    console.log(`Repository spec-journalism/${slug} doesnt exist.`);
+    console.log(`Repository graphicsdesk/${slug} doesnt exist.`);
   }
 
   // Add remote origin if repository exists
   if (repositoryExists) {
     try {
       execSync(
-        `git remote add origin git@github.com:spec-journalism/${slug}.git`,
+        `git remote add origin git@github.com:graphicsdesk/${slug}.git`,
         { stdio: 'ignore' },
       );
       console.log(
-        `Added remote origin git@github.com:spec-journalism/${slug}.git`,
+        `Added remote origin git@github.com:graphicsdesk/${slug}.git`,
       );
     } catch (e) {
       console.log(

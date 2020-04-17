@@ -2,13 +2,13 @@
 
 Spectate provides a workflow for building freeform stories. It allows users to code locally while writing stories in Google Docs, and can bundle several kinds of visual assets.
 
-Check out these examples: [University responses to COVID-19](https://www.columbiaspectator.com/news/2020/04/13/the-us-and-ivy-league-schools-were-late-to-respond-to-covid-19-data-shows-international-universities-did-better/); [EOAA investigation](https://www.columbiaspectator.com/eye-lead/2019/11/15/students-and-faculty-say-gender-based-harassment-and-discrimination-at-columbia-is-systemic-why-are-they-turning-away-from-the-system-built-to-address-it/); [Union Theological Seminary](https://github.com/spec-journalism/uts).
+Check out these examples: [University responses to COVID-19](https://www.columbiaspectator.com/news/2020/04/13/the-us-and-ivy-league-schools-were-late-to-respond-to-covid-19-data-shows-international-universities-did-better/); [EOAA investigation](https://www.columbiaspectator.com/eye-lead/2019/11/15/students-and-faculty-say-gender-based-harassment-and-discrimination-at-columbia-is-systemic-why-are-they-turning-away-from-the-system-built-to-address-it/); [Union Theological Seminary](https://github.com/graphicsdesk/uts).
 
 ## Prerequisites
 
 1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
-2. Make a [GitHub](https://github.com) account. Ask Jason, Charlotte, or Raeedah to add you to the `spec-journalism` organization.
+2. Make a [GitHub](https://github.com) account. Ask Jason, Charlotte, or Raeedah to add you to the `graphicsdesk` organization.
 
 3. To be able to write to our repositories, set up an SSH key. Follow the instructions in the first five sections of [Connecting to GitHub with SSH](https://help.github.com/en/articles/connecting-to-github-with-ssh).
 
@@ -20,7 +20,7 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 1. Clone the Spectate repository and move into it:
 ```sh
-$ git clone git@github.com:spec-journalism/spectate.git ~/spectate
+$ git clone git@github.com:graphicsdesk/spectate.git ~/spectate
 $ cd ~/spectate
 ```
 
@@ -52,7 +52,7 @@ $ cd <var>SLUG</var>
 $ spectate create
 ```
 
-3. On GitHub, create a new repository in the `spec-journalism` organization with _`SLUG`_ as the name.
+3. On GitHub, create a new repository in the `graphicsdesk` organization with _`SLUG`_ as the name.
 
 4. Clone the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit).
 
@@ -75,7 +75,7 @@ To clone a Spectate project, run:
 <pre>
 $ spectate clone <var>SLUG</var>
 </pre>
-This will clone the repository `git@github.com:spec-journalism/SLUG.git` into a new directory named _`SLUG`_ and install the project's node modules. See [Usage](#usage).
+This will clone the repository `git@github.com:graphicsdesk/SLUG.git` into a new directory named _`SLUG`_ and install the project's node modules. See [Usage](#usage).
 
 ## Usage
 

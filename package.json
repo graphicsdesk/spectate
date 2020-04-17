@@ -4,7 +4,7 @@
   "description": "Spectate is a tool for building freeform Spectator stories.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spec-journalism/spectate.git"
+    "url": "git+https://github.com/graphicsdesk/spectate.git"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +12,7 @@
   "bin": {
     "spectate": "./bin/spectate"
   },
-  "homepage": "https://github.com/spec-journalism/spectate#readme",
+  "homepage": "https://github.com/graphicsdesk/spectate#readme",
   "dependencies": {
     "aws-sdk": "^2.642.0",
     "chalk": "^4.0.0",

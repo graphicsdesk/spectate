@@ -1,5 +1,5 @@
 # SLUG
 
-This story was created with [Spectate](https://github.com/spec-journalism/spectate).
+This story was created with [Spectate](https://github.com/graphicsdesk/spectate).
 
-For setup and usage instructions, see the [Spectate documentation](https://github.com/spec-journalism/spectate/#cloning-a-spectate-project).
+For setup and usage instructions, see the [Spectate documentation](https://github.com/graphicsdesk/spectate/#cloning-a-spectate-project).

@@ -1,6 +1,6 @@
 # Contributing to Spectate
 
-Make sure you have completed the [prequisite and setup instructions](https://github.com/spec-journalism/spectate#prerequisites) for Spectate. Then, create a Spectate project with a slug like `test-feature-nerdbox`.
+Make sure you have completed the [prequisite and setup instructions](https://github.com/graphicsdesk/spectate#prerequisites) for Spectate. Then, create a Spectate project with a slug like `test-feature-nerdbox`.
 
 We use ESLint for JavaScript linting. Please [integrate it](https://eslint.org/docs/user-guide/integrations) into your text editor.
 
@@ -8,7 +8,7 @@ To add a new HTML partial (visual element) onto the site, see the section [Writi
 
 ## Writing components
 
-1. Refer to a Spectate project's [Usage](https://github.com/spec-journalism/spectate#usage) instructions.
+1. Refer to a Spectate project's [Usage](https://github.com/graphicsdesk/spectate#usage) instructions.
 
 2. In the Spectate project, the `/src/partials` directory contains all of Spectate's built-in UI components. Add a new one named `methodology.html`.
 
