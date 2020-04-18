@@ -9,9 +9,3 @@ body {
   // Arc's overflow hidden on <body> messes up position sticky
   overflow-x: visible !important;
 }
-
-.graphic-name {
-  height: 300px;
-  border: 1px solid red;
-  color: red;
-}

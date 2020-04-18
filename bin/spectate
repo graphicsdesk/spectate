@@ -79,7 +79,7 @@ spectate_create() {
   # Write default .posthtmlrc
   spectate_download
 
-  log "Displaying git status..."
+  log "Displaying git status:"
   git status
 }
 
