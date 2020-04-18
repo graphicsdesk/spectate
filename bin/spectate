@@ -61,18 +61,18 @@ spectate_create() {
   fi
 
   # Copy template into current directory
-  log "Copying template $TEMPLATE_NAME..."
+  log "Copying $TEMPLATE_NAME template..."
   cp -vRn "$TEMPLATE_PATH"/. . # Copy without overwrite
 
   # Install node packages
   if [ -f "package.json" ]; then
-    log "Installing node modules..."
+    log "Installing node packages..."
     npm install
   fi
 
   # Create a git repo
   if [ ! -d ".git" ]; then
-    log "Initiating git repository..."
+    log "Initializing git repository..."
     git init
   fi
 

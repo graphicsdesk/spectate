@@ -162,7 +162,7 @@ The ArchieML output is also stored in the PostHTML config (`.posthtmlrc`) as the
 
 The `expressions` plugin will throw `TypeError: Cannot read property 'split' of undefined`. The `if` block only considers whether some HTML should be included, not whether it should be processed, so `expressions` will still try to split the undefined value.
 
-To conditionally include a variable based on its existence in the Google Doc, you have to go into the `download-doc.js` script and manually add a default value. You can do this by adding a variable to the `LOCAL_DEFAULTS` object at the top of the script. This object sets the default values of the [locals object](https://github.com/posthtml/posthtml-expressions#options).
+To conditionally include a variable based on its existence in the Google Doc, you have to go into the `download-doc.js` script and manually add a default value. You can do this by adding a variable to the `DEFAULT_LOCALS` object at the top of the script. This object sets the default values of the [locals object](https://github.com/posthtml/posthtml-expressions#options).
 
 Note that setting the default value of `text` to `null` in the previous example will still lead to the error `TypeError: Cannot read property 'split' of null` for the same reason as above. The default value of a local should be set considering the operations that it must go through (e.g. empty string if splitting, empty array if looping). (This manual setting is the only reason why I haven't yet centralized `/process/download-doc.js`).
 
@@ -194,4 +194,4 @@ You could also account for the operation in an expression itself, but you might 
 </if>
 ```
 
-Keep in mind that this only works for surface-level locals, not nested ones, because I am [shallow cloning](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) `LOCAL_DEFAULTS` with the ArchieML output and the config.
+Keep in mind that this only works for surface-level locals, not nested ones, because I am [shallow cloning](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) `DEFAULT_LOCALS` with the ArchieML output and the config.

@@ -1,5 +1,5 @@
 // Default locals values
-const LOCAL_DEFAULTS = {
+const DEFAULT_LOCALS = {
   top: {},
   credits: '',
 }
@@ -69,7 +69,7 @@ async function retrieveDoc(config, auth) {
 
   // Set local variables for HTML
   PH_CONFIG.plugins['posthtml-expressions'].locals = {
-    ...LOCAL_DEFAULTS,
+    ...DEFAULT_LOCALS,
     ...doc,
     ...config,
   };
@@ -79,11 +79,7 @@ async function retrieveDoc(config, auth) {
 
   // Write doc data again to data/doc.json. (Example use case: accessing
   // information in the doc in client-side JavaScript).
-  await fs.writeFile(
-    path.join(process.cwd(), './data/doc.json'),
-    JSON.stringify(doc, null, 2),
-  );
-  console.log('[download-doc] Successfully wrote ./data/doc.json');
+  await writeDataDoc(doc);
 }
 
 // Writes a config to .posthtmlrc
@@ -95,17 +91,31 @@ async function writePostHTMLConfig(config) {
   console.log('[download-doc] Successfully wrote .posthtmlrc');
 }
 
-function init() {
-  // Read in local config file
-  fs.readFile(process.cwd() + '/package.json')
-    .then(content => {
-      const { spectate: config } = JSON.parse(content);
-      if (config && config.DOC_URL)
-        return authorizeAndDownload(config);
-      // If DOC_URL is not set, write the default .posthtmlrc
-      return writePostHTMLConfig(PH_CONFIG);
-    })
-    .catch(console.error);
+// Writes doc data to data/doc.json
+async function writeDataDoc(doc) {
+  await fs.writeFile(
+    path.join(process.cwd(), './data/doc.json'),
+    JSON.stringify(doc, null, 2),
+  );
+  console.log('[download-doc] Successfully wrote ./data/doc.json');
 }
 
-init();
+async function init() {
+  // Read in local config file
+  const packageContent = await fs.readFile(process.cwd() + '/package.json');
+  const { spectate: config } = JSON.parse(packageContent);
+
+  if (config && config.DOC_URL) {
+    return authorizeAndDownload(config);
+  }
+
+  // If DOC_URL is not set, write the default .posthtmlrc
+  PH_CONFIG.plugins['posthtml-expressions'].locals = {
+    ...DEFAULT_LOCALS,
+    ...config,
+  };
+  await writePostHTMLConfig(PH_CONFIG);
+  await writeDataDoc({});
+}
+
+init().catch(console.error)
