@@ -13,6 +13,7 @@ function init() {
  */
 
 const isOnSpectatorPage = window.location.host === 'www.columbiaspectator.com';
+const isOnContributorPage = window.location.pathname.indexOf('/contributors') === 0;
 
 const SECTION_MAIN_SELECTOR = 'section#main';
 const ARTICLE_SELECTOR =
@@ -63,7 +64,7 @@ function ready(timestamp) {
 }
 
 // Initialize our ready() function.
-if (isOnSpectatorPage) {
+if (isOnSpectatorPage && !isOnContributorPage) {
   window.requestAnimationFrame(ready);
 } else {
   init();
@@ -75,10 +76,7 @@ if (isOnSpectatorPage) {
  * still override the site.
  */
 
-const isOnContributorPage =
-  isOnSpectatorPage && window.location.pathname.indexOf('/contributors') === 0;
-
-if (isOnContributorPage) {
+if (isOnSpectatorPage && isOnContributorPage) {
   // Disable stylesheets
   document
     .querySelectorAll('.story-summary > .twolines > link')
