@@ -7,7 +7,7 @@ SPECTATE_ROOT=$( \
   pwd \
 )
 
-# Utility function for logging
+# Utility functions for logging
 CYAN='\033[36m'; BOLD='\033[1m'; NOCOLOR='\033[0m'
 log() {
   echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')] ${BOLD}$1${NOCOLOR}"
@@ -15,6 +15,9 @@ log() {
   if [ -z "$2" ]; then
     echo ""
   fi
+}
+log_small() {
+  echo -e "\n${CYAN}$1${NOCOLOR}"
 }
 
 # Updating spectate is just git pulling in the spectate repo
@@ -50,19 +53,33 @@ spectate_create() {
   spectate_update
 
   # Identify a template to be used
-  TEMPLATE_NAME="$2"
-  if [ -z "$TEMPLATE_NAME" ]; then
-    TEMPLATE_NAME="default"
-  fi
+  # TEMPLATE_NAME="$2"
+  # if [ -z "$TEMPLATE_NAME" ]; then
+  #   TEMPLATE_NAME="default"
+  # fi
+
+  # ALways use default template.
+  TEMPLATE_NAME="default"
   TEMPLATE_PATH="$SPECTATE_ROOT/templates/$TEMPLATE_NAME"
-  if [ ! -d "$TEMPLATE_PATH" ]; then
-    echo "Template $TEMPLATE_NAME does not exist."
-    return
-  fi
+
+  # if [ ! -d "$TEMPLATE_PATH" ]; then
+  #   echo "Template $TEMPLATE_NAME does not exist."
+  #   return
+  # fi
 
   # Copy template into current directory
   log "Copying $TEMPLATE_NAME template..."
   cp -vRn "$TEMPLATE_PATH"/. . # Copy without overwrite
+
+  # If $2 is "embed", set IS_EMBED to true in package.json
+  TEMPLATE_OPTION="$2"
+  if [ "$TEMPLATE_OPTION" = "embed" ]; then
+    log_small "Setting IS_EMBED to true in package.json in spectate config..."
+    (
+      set -x;
+      node --no-warnings "$SPECTATE_ROOT"/bin/config-project.js --is-embed
+    )
+  fi
 
   # Install node packages
   if [ -f "package.json" ]; then

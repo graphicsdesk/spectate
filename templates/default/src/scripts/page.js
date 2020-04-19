@@ -1,3 +1,4 @@
+import { spectate as spectateConfig } from '../../package.json';
 import initAi2html from './ai2html-resizer';
 
 /**
@@ -63,8 +64,9 @@ function ready(timestamp) {
   }
 }
 
-// Initialize our ready() function.
-if (isOnSpectatorPage && !isOnContributorPage) {
+// Replace main page section with this project if we are on a Spectator story
+// page and the project is not an embed
+if (isOnSpectatorPage && !isOnContributorPage && !spectateConfig.IS_EMBED) {
   window.requestAnimationFrame(ready);
 } else {
   init();
