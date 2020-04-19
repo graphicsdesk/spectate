@@ -38,7 +38,7 @@ async function init() {
     });
     repositoryExists = true;
   } catch (err) {
-    console.log(`Repository graphicsdesk/${slug} doesnt exist.`);
+    console.log(`Repository graphicsdesk/${slug} doesn't exist.`);
   }
 
   // Add remote origin if repository exists

@@ -103,7 +103,7 @@ spectate_create() {
 # Set remote links for a newly created project
 spectate_init() {
   log "Prompting for remote links..."
-  (set -x; node --no-warnings "$SPECTATE_ROOT"/bin/spectate-init.js)
+  node --no-warnings "$SPECTATE_ROOT"/bin/spectate-init.js
 }
 
 # Clones a spectate project repository and installs node packages
