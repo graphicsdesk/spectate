@@ -7,8 +7,7 @@ function resizer() {
 
   elements.forEach(el => {
     const parent = el.parentNode;
-    const width =
-      widthById[parent.id] || parent.getBoundingClientRect().width;
+    const width = widthById[parent.id] || parent.getBoundingClientRect().width;
     const minwidth = el.getAttribute('data-min-width');
     const maxwidth = el.getAttribute('data-max-width');
 
@@ -23,8 +22,7 @@ function resizer() {
 
 function init() {
   // only want one resizer on the page
-  if (document.documentElement.classList.contains('g-resizer-v3-init'))
-    return;
+  if (document.documentElement.classList.contains('g-resizer-v3-init')) return;
   document.documentElement.classList.add('g-resizer-v3-init');
 
   resizer();
@@ -33,7 +31,6 @@ function init() {
 
 // Initialize ai2html resizer at the end of hoistArticle in page.js
 module.exports = init;
-
 
 /**
  * Throttle function adapted from underscore.js.
@@ -70,14 +67,14 @@ function throttle(func, wait, options = {}) {
 
   const now = Date.now || (() => new Date().getTime());
 
-  const later = function() {
+  const later = function () {
     previous = options.leading === false ? 0 : now();
     timeout = null;
     result = func.apply(context, args);
     if (!timeout) context = args = null;
   };
 
-  const throttled = function() {
+  const throttled = function () {
     const _now = now();
     if (!previous && options.leading === false) previous = _now;
     const remaining = wait - (_now - previous);

@@ -2,7 +2,7 @@
 const DEFAULT_LOCALS = {
   top: {},
   credits: '',
-}
+};
 
 // Default PostHTML config
 const PH_CONFIG = {
@@ -30,8 +30,7 @@ function getSpectateRoot() {
   const pattern = /(?<=--spectate-root=).*?(?=\s|$)/;
   for (const arg of process.argv.slice(2)) {
     const match = arg.match(pattern);
-    if (match)
-      return match[0];
+    if (match) return match[0];
   }
 }
 
@@ -40,17 +39,25 @@ async function authorizeAndDownload(config) {
   const spectateRoot = getSpectateRoot();
 
   // Load client secrets from a local file
-  const credentials = JSON.parse(await fs.readFile(spectateRoot + CREDENTIALS_PATH));
+  const credentials = JSON.parse(
+    await fs.readFile(spectateRoot + CREDENTIALS_PATH),
+  );
 
   // Create OAuth2 client
   const { client_secret, client_id, redirect_uris } = credentials.installed;
-  const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0],
+  );
   try {
     const token = JSON.parse(await fs.readFile(spectateRoot + TOKEN_PATH));
     oAuth2Client.setCredentials(token);
   } catch (e) {
     // Token file does not exist.
-    console.error('Could not find token. Run spectate config-docs to generate it.');
+    console.error(
+      'Could not find token. Run spectate config-docs to generate it.',
+    );
     console.error(e.message);
     return;
   }
@@ -64,7 +71,7 @@ async function retrieveDoc(config, auth) {
   const client = google.docs({ version: 'v1', auth });
   const doc = await docToArchieML({
     client,
-    documentId: config.DOC_URL.match(/[-\w]{25,}/)[0]
+    documentId: config.DOC_URL.match(/[-\w]{25,}/)[0],
   });
 
   // Set local variables for HTML
@@ -118,4 +125,4 @@ async function init() {
   await writeDataDoc({});
 }
 
-init().catch(console.error)
+init().catch(console.error);
