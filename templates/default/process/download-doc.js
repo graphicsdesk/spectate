@@ -1,7 +1,7 @@
 // Default locals values
 const DEFAULT_LOCALS = {
   top: {},
-  credits: '',
+  body: {},
 };
 
 // Default PostHTML config
