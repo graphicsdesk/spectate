@@ -1,11 +1,11 @@
+import initAi2html from './ai2html-resizer';
+
 /**
  * Put all initializer scripts into this init() function
  */
 
-import initResizer from './ai2html-resizer';
-
 function init() {
-  initResizer();
+  initAi2html();
 }
 
 /**

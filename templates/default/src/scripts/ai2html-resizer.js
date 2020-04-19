@@ -1,5 +1,7 @@
-// Resizer script to toggle multiple artboards for responsiveness. Adapted from:
-// https://github.com/newsdev/ai2html/blob/gh-pages/_includes/resizer-script.html
+/**
+ * Resizer script to toggle multiple artboards for responsiveness. Adapted from:
+ * https://github.com/newsdev/ai2html/blob/gh-pages/_includes/resizer-script.html
+ */
 
 function resizer() {
   const elements = document.querySelectorAll('.g-artboard[data-min-width]');
@@ -29,7 +31,7 @@ function init() {
   window.addEventListener('resize', throttle(resizer, 200));
 }
 
-// Initialize ai2html resizer at the end of hoistArticle in page.js
+// Export ai2html resizer initialization to page.js
 module.exports = init;
 
 /**
