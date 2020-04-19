@@ -10,11 +10,14 @@ const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
 const TOKEN_PATH = path.join(__dirname, '../keys/token.json');
 
 // Load client secrets from a local file.
-fs.readFile(path.join(__dirname, '../keys/credentials.json'), (err, content) => {
-  if (err) return console.log('Error loading client secret file:', err);
-  // Authorize a client with credentials, then call the Google Sheets API.
-  authorize(JSON.parse(content));
-});
+fs.readFile(
+  path.join(__dirname, '../keys/credentials.json'),
+  (err, content) => {
+    if (err) return console.log('Error loading client secret file:', err);
+    // Authorize a client with credentials, then call the Google Sheets API.
+    authorize(JSON.parse(content));
+  },
+);
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -24,7 +27,11 @@ fs.readFile(path.join(__dirname, '../keys/credentials.json'), (err, content) => 
  */
 function authorize(credentials) {
   const { client_secret, client_id, redirect_uris } = credentials.installed;
-  const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0],
+  );
 
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
@@ -49,12 +56,16 @@ function getNewToken(oAuth2Client) {
     input: process.stdin,
     output: process.stdout,
   });
-  rl.question('Enter the code from that page here: ', (code) => {
+  rl.question('Enter the code from that page here: ', code => {
     rl.close();
     oAuth2Client.getToken(code, (err, token) => {
-      if (err) return console.error('Error while trying to retrieve access token', err);
+      if (err)
+        return console.error(
+          'Error while trying to retrieve access token',
+          err,
+        );
       // Store the token to disk for later program executions
-      fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+      fs.writeFile(TOKEN_PATH, JSON.stringify(token), err => {
         if (err) return console.error(err);
         console.log('Token stored at', TOKEN_PATH);
       });

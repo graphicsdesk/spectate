@@ -7,7 +7,9 @@ const { S3_WEBSITE_BASE } = require('./constants');
 
 const DIST_DIR = './dist';
 
-AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: 'spectate' });
+AWS.config.credentials = new AWS.SharedIniFileCredentials({
+  profile: 'spectate',
+});
 const {
   name: Prefix,
   scripts: { build: buildScript },
@@ -58,13 +60,17 @@ const putObject = filename =>
 
 async function uploadDir() {
   if (buildScript.indexOf(S3_WEBSITE_BASE) < 0) {
-    console.log('Skipping S3 upload because build script does not use an public URL of the form:', S3_WEBSITE_BASE);
+    console.log(
+      'Skipping S3 upload because build script does not use an public URL of the form:',
+      S3_WEBSITE_BASE,
+    );
     return;
   }
 
   // Remove all objects in current prefix
-  await listObjects()
-    .then(({ Contents }) => Promise.all(Contents.map(deleteObject)));
+  await listObjects().then(({ Contents }) =>
+    Promise.all(Contents.map(deleteObject)),
+  );
 
   // Upload all objects in dist to prefix
   await Promise.all(fs.readdirSync('./dist').map(putObject));

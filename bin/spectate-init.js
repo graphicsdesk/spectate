@@ -80,7 +80,9 @@ async function init() {
   // Set google doc url in config
   if (url) {
     await setPackageKey('DOC_URL', url, true);
-    console.log('Successfully set DOC_URL in the "spectate" key in package.json.');
+    console.log(
+      'Successfully set DOC_URL in the "spectate" key in package.json.',
+    );
   }
 }
 
