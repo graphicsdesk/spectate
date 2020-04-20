@@ -27,6 +27,7 @@
     "defaults"
   ],
   "spectate": {
+    "USE_NEWS_NAV": false,
     "USE_EYE_NAV": false,
     "USE_COVER_HED": false,
     "IS_EMBED": false,
