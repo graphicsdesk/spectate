@@ -9,8 +9,6 @@ const { Asker, setPackageKey } = require('./utils');
 const TEMPLATE_DOC_URL =
   'https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit';
 
-const googleDocsRegex = /docs\.google\.com\/document(\/u\/\d)?\/d\/[-\w]{25,}/;
-
 const asker = new Asker();
 
 async function init() {
@@ -96,6 +94,7 @@ function isValidRepoName(s) {
 }
 
 function isValidGoogleDocsURL(s) {
-  if (googleDocsRegex.test(s)) return { success: true };
+  if (/docs\.google\.com\/document(\/u\/\d)?\/d\/[-\w]{25,}/.test(s))
+    return { success: true };
   return { error: 'Invalid Google Docs link.' };
 }

@@ -17,6 +17,7 @@ const {
 const s3 = new AWS.S3();
 const Bucket = 'spectator-static-assets';
 
+// Deletes a bucket object
 const deleteObject = ({ Key }) =>
   new Promise((resolve, reject) => {
     s3.deleteObject({ Bucket, Key }, (err, data) => {
@@ -28,6 +29,7 @@ const deleteObject = ({ Key }) =>
     });
   });
 
+// Lists all objects prefixed by the package.json "name" key
 const listObjects = () =>
   new Promise((resolve, reject) => {
     s3.listObjectsV2({ Bucket, Prefix }, (err, data) => {
@@ -36,6 +38,7 @@ const listObjects = () =>
     });
   });
 
+// Puts a file into a bucket
 const putObject = filename =>
   new Promise((resolve, reject) => {
     const fileStream = fs.createReadStream(DIST_DIR + '/' + filename);
@@ -58,7 +61,8 @@ const putObject = filename =>
     });
   });
 
-async function uploadDir() {
+// Uploads the contents of dist/ to S3
+async function init() {
   if (buildScript.indexOf(S3_WEBSITE_BASE) < 0) {
     console.log(
       'Skipping S3 upload because build script does not use an public URL of the form:',
@@ -76,4 +80,4 @@ async function uploadDir() {
   await Promise.all(fs.readdirSync('./dist').map(putObject));
 }
 
-uploadDir();
+init().catch(console.error);
