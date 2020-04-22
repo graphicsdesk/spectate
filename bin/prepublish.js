@@ -19,21 +19,18 @@ async function prepublish() {
     return;
   }
 
-  // Ask whether to use directory name as slug. If not, ask for a slug.
-  let slug = getRepoName();
-  const confirmation = await asker.question(`Use "${slug}" as S3 slug? (y/n)`);
-  if (confirmation !== 'y') {
-    slug = await asker.askForSlug();
-  }
+  // Requires repo name to be slug.
+  const slug = getRepoName();
+  console.log(`Using repo name "${slug}" as S3 slug`);
 
   // Rewrite current build script with the S3 public URL
-  const purl = S3_WEBSITE_BASE + '/' + slug;
+  const publicUrl = S3_WEBSITE_BASE + '/' + slug;
   packageJSON.scripts.build = build.replace(
     /(?<=--public-url )\.(?=\s|$)/,
-    purl,
+    publicUrl,
   );
   await fs.writeFile('package.json', JSON.stringify(packageJSON, null, 2));
-  console.log('Set public URL to', purl);
+  console.log('Set public URL to', publicUrl);
 
 }
 
