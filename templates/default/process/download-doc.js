@@ -22,8 +22,8 @@ const { google } = require('googleapis');
 const { docToArchieML } = require('@newswire/doc-to-archieml');
 
 // TODO: Centralize these path values (they are used in spectate config-docs as well)
-CREDENTIALS_PATH = '/keys/credentials.json';
-TOKEN_PATH = '/keys/token.json';
+const CREDENTIALS_PATH = '/keys/credentials.json';
+const TOKEN_PATH = '/keys/token.json';
 
 // Gets value of the --spectate-root flag (spectate download provides this)
 function getSpectateRoot() {
