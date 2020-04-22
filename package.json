@@ -6,9 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/graphicsdesk/spectate.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bin": {
     "spectate": "./bin/spectate"
   },
@@ -16,7 +14,7 @@
   "dependencies": {
     "aws-sdk": "^2.642.0",
     "chalk": "^4.0.0",
-    "googleapis": "^47.0.0",
+    "googleapis": "^49.0.0",
     "mime-types": "^2.1.26",
     "opn": "^6.0.0"
   },
