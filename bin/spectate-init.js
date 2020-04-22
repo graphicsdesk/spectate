@@ -2,7 +2,6 @@
 
 const opn = require('opn');
 const path = require('path');
-const chalk = require('chalk');
 const { execSync } = require('child_process');
 const { Asker, setPackageKey } = require('./utils');
 
@@ -12,17 +11,12 @@ const TEMPLATE_DOC_URL =
 const asker = new Asker();
 
 async function init() {
-  let slug;
-  while (!slug) {
-    try {
-      slug = await asker.question(
-        'Enter a slug',
-        path.basename(process.cwd()),
-        isValidRepoName,
-      );
-    } catch (err) {
-      console.error(err);
-    }
+
+  // Use repository name as default slug
+  let slug = path.basename(process.cwd());
+  const confirmation = await asker.question(`Use "${slug}" as slug? (y/n)`);
+  if (confirmation !== 'y') {
+    slug = await asker.askForSlug();
   }
 
   // Set name in package.json to slug
@@ -82,16 +76,12 @@ async function init() {
       'Successfully set DOC_URL in the "spectate" key in package.json.',
     );
   }
+
 }
 
 init()
   .catch(console.error)
   .finally(() => asker.close());
-
-function isValidRepoName(s) {
-  if (s.match(/^[A-Za-z0-9_.-]+$/)) return { success: true };
-  return { error: 'Invalid GitHub repository name: ' + s };
-}
 
 function isValidGoogleDocsURL(s) {
   if (/docs\.google\.com\/document(\/u\/\d)?\/d\/[-\w]{25,}/.test(s))

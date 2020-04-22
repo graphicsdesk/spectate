@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const readline = require('readline');
 const chalk = require('chalk');
+const { execSync } = require('child_process');
 
 class Asker {
   constructor() {
@@ -10,15 +11,17 @@ class Asker {
   // Prompts a question and validates answer
   question(message, defaultAnswer, validate = nonEmpty, options) {
     return new Promise((resolve, reject) => {
-      if (options)
-        // Options to perform certain actions
+      if (options) { // Options to perform certain actions
         message += ` [${Object.keys(options).join('|')}]`;
-      if (!['?', ')'].includes(message.charAt(message.length - 1)))
+      }
+      if (!['?', ')'].includes(message.charAt(message.length - 1))) {
         message += ':';
+      }
       message += ' ';
-      if (defaultAnswer)
-        // Leaving line empty will default this answer
+      if (defaultAnswer) { // Leaving line empty will default this answer
         message += `(${defaultAnswer}) `;
+      }
+
       this.rl.question(chalk.cyan(message), line => {
         if (options && line in options) {
           options[line]();
@@ -32,6 +35,22 @@ class Asker {
         return reject(validation.error);
       });
     });
+  }
+
+  async askForSlug() {
+    let slug;
+    while (!slug) {
+      try {
+        slug = await this.question(
+          'Enter a slug',
+          null,
+          isValidRepoName,
+        );
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    return slug;
   }
 
   close() {
@@ -57,4 +76,15 @@ function nonEmpty(s) {
   return { error: 'User gave empty string.' };
 }
 
-module.exports = { Asker, setPackageKey };
+function getRepoName() {
+  return execSync(
+    'basename -s .git `git config --get remote.origin.url`'
+  ).toString().trim();
+}
+
+function isValidRepoName(s) {
+  if (s.match(/^[A-Za-z0-9_.-]+$/)) return { success: true };
+  return { error: 'Invalid GitHub repository name: ' + s };
+}
+
+module.exports = { Asker, setPackageKey, getRepoName };
