@@ -79,9 +79,17 @@ This will clone the repository `git@github.com:graphicsdesk/SLUG.git` into a new
 
 ## Usage
 
-To start the development server, run `npm run dev`.
+To start the development server, run:
+```
+$ npm run dev
+```
 
-To re-download the Google Doc, run `spectate download`.
+To re-download the Google Doc, run:
+```
+$ spectate download
+```
+
+For a detailed reference of the Spectate API, see the [API Documentation](https://github.com/graphicsdesk/spectate/wiki/API-Documentation).
 
 ### Illustrator and [ai2html](http://ai2html.org/)
 
@@ -124,7 +132,3 @@ aws_secret_access_key = <var>YOUR_SECRET_ACCESS_KEY</var>
 See [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit) for your access key.
 
 Run `cat ~/.aws/credentials`. If the output is the contents of the file you just made, you should now be able to run any publish command.
-
-## API Reference
-
-For a detailed reference of Spectate commands, see the [API Reference](https://github.com/graphicsdesk/spectate/wiki/API-Reference).
