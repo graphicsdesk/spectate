@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
+    "start": "parcel src/index.html --global script",
+    "build": "parcel build src/index.html --global script --public-url . --no-content-hash",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "patch-package",
-    "dev": "parcel src/index.html --global script",
-    "build": "parcel build src/index.html --global script --public-url . --no-content-hash"
+    "postinstall": "patch-package"
   },
   "keywords": [],
   "devDependencies": {
