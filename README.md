@@ -81,7 +81,7 @@ This will clone the repository `git@github.com:graphicsdesk/SLUG.git` into a new
 
 To start the development server, run:
 ```
-$ npm run dev
+$ npm start
 ```
 
 To re-download the Google Doc, run:
