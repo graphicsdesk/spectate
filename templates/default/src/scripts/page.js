@@ -19,13 +19,20 @@ const isOnContributorPage = window.location.pathname.indexOf('/contributors') ==
 const SECTION_MAIN_SELECTOR = 'section#main';
 const ARTICLE_SELECTOR =
   '.pb-f-article-article-body > .row > .col-xs-12 > .ab-article-body > .ab-article-content > article';
+const COMMENTS_SELECTOR = '.pb-f-article-disqus-new';
 
 // Replaces section#main with article
 function hoistArticle() {
-  // Replace section#main with article
+  // Store nodes of interest
   const sectionMain = document.querySelector(SECTION_MAIN_SELECTOR);
   const article = document.querySelector(ARTICLE_SELECTOR);
+  const comments = document.querySelector(COMMENTS_SELECTOR);
+
+  // Replace section#main with article
   sectionMain.parentNode.replaceChild(article, sectionMain);
+
+  // Append comment section after article
+  article.parentNode.insertBefore(comments, article.nextSibling);
 
   // Arc SSRs elements like links and meta tags in Spectate's index.html <head>
   // into a paragraph, which takes up unwanted space thanks to Arc's CSS
