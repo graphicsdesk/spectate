@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const opn = require('opn');
+const open = require('open');
 const path = require('path');
 const { execSync } = require('child_process');
 const { Asker, setPackageKey } = require('./utils');
@@ -62,7 +62,7 @@ async function init() {
         'Enter the Google Docs URL',
         null,
         isValidGoogleDocsURL,
-        { o: () => opn(TEMPLATE_DOC_URL) },
+        { o: () => open(TEMPLATE_DOC_URL) },
       );
     } catch (err) {
       console.error(err, --numTries, 'tries left');
