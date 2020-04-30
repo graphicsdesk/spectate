@@ -23,14 +23,23 @@ log_small() {
 # Updating spectate is just git pulling in the spectate repo
 spectate_update() {
   log "Updating the spectate repository..."
-  (cd "$SPECTATE_ROOT" && git pull)
-}
 
-# spectate update with npm install
-spectate_update_install() {
-  spectate_update
-  log "Installing dependencies..."
-  (cd "$SPECTATE_ROOT" && npm install)
+  (
+    cd "$SPECTATE_ROOT" || exit
+    git fetch origin master
+
+    # $? returns the exit value of the previous statement. If the following
+    # condition is successful (exit status = 0), SHOULD_REINSTALL becomes 0.
+    # FYI: Breaks if spectate's origin/master or package.json does not exist
+    [[ $(git diff --name-only origin/master package.json) == *package.json* ]]
+    SHOULD_REINSTALL=$?
+
+    git pull
+    if [ $SHOULD_REINSTALL -eq 0 ]; then
+      log "Also installing dependencies because package.json changed..."
+      npm install
+    fi
+  )
 }
 
 # Download Google Doc and write .posthtmlrlc
@@ -140,7 +149,7 @@ publish() {
 # Uploads assets to S3 using AWS Node SDK
 prepublish() {
   log "Setting public S3 URL..."
-  node --no-warnings "$SPECTATE_ROOT"/bin/prepublish.js # suppress fs.promises warning
+  node --no-warnings "$SPECTATE_ROOT"/bin/prepublish.js
 }
 
 # Publishes on a gh-pages branch which lives in a working tree in dist
@@ -181,7 +190,6 @@ case $COMMAND in
   gh-publish) gh_publish ;;
   config-docs) spectate_config_docs ;;
   update) spectate_update ;;
-  update-install) spectate_update_install ;;
 
   *)
     if [ -z "$COMMAND" ]; then
@@ -197,7 +205,7 @@ case $COMMAND in
       echo "  publish       Build and upload assets"
       echo "  gh-publish    Publish and push to a gh-pages branch"
       echo "  config-docs   Reset Google Docs authentication"
-      echo "  update        Update Spectate itself"
+      echo "  update        Update the Spectate repository itself"
     else
       echo "Unknown command: $COMMAND"
     fi
