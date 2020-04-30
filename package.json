@@ -12,10 +12,10 @@
   },
   "homepage": "https://github.com/graphicsdesk/spectate#readme",
   "dependencies": {
-    "aws-sdk": "^2.642.0",
+    "aws-sdk": "^2.666.0",
     "chalk": "^4.0.0",
     "googleapis": "^49.0.0",
-    "mime-types": "^2.1.26",
+    "mime-types": "^2.1.27",
     "opn": "^6.0.0"
   },
   "devDependencies": {
