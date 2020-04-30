@@ -2,15 +2,16 @@
   "name": "spectate",
   "version": "1.0.0",
   "description": "Spectate is a tool for building freeform Spectator stories.",
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://github.com/graphicsdesk/spectate#readme",
+  "bin": {
+    "spectate": "./bin/spectate"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/graphicsdesk/spectate.git"
   },
-  "license": "MIT",
-  "bin": {
-    "spectate": "./bin/spectate"
-  },
-  "homepage": "https://github.com/graphicsdesk/spectate#readme",
   "dependencies": {
     "aws-sdk": "^2.666.0",
     "chalk": "^4.0.0",
