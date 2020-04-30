@@ -96,7 +96,8 @@ spectate_create() {
   # Write default .posthtmlrc
   spectate_download
 
-  log "Displaying git status:"
+  log "Staged all initial files. Displaying git status:"
+  git add -A
   git status
 }
 
