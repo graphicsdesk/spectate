@@ -21,7 +21,7 @@ async function prepublish() {
 
   // Requires repo name to be slug.
   const slug = getRepoName();
-  console.log(`Using repo name "${slug}" as S3 slug`);
+  console.log(`Using repo name "${slug}" as S3 slug...`);
 
   // Rewrite current build script with the S3 public URL
   const publicUrl = S3_WEBSITE_BASE + '/' + slug;
@@ -30,7 +30,8 @@ async function prepublish() {
     publicUrl,
   );
   await fs.writeFile('package.json', JSON.stringify(packageJSON, null, 2));
-  console.log('Set public URL to', publicUrl);
+  console.log('Successfully set public URL to', publicUrl);
+  console.log(`\nDon't forget to uncomment an Arc stylesheet before publication!`)
 
 }
 
