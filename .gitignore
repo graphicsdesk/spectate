@@ -1,8 +1,6 @@
-*.sublime-workspace
-
 .DS_Store
-.idea
+.vscode
 
 node_modules
-credentials.json
-token.json
+keys/credentials.json
+keys/token.json
