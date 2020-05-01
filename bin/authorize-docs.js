@@ -2,6 +2,7 @@
 
 const fs = require('fs').promises;
 const readline = require('readline');
+const chalk = require('chalk');
 const { google } = require('googleapis');
 
 // If modifying these scopes, delete token.json and regenerate it with spectate config-docs
@@ -28,12 +29,12 @@ async function authorizeClient() {
   let token;
   try {
     token = JSON.parse(await fs.readFile(TOKEN_PATH));
-    oAuth2Client.setCredentials(token);
-  } catch (e) { // Token file does not exist.    
-    token = getNewToken(oAuth2Client);
+  } catch (e) { // Token file does not exist.
+    token = await getNewToken(oAuth2Client);
   }
+  oAuth2Client.setCredentials(token);
 
-  return new google.docs({ version: 'v1', auth: oAuth2Client });
+  return google.docs({ version: 'v1', auth: oAuth2Client });
 }
 
 module.exports = { authorizeClient };
@@ -42,32 +43,35 @@ module.exports = { authorizeClient };
  * Get and store new token after prompting for user authorization.
  * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
  */
-function getNewToken(oAuth2Client) {
+async function getNewToken(oAuth2Client) {
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: SCOPES,
   });
-  console.log('Authorize this app by visiting this url:', authUrl);
+  console.log(
+    chalk.cyan(`It seems like it's your first time downloading a Google Doc.\nAuthorize Spectate to do so by visiting this url:`),
+    authUrl,
+  );
+
+  // Get token
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
-  rl.question('Enter the code from that page here: ', code => {
-    rl.close();
-    oAuth2Client.getToken(code, async (err, token) => {
-      if (err)
-        return console.error(
-          'Error while trying to retrieve access token',
-          err,
-        );
-      oAuth2Client.setCredentials(token);
-      // Store the token to disk for later program executions
-      try {
-        await fs.writeFile(TOKEN_PATH, JSON.stringify(token));
-        console.log('Token stored at', TOKEN_PATH);
-      } catch(e) {
-        console.error(e);
-      }
+  const token = await new Promise((resolve, reject) => {
+    rl.question(chalk.cyan('Enter the code from that page here: '), code => {
+      rl.close();
+      oAuth2Client.getToken(code, (err, token) => {
+        if (err)
+          return reject('Error while trying to retrieve access token. ' + err);
+        resolve(token);
+      });
     });
   });
+
+  // Store token
+  await fs.writeFile(TOKEN_PATH, JSON.stringify(token));
+  console.log(chalk.cyan('Token stored successfully.'), '\n');
+
+  return token;
 }

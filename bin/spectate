@@ -44,11 +44,8 @@ spectate_update() {
 
 # Download Google Doc and write .posthtmlrlc
 spectate_download() {
-  log "Writing .posthtmlrc..."
-  (
-    set -x;
-    node --no-warnings "$SPECTATE_ROOT"/bin/download-doc.js
-  )
+  log "Downloading and parsing Google Doc..."
+  node --no-warnings "$SPECTATE_ROOT"/bin/download-doc.js
 }
 
 # Creates a Spectate project from scratch

@@ -16,24 +16,19 @@ const PH_CONFIG = {
 };
 
 async function init() {
-  // Read in Spectate config
+
+  // Read in local Spectate config
   const packageContent = await fs.readFile(process.cwd() + '/package.json');
   const { spectate: config } = JSON.parse(packageContent);
   const { DOC_URL } = config;
 
   // Read in possible configuration for ArchieML output
   const docConfigPath = process.cwd() + '/docs.config.js';
-  let defaultLocals = { top: [], body: [] }; // Default locals values
-  let formatter; // Default null formatter for docToArchieML
-  if (existsSync(docConfigPath)) {
-    const docConfig = require(docConfigPath);
-    if (docConfig.defaultLocals) {
-      defaultLocals = { ...defaultLocals, ...docConfig.defaultLocals };
-    }
-    if (docConfig.formatter) {
-      formatter = docConfig.formatter;
-    }
-  }
+  let docConfig = existsSync(docConfigPath) ? require(docConfigPath) : {};
+
+  // Set default locals and doc-to-archieml formatter
+  const defaultLocals = { top: [], body: [], ...docConfig.defaultLocals };
+  const { formatter } = docConfig;
 
   // If a doc URL exists, authorize a Docs client, and then download and parse
   // the text.
@@ -46,7 +41,7 @@ async function init() {
     });
   }
 
-  // Set locals for PostHTML
+  // Set locals for PostHTML expressions
   PH_CONFIG.plugins['posthtml-expressions'].locals = {
     ...defaultLocals,
     ...data,
@@ -59,15 +54,16 @@ async function init() {
   // Write doc data again to data/doc.json. (Example use case: accessing
   // information in the doc in client-side JavaScript). Should probs remove.
   await writeLocalFile('./data/doc.json', data);
+
 }
 
-/* Writes data to a local file */
+/* Writes data to a file in the Spectate project */
 async function writeLocalFile(filename, data) {
   await fs.writeFile(
     path.join(process.cwd(), filename),
     JSON.stringify(data, null, 2),
   );
-  console.log('[download-doc] Successfully wrote ' + filename);
+  console.log('Successfully wrote ' + filename);
 }
 
 init().catch(console.error);
