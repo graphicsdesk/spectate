@@ -286,6 +286,10 @@ header {
 @media (max-width: 760px) {
   #navbar {
     flex-direction: column;
+
+    &.news-navbar {
+      justify-content: center;
+    }
   }
 
   #nav-links {
