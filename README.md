@@ -14,7 +14,7 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 4. Install [Node](https://nodejs.org/en/).
 
-5. Install a code editor. [Sublime Text](https://www.sublimetext.com) is a great option. (If you use Sublime, also set up the command line shortcut [`subl`](https://www.sublimetext.com/docs/3/osx_command_line.html)).
+5. Install a code editor. [Visual Studio Code](https://code.visualstudio.com) is a great option. (If you use VSCode, I highly recommend going through the First Steps in the [documentation](https://code.visualstudio.com/docs).
 
 ## Setup
 
