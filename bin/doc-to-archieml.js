@@ -27,25 +27,30 @@
 const { load } = require('archieml');
 const { google: googleApisInstance } = require('googleapis');
 
-function readParagraphElement(element) {
+function defaultFormatter(textRun) {
+  // sometimes the content isn't there, and if so, make it an empty string
+  let content = textRun.content || '';
+
+  // step through optional text styles to check for an associated URL
+  if (!textRun.textStyle) return content;
+
+  // add inline style tags
+  if (textRun.textStyle.italic) {
+    content = content.replace(/([^\n]+)(\n)?/,'<i>$1</i>$2');
+  }
+  if (textRun.textStyle.bold) {
+    content = content.replace(/([^\n]+)(\n)?/,'<b>$1</b>$2');
+  }
+  return content;
+}
+
+function readParagraphElement(element, formatter) {
   // pull out the text
   const textRun = element.textRun;
 
   // sometimes it's not there, skip this all if so
   if (textRun) {
-    // sometimes the content isn't there, and if so, make it an empty string
-    let content = textRun.content || '';
-
-    // step through optional text styles to check for an associated URL
-    if (!textRun.textStyle) return content;
-    
-    // add inline style tags
-    if (textRun.textStyle.italic) {
-      content = content.replace(/([^\n]+)(\n)?/,'<i>$1</i>$2');
-    }
-    if (textRun.textStyle.bold) {
-      content = content.replace(/([^\n]+)(\n)?/,'<b>$1</b>$2');
-    }
+    const content = formatter(textRun);
     
     if (!textRun.textStyle.link) return content;
     if (!textRun.textStyle.link.url) return content;
@@ -64,7 +69,7 @@ function readParagraphElement(element) {
   }
 }
 
-function readElements(document) {
+function readElements(document, formatter) {
   // prepare the text holder
   let text = '';
 
@@ -93,7 +98,7 @@ function readElements(document) {
           const prefix = needsBullet && isFirstValue ? '* ' : '';
 
           // concat the text
-          text += `${prefix}${readParagraphElement(value)}`;
+          text += `${prefix}${readParagraphElement(value, formatter)}`;
         });
       }
     }
@@ -106,6 +111,7 @@ async function docToArchieML({
   auth,
   client,
   documentId,
+  formatter = defaultFormatter,
   google = googleApisInstance,
 }) {
   // create docs client if not provided
@@ -122,7 +128,7 @@ async function docToArchieML({
   });
 
   // convert the doc's content to text ArchieML will understand
-  const text = readElements(data);
+  const text = readElements(data, formatter);
 
   // pass text to ArchieML and return results
   return load(text);

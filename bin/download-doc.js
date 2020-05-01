@@ -1,15 +1,7 @@
-// CONFIGURE OUT: defaultLocals
-
-const fs = require('fs').promises;
 const path = require('path');
+const { promises: fs, existsSync } = require('fs');
 const { authorizeClient } = require('./authorize-docs');
 const { docToArchieML } = require('./doc-to-archieml');
-
-// Default locals values
-const defaultLocals = {
-  top: {},
-  body: {},
-};
 
 // Default PostHTML config
 const PH_CONFIG = {
@@ -24,19 +16,33 @@ const PH_CONFIG = {
 };
 
 async function init() {
-  // Read in local Spectate config
+  // Read in Spectate config
   const packageContent = await fs.readFile(process.cwd() + '/package.json');
   const { spectate: config } = JSON.parse(packageContent);
   const { DOC_URL } = config;
 
-  // If a doc URL exists, authorize a Docs client,
-  // and then download and parse the text.
+  // Read in possible configuration for ArchieML output
+  const docConfigPath = process.cwd() + '/docs.config.js';
+  let defaultLocals = { top: [], body: [] }; // Default locals values
+  let formatter; // Default null formatter for docToArchieML
+  if (existsSync(docConfigPath)) {
+    const docConfig = require(docConfigPath);
+    if (docConfig.defaultLocals) {
+      defaultLocals = { ...defaultLocals, ...docConfig.defaultLocals };
+    }
+    if (docConfig.formatter) {
+      formatter = docConfig.formatter;
+    }
+  }
+
+  // If a doc URL exists, authorize a Docs client, and then download and parse
+  // the text.
   let data = {};
   if (DOC_URL) {
-    const client = await authorizeClient();
     data = await docToArchieML({
-      client,
+      client: await authorizeClient(),
       documentId: DOC_URL.match(/[-\w]{25,}/)[0],
+      formatter,
     });
   }
 
