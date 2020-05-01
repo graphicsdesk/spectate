@@ -22,7 +22,8 @@ function resizer() {
   });
 }
 
-function init() {
+// Export ai2html resizer initialization to page.js
+export default function() {
   // only want one resizer on the page
   if (document.documentElement.classList.contains('g-resizer-v3-init')) return;
   document.documentElement.classList.add('g-resizer-v3-init');
@@ -30,9 +31,6 @@ function init() {
   resizer();
   window.addEventListener('resize', throttle(resizer, 200));
 }
-
-// Export ai2html resizer initialization to page.js
-module.exports = init;
 
 /**
  * Throttle function adapted from underscore.js.
