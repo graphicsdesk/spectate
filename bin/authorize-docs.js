@@ -5,7 +5,7 @@ const readline = require('readline');
 const chalk = require('chalk');
 const { google } = require('googleapis');
 
-// If modifying these scopes, delete token.json and regenerate it with spectate config-docs
+// If modifying these scopes, delete token.json
 const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
 const CREDENTIALS_PATH = __dirname + '/../keys/credentials.json';
 const TOKEN_PATH = __dirname + '/../keys/token.json';

@@ -34,10 +34,7 @@ $ npm install
 $ npm link
 ```
 
-4. Lastly, we need to configure Google Docs access. Follow Step 1 of the [Node Google Docs quickstart](https://developers.google.com/docs/api/quickstart/nodejs), saving `credentials.json` into the `~/spectate/keys/` directory. Then, run:
-```
-$ spectate config-docs
-```
+4. Lastly, to authorize Spectate to download Google Docs, click the ["Enable the Google Docs API"](https://developers.google.com/docs/api/quickstart/nodejs) button. Click "Create", and save the client configuration as `credentials.json` inside the `~/spectate/keys/` directory.
 
 ## Creating a Spectate project
 

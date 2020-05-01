@@ -160,11 +160,6 @@ gh_publish() {
   (cd dist && git add . && git commit -m 'Deploy to gh-pages' && git push origin gh-pages -f)
 }
 
-spectate_config_docs() {
-  log "Authorizing Google user..."
-  node --no-warnings "$SPECTATE_ROOT"/bin/config-docs.js
-}
-
 # Takes intended command
 COMMAND=$1
 
@@ -179,7 +174,6 @@ case $COMMAND in
   prepublish) prepublish ;;
   publish) publish ;;
   gh-publish) gh_publish ;;
-  config-docs) spectate_config_docs ;;
   update) spectate_update ;;
 
   *)
@@ -195,7 +189,6 @@ case $COMMAND in
       echo "  prepublish    Configure public S3 URL"
       echo "  publish       Build and upload assets"
       echo "  gh-publish    Publish and push to a gh-pages branch"
-      echo "  config-docs   Reset Google Docs authentication"
       echo "  update        Update the Spectate repository itself"
     else
       echo "Unknown command: $COMMAND"
