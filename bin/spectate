@@ -47,14 +47,8 @@ spectate_download() {
   log "Writing .posthtmlrc..."
   (
     set -x;
-    node --no-warnings process/download-doc.js --spectate-root="$SPECTATE_ROOT"
+    node --no-warnings "$SPECTATE_ROOT"/bin/download-doc.js
   )
-}
-
-# Download data
-spectate_download_data() {
-  log "Downloading data..."
-  (set -x; node --no-warnings process/download-data.js)
 }
 
 # Creates a Spectate project from scratch
@@ -171,7 +165,7 @@ gh_publish() {
 
 spectate_config_docs() {
   log "Authorizing Google user..."
-  node "$SPECTATE_ROOT"/bin/config-docs.js
+  node --no-warnings "$SPECTATE_ROOT"/bin/config-docs.js
 }
 
 # Takes intended command
