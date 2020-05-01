@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "archieml": "^0.4.2",
-    "aws-sdk": "^2.666.0",
+    "aws-sdk": "^2.667.0",
     "chalk": "^4.0.0",
     "googleapis": "^49.0.0",
     "mime-types": "^2.1.27",
