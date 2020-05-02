@@ -36,7 +36,7 @@ spectate_update() {
 
     git pull
     if [ $SHOULD_REINSTALL -eq 0 ]; then
-      log "Also installing dependencies because package.json changed..."
+      log "Re-installing dependencies because package.json changed..."
       npm install
     fi
   )
