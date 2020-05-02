@@ -19,17 +19,20 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 ## Setup
 
 1. Clone the Spectate repository and move into it:
+
 ```sh
 $ git clone git@github.com:graphicsdesk/spectate.git ~/spectate
 $ cd ~/spectate
 ```
 
 2. Install the necessary dependencies:
+
 ```
 $ npm install
 ```
 
 3. Make the `spectate` command available everywhere:
+
 ```
 $ npm link
 ```
@@ -45,6 +48,7 @@ $ cd <var>SLUG</var>
 </pre>
 
 2. Next, run:
+
 ```
 $ spectate create
 ```
@@ -56,6 +60,7 @@ $ spectate create
 5. Run `spectate init`. It will first prompt you for the article slug. If you leave the answer blank, it will use the project directory name by default. It will then ask you the new Google Docs link. To skip this step, input `s`.
 
 6. Add all the new files, create the first commit, and push it to GitHub.
+
 ```
 $ git add .
 $ git commit -m "Initial commit"
@@ -69,19 +74,23 @@ $ git push -u origin master
 Make sure you have first completed the [prerequisites and setup instructions](#prerequisites).
 
 To clone a Spectate project, run:
+
 <pre>
 $ spectate clone <var>SLUG</var>
 </pre>
+
 This will clone the repository `git@github.com:graphicsdesk/SLUG.git` into a new directory named _`SLUG`_ and install the project's node modules. See [Usage](#usage).
 
 ## Usage
 
 To start the development server, run:
+
 ```
 $ npm start
 ```
 
 To re-download the Google Doc, run:
+
 ```
 $ spectate download
 ```
@@ -121,11 +130,13 @@ That means GitHub is starting up the page, but it's not ready yet. Once you see 
 ## AWS Setup
 
 Write a new file at `~/.aws/credentials` with the contents below:
+
 <pre>
 [spectate]
 aws_access_key_id = <var>YOUR_ACCESS_KEY_ID</var>
 aws_secret_access_key = <var>YOUR_SECRET_ACCESS_KEY</var>
 </pre>
+
 See [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit) for your access key.
 
 Run `cat ~/.aws/credentials`. If the output is the contents of the file you just made, you should now be able to run any publish command.

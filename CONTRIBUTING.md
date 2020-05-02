@@ -15,16 +15,19 @@ To add a new HTML partial (visual element) onto the site, see the section [Writi
 3. To see `methodology.html` on the page, add the component as a case inside the `<each loop="item in body">` element in `src/index.html`. After you've done that, it should look like this:
 
 ```html
-  <div class="story">
-    <each loop="item in body">
-      <switch expression="item.type">
-        <case n="'methodology'">
-          <include src="partials/methodology.html"></include>
-        </case>
-        <case n="'text'">
-          <include src="partials/paragraph.html"></include>
-        </case>
-        ...
+<div class="story">
+  <each loop="item in body">
+    <switch expression="item.type">
+      <case n="'methodology'">
+        <include src="partials/methodology.html"></include>
+      </case>
+      <case n="'text'">
+        <include src="partials/paragraph.html"></include>
+      </case>
+      ...
+    </switch>
+  </each>
+</div>
 ```
 
 4. In the Google Doc, add text inside `[+body]` that looks like this:
