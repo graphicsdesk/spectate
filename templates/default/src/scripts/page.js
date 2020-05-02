@@ -14,7 +14,8 @@ function init() {
  */
 
 const isOnSpectatorPage = window.location.host === 'www.columbiaspectator.com';
-const isOnContributorPage = window.location.pathname.indexOf('/contributors') === 0;
+const isOnContributorPage =
+  window.location.pathname.indexOf('/contributors') === 0;
 
 const SECTION_MAIN_SELECTOR = 'section#main';
 const ARTICLE_SELECTOR =
