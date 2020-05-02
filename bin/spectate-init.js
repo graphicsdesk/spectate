@@ -11,10 +11,11 @@ const TEMPLATE_DOC_URL =
 const asker = new Asker();
 
 async function init() {
-  // Confirm repository name as default slug, or input a new one
+  // Confirm repository name as default slug, or input a new one. Slug input
+  // error should not be caught.
   const slug = await asker.confirmSlugOrAsk(path.basename(process.cwd()));
 
-  // Set name in package.json to slug
+  // Set package name to slug
   await setPackageKey('name', slug);
 
   // Check if repository exists
@@ -25,7 +26,7 @@ async function init() {
     });
     repositoryExists = true;
   } catch (err) {
-    console.log(`Repository graphicsdesk/${slug} doesn't exist.`);
+    console.error(`Repository graphicsdesk/${slug} doesn't exist.`);
   }
 
   // Add remote origin if repository exists
@@ -49,19 +50,11 @@ async function init() {
   console.log();
 
   // Ask for Google Doc
-  let url;
-  let numTries = 3;
-  while (!url && numTries > 0) {
-    try {
-      url = await asker.question({
-        message: 'Enter the Google Docs URL',
-        validate: isValidGoogleDocsURL,
-        options: { o: () => open(TEMPLATE_DOC_URL) },
-      });
-    } catch (err) {
-      console.error(err, --numTries, 'tries left.');
-    }
-  }
+  const url = await asker.questionWithRetries({
+    message: 'Enter the Google Docs URL',
+    validate: isValidGoogleDocsURL,
+    options: { o: async () => await open(TEMPLATE_DOC_URL) },
+  });
 
   // Set google doc url in config
   if (url) {

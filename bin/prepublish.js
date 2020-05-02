@@ -30,7 +30,10 @@ async function prepublish() {
     /(?<=--public-url )\.(?=\s|$)/,
     publicUrl,
   );
-  await fs.writeFile('package.json', JSON.stringify(packageJSON, null, 2));
+  await fs.writeFile(
+    'package.json',
+    JSON.stringify(packageJSON, null, 2) + '\n',
+  );
   console.log('Successfully set public URL to', publicUrl);
   console.log(
     `\nDon't forget to uncomment an Arc stylesheet before publication!`,

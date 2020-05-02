@@ -40,25 +40,31 @@ class Asker {
   }
 
   async confirmSlugOrAsk(defaultSlug) {
-    const confirmation = await this.question({ message: `Use "${defaultSlug}" as slug? (y/n)` });
+    const confirmation = await this.question({
+      message: `Use "${defaultSlug}" as slug? (y/n)`,
+    });
     if (confirmation === 'y') {
       return defaultSlug;
     }
+    return await this.questionWithRetries({
+      message: 'Enter a slug',
+      validate: isValidRepoName,
+    });
+  }
 
-    let slug;
-    let numTries = 3;
-    while (!slug && numTries > 0) {
+  async questionWithRetries(questionObj, numTries = 3) {
+    let answer;
+    while (!answer) {
       try {
-        slug = await this.question({ message: 'Enter a slug', validate: isValidRepoName });
+        answer = await this.question(questionObj);
       } catch (err) {
-        console.error(err, --numTries, 'tries left.');
+        if (--numTries === 0) {
+          throw err + '. No tries left.';
+        }
+        console.error(err, numTries, 'tries left.');
       }
     }
-
-    if (slug === undefined) {
-      throw 'Failed to input a valid slug.';
-    }
-    return slug;
+    return answer;
   }
 
   close() {
@@ -76,7 +82,7 @@ async function setPackageKey(key, value, isSpectateKey) {
     fileRoot = file.spectate;
   }
   fileRoot[key] = value;
-  await fs.writeFile(filename, JSON.stringify(file, null, 2));
+  await fs.writeFile(filename, JSON.stringify(file, null, 2) + '\n');
 }
 
 function nonEmpty(s) {

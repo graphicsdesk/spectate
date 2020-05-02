@@ -21,7 +21,10 @@ async function init() {
       return;
   }
 
-  await fs.writeFile('package.json', JSON.stringify(packageJSON, null, 2));
+  await fs.writeFile(
+    'package.json',
+    JSON.stringify(packageJSON, null, 2) + '\n',
+  );
 }
 
 init().catch(console.error);
