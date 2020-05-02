@@ -1,8 +1,8 @@
 /**
  * Adapted from https://github.com/rdmurphy/doc-to-archieml
- * 
+ *
  * MIT License
- 
+
  * Copyright (c) 2019 Ryan Murphy
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,10 +36,10 @@ function defaultFormatter(textRun) {
 
   // add inline style tags
   if (textRun.textStyle.italic) {
-    content = content.replace(/([^\n]+)(\n)?/,'<i>$1</i>$2');
+    content = content.replace(/([^\n]+)(\n)?/, '<i>$1</i>$2');
   }
   if (textRun.textStyle.bold) {
-    content = content.replace(/([^\n]+)(\n)?/,'<b>$1</b>$2');
+    content = content.replace(/([^\n]+)(\n)?/, '<b>$1</b>$2');
   }
   return content;
 }
@@ -51,7 +51,7 @@ function readParagraphElement(element, formatter) {
   // sometimes it's not there, skip this all if so
   if (textRun) {
     const content = formatter(textRun);
-    
+
     if (!textRun.textStyle.link) return content;
     if (!textRun.textStyle.link.url) return content;
 

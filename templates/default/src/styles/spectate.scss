@@ -20,6 +20,10 @@ h1, p {
 a {
   color: #337ab7;
   text-decoration: none;
+
+  &[href^="mailto:"] {
+    word-wrap: break-word;
+  }
 }
 
 a:hover {
