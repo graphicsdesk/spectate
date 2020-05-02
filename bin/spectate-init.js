@@ -11,12 +11,8 @@ const TEMPLATE_DOC_URL =
 const asker = new Asker();
 
 async function init() {
-  // Use repository name as default slug
-  let slug = path.basename(process.cwd());
-  const confirmation = await asker.question(`Use "${slug}" as slug? (y/n)`);
-  if (confirmation !== 'y') {
-    slug = await asker.askForSlug();
-  }
+  // Confirm repository name as default slug, or input a new one
+  const slug = await asker.confirmSlugOrAsk(path.basename(process.cwd()));
 
   // Set name in package.json to slug
   await setPackageKey('name', slug);
@@ -57,14 +53,13 @@ async function init() {
   let numTries = 3;
   while (!url && numTries > 0) {
     try {
-      url = await asker.question(
-        'Enter the Google Docs URL',
-        null,
-        isValidGoogleDocsURL,
-        { o: () => open(TEMPLATE_DOC_URL) },
-      );
+      url = await asker.question({
+        message: 'Enter the Google Docs URL',
+        validate: isValidGoogleDocsURL,
+        options: { o: () => open(TEMPLATE_DOC_URL) },
+      });
     } catch (err) {
-      console.error(err, --numTries, 'tries left');
+      console.error(err, --numTries, 'tries left.');
     }
   }
 

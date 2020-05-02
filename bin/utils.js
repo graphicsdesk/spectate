@@ -9,7 +9,7 @@ class Asker {
   }
 
   // Prompts a question and validates answer
-  question(message, defaultAnswer, validate = nonEmpty, options) {
+  question({ message, defaultAnswer, validate = nonEmpty, options }) {
     return new Promise((resolve, reject) => {
       if (options) {
         // Options to perform certain actions
@@ -39,14 +39,24 @@ class Asker {
     });
   }
 
-  async askForSlug() {
+  async confirmSlugOrAsk(defaultSlug) {
+    const confirmation = await this.question({ message: `Use "${defaultSlug}" as slug? (y/n)` });
+    if (confirmation === 'y') {
+      return defaultSlug;
+    }
+
     let slug;
-    while (!slug) {
+    let numTries = 3;
+    while (!slug && numTries > 0) {
       try {
-        slug = await this.question('Enter a slug', null, isValidRepoName);
+        slug = await this.question({ message: 'Enter a slug', validate: isValidRepoName });
       } catch (err) {
-        console.error(err);
+        console.error(err, --numTries, 'tries left.');
       }
+    }
+
+    if (slug === undefined) {
+      throw 'Failed to input a valid slug.';
     }
     return slug;
   }
