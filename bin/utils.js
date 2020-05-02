@@ -11,14 +11,16 @@ class Asker {
   // Prompts a question and validates answer
   question(message, defaultAnswer, validate = nonEmpty, options) {
     return new Promise((resolve, reject) => {
-      if (options) { // Options to perform certain actions
+      if (options) {
+        // Options to perform certain actions
         message += ` [${Object.keys(options).join('|')}]`;
       }
       if (!['?', ')'].includes(message.charAt(message.length - 1))) {
         message += ':';
       }
       message += ' ';
-      if (defaultAnswer) { // Leaving line empty will default this answer
+      if (defaultAnswer) {
+        // Leaving line empty will default this answer
         message += `(${defaultAnswer}) `;
       }
 
@@ -41,13 +43,9 @@ class Asker {
     let slug;
     while (!slug) {
       try {
-        slug = await this.question(
-          'Enter a slug',
-          null,
-          isValidRepoName,
-        );
+        slug = await this.question('Enter a slug', null, isValidRepoName);
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     }
     return slug;
@@ -77,9 +75,9 @@ function nonEmpty(s) {
 }
 
 function getRepoName() {
-  return execSync(
-    'basename -s .git `git config --get remote.origin.url`'
-  ).toString().trim();
+  return execSync('basename -s .git `git config --get remote.origin.url`')
+    .toString()
+    .trim();
 }
 
 function isValidRepoName(s) {

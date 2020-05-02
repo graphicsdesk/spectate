@@ -11,7 +11,6 @@ const TEMPLATE_DOC_URL =
 const asker = new Asker();
 
 async function init() {
-
   // Use repository name as default slug
   let slug = path.basename(process.cwd());
   const confirmation = await asker.question(`Use "${slug}" as slug? (y/n)`);
@@ -76,7 +75,6 @@ async function init() {
       'Successfully set DOC_URL in the "spectate" key in package.json.',
     );
   }
-
 }
 
 init()

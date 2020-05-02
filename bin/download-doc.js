@@ -16,7 +16,6 @@ const PH_CONFIG = {
 };
 
 async function init() {
-
   // Read in local Spectate config
   const packageContent = await fs.readFile(process.cwd() + '/package.json');
   const { spectate: config } = JSON.parse(packageContent);
@@ -54,7 +53,6 @@ async function init() {
   // Write doc data again to data/doc.json. (Example use case: accessing
   // information in the doc in client-side JavaScript). Should probs remove.
   await writeLocalFile('./data/doc.json', data);
-
 }
 
 /* Writes data to a file in the Spectate project */

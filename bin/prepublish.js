@@ -9,11 +9,12 @@ const { S3_WEBSITE_BASE } = require('./constants');
 const asker = new Asker();
 
 async function prepublish() {
-
   // Check if build script already uses S3 public URL
   let packageJSON = await fs.readFile('package.json');
   packageJSON = JSON.parse(packageJSON.toString());
-  const { scripts: { build } } = packageJSON;
+  const {
+    scripts: { build },
+  } = packageJSON;
   if (build.includes('--public-url ' + S3_WEBSITE_BASE)) {
     console.log('Build script already uses an S3 public URL.');
     return;
@@ -31,8 +32,9 @@ async function prepublish() {
   );
   await fs.writeFile('package.json', JSON.stringify(packageJSON, null, 2));
   console.log('Successfully set public URL to', publicUrl);
-  console.log(`\nDon't forget to uncomment an Arc stylesheet before publication!`)
-
+  console.log(
+    `\nDon't forget to uncomment an Arc stylesheet before publication!`,
+  );
 }
 
 prepublish()

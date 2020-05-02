@@ -29,7 +29,8 @@ async function authorizeClient() {
   let token;
   try {
     token = JSON.parse(await fs.readFile(TOKEN_PATH));
-  } catch (e) { // Token file does not exist.
+  } catch (e) {
+    // Token file does not exist.
     token = await getNewToken(oAuth2Client);
   }
   oAuth2Client.setCredentials(token);
@@ -49,7 +50,9 @@ async function getNewToken(oAuth2Client) {
     scope: SCOPES,
   });
   console.log(
-    chalk.cyan(`It seems like it's your first time downloading a Google Doc.\nAuthorize Spectate to do so by visiting this url:`),
+    chalk.cyan(
+      `It seems like it's your first time downloading a Google Doc.\nAuthorize Spectate to do so by visiting this url:`,
+    ),
     authUrl,
   );
 
