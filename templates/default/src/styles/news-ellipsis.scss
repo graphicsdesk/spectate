@@ -1,7 +1,8 @@
 /* These styles help hide default site elements for a News story */
 
 // Unset Arc's Bootstrap box-sizing: border-box;
-#pb-root > article, #pb-root > article * {
+#pb-root > article,
+#pb-root > article * {
   box-sizing: unset;
 }
 
@@ -37,7 +38,8 @@
 }
 
 // Hide advertisements that get server-side-rendered into the middle of the page
-#hor-in-article-ad-placement, #ver-in-article-ad-placement {
+#hor-in-article-ad-placement,
+#ver-in-article-ad-placement {
   display: none;
 }
 
