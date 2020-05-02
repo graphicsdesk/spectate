@@ -6,15 +6,13 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 ## Prerequisites
 
-1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and make a [GitHub](https://github.com) account. Ask Jason, Charlotte, or Raeedah to add you to the `graphicsdesk` organization.
 
-2. Make a [GitHub](https://github.com) account. Ask Jason, Charlotte, or Raeedah to add you to the `graphicsdesk` organization.
+2. To be able to write to our repositories, set up an SSH key. Follow the instructions in the first five sections of [Connecting to GitHub with SSH](https://help.github.com/en/articles/connecting-to-github-with-ssh).
 
-3. To be able to write to our repositories, set up an SSH key. Follow the instructions in the first five sections of [Connecting to GitHub with SSH](https://help.github.com/en/articles/connecting-to-github-with-ssh).
+3. Install [Node](https://nodejs.org/en/).
 
-4. Install [Node](https://nodejs.org/en/).
-
-5. Install a code editor. [Visual Studio Code](https://code.visualstudio.com) is a great option. (If you use VS Code, I highly recommend going through the First Steps in the [documentation](https://code.visualstudio.com/docs).
+4. Install a code editor. [Visual Studio Code](https://code.visualstudio.com) is a great option. (If you use VS Code, I highly recommend going through the First Steps in the [documentation](https://code.visualstudio.com/docs).
 
 ## Setup
 
@@ -42,6 +40,7 @@ $ npm link
 ## Creating a Spectate project
 
 1. In the terminal, create a new directory with the article slug as the name and move into it.
+
 <pre>
 $ mkdir <var>SLUG</var>
 $ cd <var>SLUG</var>
@@ -55,11 +54,9 @@ $ spectate create
 
 3. On GitHub, create a new repository in the `graphicsdesk` organization with _`SLUG`_ as the name.
 
-4. Clone the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit).
+4. Run `spectate init`. It will first prompt you for the article slug. If you leave the answer blank, it will use the project directory name by default. It will then ask you for a Google Docs link for the project. Open the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit) by inputting `o` into the prompt. Clone it. Paste the new Doc's link into the prompt.
 
-5. Run `spectate init`. It will first prompt you for the article slug. If you leave the answer blank, it will use the project directory name by default. It will then ask you the new Google Docs link. To skip this step, input `s`.
-
-6. Add all the new files, create the first commit, and push it to GitHub.
+5. Add all the new files, create the first commit, and push it to GitHub.
 
 ```
 $ git add .
@@ -67,7 +64,7 @@ $ git commit -m "Initial commit"
 $ git push -u origin master
 ```
 
-7. See [Usage](#usage).
+6. See [Usage](#usage).
 
 ## Cloning a Spectate project
 
@@ -79,7 +76,7 @@ To clone a Spectate project, run:
 $ spectate clone <var>SLUG</var>
 </pre>
 
-This will clone the repository `git@github.com:graphicsdesk/SLUG.git` into a new directory named _`SLUG`_ and install the project's node modules. See [Usage](#usage).
+This will clone the repository `git@github.com:graphicsdesk/SLUG.git` into a new directory named _`SLUG`_ and install the project's dependencies. See [Usage](#usage).
 
 ## Usage
 
@@ -89,7 +86,7 @@ To start the development server, run:
 $ npm start
 ```
 
-To re-download the Google Doc, run:
+To re-download the Google Doc or update the project's [configuration](https://github.com/graphicsdesk/spectate/wiki/API-Documentation#spectate-config), run:
 
 ```
 $ spectate download
@@ -99,19 +96,21 @@ For a detailed reference of the Spectate API, see the [API Documentation](https:
 
 ### Illustrator and [ai2html](http://ai2html.org/)
 
-Illustrator files must be kept in the `ai/` directory. Each file represents one graphic with one or more artboards for different screen sizes. Every graphic must have a `300` (an artboard named "300" with width 300px) for mobile screens. A `600` will fit inline with Spectate text. Larger sizes include `960`, `1050`, and `1200`.
+Illustrator files must be kept in the `ai/` directory. Each file should represent one graphic. Each file can (and should) have multiple artboards for different screen sizes. Every graphic must have a `300` (an artboard named "300" with width 300px) for mobile screens. A `600` will fit inline with Spectate text. Larger sizes include `960`, `1050`, and `1200`.
 
 When the ai2html script is run, the output HTML and images will be put into `src/` (this is configured in `ai/ai2html-config.json`). You can include those files in your HTML with [`<include>`](https://github.com/posthtml/posthtml-include) tags.
 
+### Assets
+
+Assets like fonts and video should be kept in an `assets/` directory. All images should be uploaded to Arc's [Photo Center](https://spectator.arcpublishing.com/photo/). Their public links can then be put directly in the code or in the Spectate Doc.
+
 ## Publishing on Arc
 
-1. Run `spectate prepublish`, which will help you set up the S3 URL. Make sure you have completed the [AWS setup](#aws-setup).
+1. Run `spectate prepublish`, which will help you set up the S3 URL. Make sure you have completed the [AWS setup](https://github.com/graphicsdesk/spectate/wiki/API-Documentation#aws-setup). Uncomment the appropriate override stylesheet at the top of `src/styles.scss`.
 
-2. Uncomment the appropriate override stylesheet at the top of `src/styles.scss`.
+2. Run `spectate publish`. (Whenever you want to update JS or CSS assets after publication, just run this command again.)
 
-3. Run `spectate publish`. (Whenever you want to update JS or CSS assets after publication, just run this command again.)
-
-4. Copy the contents of `dist/index.html` into Ellipsis.
+3. Copy the contents of `dist/index.html` into an HTML block in an Ellipsis story.
 
 ## Publishing on GitHub Pages
 
@@ -125,18 +124,4 @@ That means GitHub is starting up the page, but it's not ready yet. Once you see 
 
 <img height="60px" src="https://i.imgur.com/UgxOXKJ.png" />
 
-…the link should work. It will show whatever is in your `dist/` directory.
-
-## AWS Setup
-
-Write a new file at `~/.aws/credentials` with the contents below:
-
-<pre>
-[spectate]
-aws_access_key_id = <var>YOUR_ACCESS_KEY_ID</var>
-aws_secret_access_key = <var>YOUR_SECRET_ACCESS_KEY</var>
-</pre>
-
-See [this doc](https://docs.google.com/document/u/1/d/1C6WPRpabD6YXjQK3VnvjGy02fgxaARHbJTirm3Rzf8I/edit) for your access key.
-
-Run `cat ~/.aws/credentials`. If the output is the contents of the file you just made, you should now be able to run any publish command.
+…the link should work. It will show the build that was generated in the `dist/` directory.
