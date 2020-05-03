@@ -17,7 +17,7 @@ async function init() {
       packageJSON.spectate.IS_EMBED = true;
       break;
     default:
-      console.log('Setting', setting, 'does not exist.');
+      console.error('Setting', setting, 'does not exist.');
       return;
   }
 

@@ -21,13 +21,11 @@ async function init() {
   const { spectate: config } = JSON.parse(packageContent);
   const { DOC_URL } = config;
 
-  // Read in possible configuration for ArchieML output
+  // Read in possible config for ArchieML, store default locals and formatter
   const docConfigPath = process.cwd() + '/docs.config.js';
-  let docConfig = existsSync(docConfigPath) ? require(docConfigPath) : {};
-
-  // Set default locals and doc-to-archieml formatter
-  const defaultLocals = { top: [], body: [], ...docConfig.defaultLocals };
-  const { formatter } = docConfig;
+  const { defaultLocals, formatter } = existsSync(docConfigPath)
+    ? require(docConfigPath)
+    : {};
 
   // If a doc URL exists, authorize a Docs client, and then download and parse
   // the text.
@@ -40,14 +38,16 @@ async function init() {
     });
   }
 
-  // Set locals for PostHTML expressions
+  // Set locals for PostHTML expressions. Some default locals should always exist
   PH_CONFIG.plugins['posthtml-expressions'].locals = {
+    top: [],
+    body: [],
     ...defaultLocals,
     ...data,
     ...config,
   };
 
-  // Write new config to .posthtmlrc, which triggers hot module replacement
+  // Write config to .posthtmlrc, the only config file that triggers live reload
   await writeLocalFile('.posthtmlrc', PH_CONFIG);
 
   // Write doc data again to data/doc.json. (Example use case: accessing
