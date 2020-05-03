@@ -1,10 +1,7 @@
 const fs = require('fs-extra');
-const { Asker, getRepoName } = require('./utils');
+const { log, getRepoName } = require('./utils');
 
 const { S3_WEBSITE_BASE } = require('./constants');
-
-// Create new isntance of a readline asker
-const asker = new Asker();
 
 async function prepublish() {
   const packageJSON = JSON.parse(await fs.readFile('package.json'));
@@ -26,12 +23,8 @@ async function prepublish() {
     'package.json',
     JSON.stringify(packageJSON, null, 2) + '\n',
   );
-  console.log('Successfully set public URL to', publicUrl);
-  console.log(
-    `\nDon't forget to uncomment an Arc stylesheet before publication!`,
-  );
+  log.success('Set public URL to ' + publicUrl);
+  log.info(`Don't forget to uncomment an Arc stylesheet before publication!`);
 }
 
-prepublish()
-  .catch(console.error)
-  .finally(() => asker.close());
+prepublish().catch(console.error);

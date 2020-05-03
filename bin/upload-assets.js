@@ -39,7 +39,7 @@ async function uploadAssets() {
       s3.deleteObject({ Bucket, Key }, (err, data) => {
         if (err) reject(err);
         else {
-          console.log(chalk.green('delete'), Key);
+          console.log(chalk.green('delete'), chalk.strikethrough(Key));
           resolve(data);
         }
       }),

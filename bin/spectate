@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo "Spectate has updated a lot."
+echo "Spectate has changed a lot."
 echo "Please go into the Spectate directory (cd ~/spectate) and run `npm link`"
 echo "If this worked, you should never see this message again."
