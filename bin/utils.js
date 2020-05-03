@@ -1,4 +1,4 @@
-const fs = require('fs').promises;
+const fs = require('fs-extra');
 const readline = require('readline');
 const chalk = require('chalk');
 const { execSync } = require('child_process');
@@ -9,28 +9,23 @@ class Asker {
   }
 
   // Prompts a question and validates answer
-  question({ message, defaultAnswer, validate = nonEmpty, options }) {
+  question({ message, validate = nonEmpty, options, commands }) {
     return new Promise((resolve, reject) => {
-      if (options) {
-        // Options to perform certain actions
-        message += ` [${Object.keys(options).join('|')}]`;
-      }
       if (!['?', ')'].includes(message.charAt(message.length - 1))) {
         message += ':';
       }
-      message += ' ';
-      if (defaultAnswer) {
-        // Leaving line empty will default this answer
-        message += `(${defaultAnswer}) `;
+      message = chalk.bold(message);
+      if (options) {
+        message += ' ' + chalk.gray(options);
+      }
+      if (commands) {
+        message += ' ' + chalk.gray(`[${Object.keys(commands).join('|')}]`);
       }
 
-      this.rl.question(chalk.cyan(message), line => {
-        if (options && line in options) {
-          options[line]();
-          return resolve(null);
-        }
-        if (defaultAnswer && line.length === 0) {
-          return resolve(defaultAnswer);
+      this.rl.question(chalk.green('? ') + message + ' ', line => {
+        if (commands && line in commands) {
+          commands[line]();
+          return resolve();
         }
         const validation = validate(line);
         if (validation.success) return resolve(line);
@@ -41,7 +36,8 @@ class Asker {
 
   async confirmSlugOrAsk(defaultSlug) {
     const confirmation = await this.question({
-      message: `Use "${defaultSlug}" as slug? (y/n)`,
+      message: `Use "${defaultSlug}" as slug?`,
+      options: '(y/n)',
     });
     if (confirmation === 'y') {
       return defaultSlug;
@@ -59,7 +55,7 @@ class Asker {
         answer = await this.question(questionObj);
       } catch (err) {
         if (--numTries === 0) {
-          throw err + '. No tries left.';
+          throw err + ' No tries left.';
         }
         console.error(err, numTries, 'tries left.');
       }
@@ -98,7 +94,15 @@ function getRepoName() {
 
 function isValidRepoName(s) {
   if (s.match(/^[A-Za-z0-9_.-]+$/)) return { success: true };
-  return { error: 'Invalid GitHub repository name: ' + s };
+  return { error: 'Invalid GitHub repository name.' };
 }
 
-module.exports = { Asker, setPackageKey, getRepoName };
+function logError(message) {
+  console.error(chalk.red('error'), message);
+}
+
+function logSuccess(message) {
+  console.log(chalk.green('success'), message);
+}
+
+module.exports = { Asker, setPackageKey, getRepoName, logError, logSuccess };

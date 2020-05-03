@@ -6,7 +6,7 @@ const execSync = require('child_process').execSync;
 async function create() {
   console.log();
   console.log(
-    `Creating a new Spectate project in ${chalk.green(process.cwd())}.`,
+    `Creating a new Spectate project in ${chalk.bold.green(process.cwd())}.`,
   );
   console.log();
 

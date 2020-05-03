@@ -1,9 +1,8 @@
-#!/usr/bin/env node
-
-const open = require('open');
 const path = require('path');
+const open = require('open');
+const chalk = require('chalk');
 const { execSync } = require('child_process');
-const { Asker, setPackageKey } = require('./utils');
+const { Asker, setPackageKey, logError, logSuccess } = require('./utils');
 
 const TEMPLATE_DOC_URL =
   'https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit';
@@ -26,23 +25,19 @@ async function init() {
     });
     repositoryExists = true;
   } catch (err) {
-    console.error(`Repository graphicsdesk/${slug} doesn't exist.`);
+    logError(`Repository graphicsdesk/${slug} doesn't exist.`);
   }
 
   // Add remote origin if repository exists
   if (repositoryExists) {
     try {
-      execSync(
-        `git remote add origin git@github.com:graphicsdesk/${slug}.git`,
-        { stdio: 'ignore' },
-      );
-      console.log(
-        `Added remote origin git@github.com:graphicsdesk/${slug}.git`,
-      );
+      const remoteOrigin = `git@github.com:graphicsdesk/${slug}.git`;
+      execSync('git remote add origin ' + remoteOrigin, { stdio: 'ignore' });
+      console.log(chalk.green('success'), 'Added remote origin' + remoteOrigin);
     } catch (e) {
-      console.log(
-        'A remote origin already exists:',
-        execSync('git remote get-url origin').toString().trim(),
+      logError(
+        'A remote origin already exists: ' +
+          execSync('git remote get-url origin').toString().trim(),
       );
     }
   }
@@ -53,15 +48,13 @@ async function init() {
   const url = await asker.questionWithRetries({
     message: 'Enter the Google Docs URL',
     validate: isValidGoogleDocsURL,
-    options: { o: async () => await open(TEMPLATE_DOC_URL) },
+    commands: { o: async () => await open(TEMPLATE_DOC_URL) },
   });
 
   // Set google doc url in config
   if (url) {
     await setPackageKey('DOC_URL', url, true);
-    console.log(
-      'Successfully set DOC_URL in the "spectate" key in package.json.',
-    );
+    logSuccess('Set DOC_URL in the "spectate" key in package.json.');
   }
 }
 
