@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
+const { log } = require('./utils');
 
 async function create() {
   console.log();
@@ -38,21 +39,18 @@ async function create() {
 
   // Documentation messages and next steps
   console.log('Success! Inside this repository you can run several commands:');
-  logCommand('npm start', 'Starts the development server.');
-  logCommand(
+  console.log();
+  log.command('npm start', 'Starts the development server.');
+  console.log();
+  log.command(
     'spectate download',
     'Downloads the Google Doc and updates configuration files.',
   );
-  logCommand('spectate init', 'Configures remotes for GitHub and Google Docs.');
+  console.log();
+  log.command('spectate init', 'Configures remotes for GitHub and Google Docs.');
 
   console.log();
   console.log('Please check the Spectate README for further instructions.');
-}
-
-function logCommand(displayedCommand, documentation) {
-  console.log();
-  console.log('  ' + chalk.cyan(displayedCommand));
-  console.log('    ' + documentation);
 }
 
 /* Returns whether we're in a git repo */

@@ -13,13 +13,19 @@ These are common Spectate commands:
   publish       Build and upload assets
   gh-publish    Publish and push to a gh-pages branch
   update        Update the Spectate repository itself`);
-  process.exit(0);
+  process.exit(1);
 }
 
 spectate().catch(console.error);
 
 async function spectate() {
   const command = process.argv[2];
+
+  const update = require('./spectate-update');
+
+  if (['create', 'clone'].includes(command)) {
+    // update();
+  }
 
   switch (command) {
     case 'create':
@@ -28,8 +34,11 @@ async function spectate() {
     case 'init':
       require('./spectate-init');
       break;
+    case 'clone':
+      require('./clone');
+      break;
     case 'update':
-      require('./spectate-update');
+      update();
       break;
     case 'prepublish':
       require('./prepublish');

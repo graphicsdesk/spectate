@@ -101,6 +101,10 @@ const log = {
   error: msg => console.error(chalk.red('error'), msg),
   success: msg => console.log(chalk.green('success'), msg),
   info: msg => console.log(chalk.blue('info'), msg),
+  command: (command, note, args = '') => {
+    console.log('  ' + chalk.cyan(command), chalk.green(args));
+    note && console.log('    ' + note);
+  }
 };
 
 module.exports = { Asker, setPackageKey, getRepoName, log };
