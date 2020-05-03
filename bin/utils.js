@@ -97,12 +97,10 @@ function isValidRepoName(s) {
   return { error: 'Invalid GitHub repository name.' };
 }
 
-function logError(message) {
-  console.error(chalk.red('error'), message);
-}
+const log = {
+  error: msg => console.error(chalk.red('error'), msg),
+  success: msg => console.log(chalk.green('success'), msg),
+  info: msg => console.log(chalk.blue('info'), msg),
+};
 
-function logSuccess(message) {
-  console.log(chalk.green('success'), message);
-}
-
-module.exports = { Asker, setPackageKey, getRepoName, logError, logSuccess };
+module.exports = { Asker, setPackageKey, getRepoName, log };
