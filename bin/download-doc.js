@@ -1,5 +1,6 @@
 const path = require('path');
-const { promises: fs, existsSync } = require('fs');
+const chalk = require('chalk');
+const fs = require('fs-extra');
 const { authorizeClient } = require('./authorize-docs');
 const { docToArchieML } = require('./doc-to-archieml');
 
@@ -15,7 +16,7 @@ const PH_CONFIG = {
   },
 };
 
-async function init() {
+async function downloadDoc() {
   // Read in local Spectate config
   const packageContent = await fs.readFile(process.cwd() + '/package.json');
   const { spectate: config } = JSON.parse(packageContent);
@@ -23,7 +24,7 @@ async function init() {
 
   // Read in possible config for ArchieML, store default locals and formatter
   const docConfigPath = process.cwd() + '/docs.config.js';
-  const { defaultLocals, formatter } = existsSync(docConfigPath)
+  const { defaultLocals, formatter } = fs.pathExistsSync(docConfigPath)
     ? require(docConfigPath)
     : {};
 
@@ -61,7 +62,7 @@ async function writeLocalFile(filename, data) {
     path.join(process.cwd(), filename),
     JSON.stringify(data, null, 2),
   );
-  console.log('Successfully wrote ' + filename);
+  console.log(chalk.green('success'), 'Wrote', filename);
 }
 
-init().catch(console.error);
+module.exports = downloadDoc;

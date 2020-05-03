@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const fs = require('fs').promises;
+const fs = require('fs-extra');
 const readline = require('readline');
 const chalk = require('chalk');
 const { google } = require('googleapis');

@@ -6,7 +6,7 @@
   "private": true,
   "homepage": "https://github.com/graphicsdesk/spectate#readme",
   "bin": {
-    "spectate": "./bin/spectate"
+    "spectate": "./bin/spectate.js"
   },
   "repository": {
     "type": "git",
@@ -16,6 +16,7 @@
     "archieml": "^0.4.2",
     "aws-sdk": "^2.668.0",
     "chalk": "^4.0.0",
+    "fs-extra": "^9.0.0",
     "googleapis": "^49.0.0",
     "mime-types": "^2.1.27",
     "open": "^7.0.3"
