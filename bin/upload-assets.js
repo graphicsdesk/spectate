@@ -17,28 +17,28 @@ const {
 const s3 = new AWS.S3();
 const Bucket = 'spectator-static-assets';
 
-// Deletes a bucket object
+/* Deletes a bucket object */
 const deleteObject = ({ Key }) =>
-  new Promise((resolve, reject) => {
+  new Promise((resolve, reject) =>
     s3.deleteObject({ Bucket, Key }, (err, data) => {
       if (err) reject(err);
       else {
         console.log('delete:', Key);
         resolve(data);
       }
-    });
-  });
+    })
+  );
 
-// Lists all objects prefixed by the package.json "name" key
+/* Lists all objects prefixed by the package.json "name" key */
 const listObjects = () =>
-  new Promise((resolve, reject) => {
+  new Promise((resolve, reject) =>
     s3.listObjectsV2({ Bucket, Prefix }, (err, data) => {
       if (err) reject(err);
       else resolve(data);
-    });
-  });
+    })
+  );
 
-// Puts a file into a bucket
+/* Puts a file into a bucket */
 const putObject = filename =>
   new Promise((resolve, reject) => {
     const fileStream = fs.createReadStream(DIST_DIR + '/' + filename);
@@ -61,11 +61,11 @@ const putObject = filename =>
     });
   });
 
-// Uploads the contents of dist/ to S3
+/* Uploads the contents of dist/ to S3 */
 async function init() {
   if (buildScript.indexOf(S3_WEBSITE_BASE) < 0) {
     console.log(
-      'Skipping S3 upload because build script does not use an public URL of the form:',
+      'Skipping S3 upload because build script does not use a public URL of the form:',
       S3_WEBSITE_BASE,
     );
     return;
@@ -77,7 +77,7 @@ async function init() {
   );
 
   // Upload all objects in dist to prefix
-  await Promise.all(fs.readdirSync('./dist').map(putObject));
+  await Promise.all(fs.readdirSync(DIST_DIR).map(putObject));
 }
 
 init().catch(console.error);
