@@ -23,19 +23,22 @@ async function spectate() {
 
   switch (command) {
     case 'create':
-      await require('./spectate-create');
+      require('./spectate-create');
       break;
     case 'init':
-      await require('./spectate-init');
+      require('./spectate-init');
       break;
     case 'update':
-      await require('./spectate-update');
+      require('./spectate-update');
       break;
     case 'prepublish':
-      await require('./prepublish');
+      require('./prepublish');
       break;
     case 'publish':
-      await require('./publish');
+      await require('./publish')();
+      break;
+    case 'gh-publish':
+      require('./gh-publish');
       break;
     case 'upload-assets':
       await require('./upload-assets')();

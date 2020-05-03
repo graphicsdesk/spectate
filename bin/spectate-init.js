@@ -33,7 +33,7 @@ async function init() {
     try {
       const remoteOrigin = `git@github.com:graphicsdesk/${slug}.git`;
       execSync('git remote add origin ' + remoteOrigin, { stdio: 'ignore' });
-      console.log(chalk.green('success'), 'Added remote origin' + remoteOrigin);
+      console.log(chalk.green('success'), 'Added remote origin ' + remoteOrigin);
     } catch (e) {
       log.error(
         'A remote origin already exists: ' +

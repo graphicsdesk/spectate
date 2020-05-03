@@ -2,12 +2,13 @@
 
 const fs = require('fs-extra');
 const AWS = require('aws-sdk');
+const path = require('path');
 const mime = require('mime-types');
 const chalk = require('chalk');
 const { log, getRepoName } = require('./utils');
 const { S3_WEBSITE_BASE } = require('./constants');
 
-const DIST_DIR = './dist';
+const DIST_DIR = path.join(process.cwd(), 'dist');
 
 /* Uploads the contents of dist/ to S3 */
 async function uploadAssets() {
@@ -82,7 +83,8 @@ async function uploadAssets() {
     );
 
     // Upload all objects in dist to prefix
-    await Promise.all(fs.readdirSync(DIST_DIR).map(putObject));
+    const distFiles = await fs.readdir(DIST_DIR);
+    await Promise.all(distFiles.map(putObject));
   } catch (e) {
     log.error(e);
   }
