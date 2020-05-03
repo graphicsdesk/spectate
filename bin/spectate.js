@@ -21,7 +21,7 @@ spectate().catch(console.error);
 async function spectate() {
   const command = process.argv[2];
 
-  const update = require('./spectate-update');
+  const update = require('./update');
 
   if (['create', 'clone'].includes(command)) {
     // update();
@@ -29,10 +29,10 @@ async function spectate() {
 
   switch (command) {
     case 'create':
-      require('./spectate-create');
+      require('./create');
       break;
     case 'init':
-      require('./spectate-init');
+      require('./init');
       break;
     case 'clone':
       require('./clone');
