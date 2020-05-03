@@ -4,6 +4,7 @@ const { log } = require('./utils');
 async function publish() {
   try {
     // Create production build
+    console.log();
     console.log('Creating a production build...');
     execSync('npm run build', { stdio: 'inherit' });
     console.log();

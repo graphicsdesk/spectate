@@ -22,7 +22,6 @@ async function ghPublish() {
   }
 
   // Publish the build
-  console.log();
   await require('./publish')();
   console.log();
 

@@ -9,6 +9,7 @@ if (process.argv.length <= 3) {
   console.log();
   console.log('For example:');
   log.command('spectate clone', null, 'ivy-coronavirus-response');
+  console.log();
   process.exit(1);
 }
 

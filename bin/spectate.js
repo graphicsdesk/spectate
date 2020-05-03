@@ -1,18 +1,28 @@
 #!/usr/bin/env node
 
-if (process.argv.length <= 2) {
-  console.log(`usage: spectate <command>
+const USAGE_TEXT = `
+usage: spectate <command> [<args>]
 
-These are common Spectate commands:
-  create        Create a Spectate project
-  init          Set remote links for a newly created project
+These are common Spectate commands used in various situations:
+
+starting on a project
+  create        Create a Spectate project in the current directory
+  init          Set remote links for GitHub and Google Docs
   clone         Clone an existing Spectate project
-  download      Download the Google Doc
-  build         Clear the contents of dist/ and npm run build
-  prepublish    Configure public S3 URL
-  publish       Build and upload assets
-  gh-publish    Publish and push to a gh-pages branch
-  update        Update the Spectate repository itself`);
+
+working with Google Docs
+  download      Download the Google Doc and update the PostHTML config
+
+publish a project
+  prepublish    Set a project's URL in our static S3 server
+  publish       Create a production build and upload static assets
+  gh-publish    Publish and then push to GitHub pages
+
+'spectate update' updates the Spectate repository itself.
+`;
+
+if (process.argv.length <= 2) {
+  console.log(USAGE_TEXT);
   process.exit(1);
 }
 
@@ -24,7 +34,9 @@ async function spectate() {
   const update = require('./update');
 
   if (['create', 'clone'].includes(command)) {
+    console.log('Updating Spectate...');
     update();
+    console.log();
   }
 
   switch (command) {
@@ -37,8 +49,8 @@ async function spectate() {
     case 'clone':
       require('./clone');
       break;
-    case 'update':
-      update();
+    case 'download':
+      await require('./download-doc')();
       break;
     case 'prepublish':
       require('./prepublish');
@@ -49,11 +61,8 @@ async function spectate() {
     case 'gh-publish':
       require('./gh-publish');
       break;
-    case 'upload-assets':
-      await require('./upload-assets')();
-      break;
-    case 'download':
-      await require('./download-doc')();
+    case 'update':
+      update();
       break;
     default:
       console.error('Unknown command:', command);

@@ -18,10 +18,10 @@ module.exports = function () {
 
   // Merge local repository with origin/master
   execSync('git pull', { stdio: 'inherit' });
-  console.log();
 
   // If package.json changed, npm install again
   if (shouldReinstall) {
+    console.log();
     log.info('Re-installing dependencies because package.json updated.');
     console.log(chalk.bold('npm install'));
     execSync('npm install', { stdio: 'inherit' });

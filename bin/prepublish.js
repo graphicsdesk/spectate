@@ -24,7 +24,9 @@ async function prepublish() {
     JSON.stringify(packageJSON, null, 2) + '\n',
   );
   log.success('Set public URL to ' + publicUrl);
-  log.info(`Don't forget to uncomment an Arc stylesheet before publication!`);
+
+  console.log();
+  console.log("Don't forget to uncomment an Arc stylesheet!");
 }
 
 prepublish().catch(console.error);
