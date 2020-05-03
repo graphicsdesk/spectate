@@ -45,66 +45,19 @@ spectate_update() {
 # Download Google Doc and write .posthtmlrlc
 spectate_download() {
   log "Downloading and parsing Google Doc..."
-  node --no-warnings "$SPECTATE_ROOT"/bin/download-doc.js
+  node "$SPECTATE_ROOT"/bin/download-doc.js
 }
 
 # Creates a Spectate project from scratch
 spectate_create() {
   spectate_update
-
-  # Identify a template to be used
-  # TEMPLATE_NAME="$2"
-  # if [ -z "$TEMPLATE_NAME" ]; then
-  #   TEMPLATE_NAME="default"
-  # fi
-
-  # ALways use default template.
-  TEMPLATE_NAME="default"
-  TEMPLATE_PATH="$SPECTATE_ROOT/templates/$TEMPLATE_NAME"
-
-  # if [ ! -d "$TEMPLATE_PATH" ]; then
-  #   echo "Template $TEMPLATE_NAME does not exist."
-  #   return
-  # fi
-
-  # Copy template into current directory
-  log "Copying $TEMPLATE_NAME template..."
-  cp -vRn "$TEMPLATE_PATH"/. . # Copy without overwrite
-
-  # If $2 is "embed", set IS_EMBED to true in package.json
-  TEMPLATE_OPTION="$2"
-  if [ "$TEMPLATE_OPTION" = "embed" ]; then
-    log_small "Setting IS_EMBED to true in package.json in spectate config..."
-    (
-      set -x;
-      node --no-warnings "$SPECTATE_ROOT"/bin/config-project.js --is-embed
-    )
-  fi
-
-  # Install node packages
-  if [ -f "package.json" ]; then
-    log "Installing node packages..."
-    npm install
-  fi
-
-  # Create a git repo
-  if [ ! -d ".git" ]; then
-    log "Initializing git repository..."
-    git init
-  fi
-
-  # Write default .posthtmlrc
-  spectate_download
-
-  log "Staged all initial files. Displaying git status:"
-  git add -A
-  git status
+  node "$SPECTATE_ROOT"/bin/spectate-create.js
 }
 
 # Set remote links for a newly created project
 spectate_init() {
   log "Prompting for remote links..."
-  node --no-warnings "$SPECTATE_ROOT"/bin/spectate-init.js
+  node "$SPECTATE_ROOT"/bin/spectate-init.js
 }
 
 # Clones a spectate project repository and installs node packages
@@ -140,7 +93,7 @@ publish() {
 # Uploads assets to S3 using AWS Node SDK
 prepublish() {
   log "Setting public S3 URL..."
-  node --no-warnings "$SPECTATE_ROOT"/bin/prepublish.js
+  node "$SPECTATE_ROOT"/bin/prepublish.js
 }
 
 # Publishes on a gh-pages branch which lives in a working tree in dist
