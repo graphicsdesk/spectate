@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const { authorizeClient } = require('./authorize-docs');
 const { docToArchieML } = require('./doc-to-archieml');
-const { logSuccess } = require('./utils');
+const { log } = require('./utils');
 
 // Default PostHTML config
 const PH_CONFIG = {
@@ -62,7 +62,7 @@ async function writeLocalFile(filename, data) {
     path.join(process.cwd(), filename),
     JSON.stringify(data, null, 2),
   );
-  logSuccess('Wrote ' + filename);
+  log.success('Wrote ' + filename);
 }
 
 module.exports = downloadDoc;

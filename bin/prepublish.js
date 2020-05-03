@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-
-const fs = require('fs').promises;
+const fs = require('fs-extra');
 const { Asker, getRepoName } = require('./utils');
 
 const { S3_WEBSITE_BASE } = require('./constants');
@@ -9,16 +7,8 @@ const { S3_WEBSITE_BASE } = require('./constants');
 const asker = new Asker();
 
 async function prepublish() {
-  // Check if build script already uses S3 public URL
-  let packageJSON = await fs.readFile('package.json');
-  packageJSON = JSON.parse(packageJSON.toString());
-  const {
-    scripts: { build },
-  } = packageJSON;
-  if (build.includes('--public-url ' + S3_WEBSITE_BASE)) {
-    console.log('Build script already uses an S3 public URL.');
-    return;
-  }
+  const packageJSON = JSON.parse(await fs.readFile('package.json'));
+  const { scripts: { build } } = packageJSON;
 
   // Requires repo name to be slug.
   const slug = getRepoName();

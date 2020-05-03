@@ -25,12 +25,21 @@ async function spectate() {
     case 'create':
       await require('./spectate-create');
       break;
-      case 'init':
-        await require('./spectate-init');
-        break;
-      case 'update':
-        await require('./spectate-update');
-        break;
+    case 'init':
+      await require('./spectate-init');
+      break;
+    case 'update':
+      await require('./spectate-update');
+      break;
+    case 'prepublish':
+      await require('./prepublish');
+      break;
+    case 'publish':
+      await require('./publish');
+      break;
+    case 'upload-assets':
+      await require('./upload-assets')();
+      break;
     case 'download':
       await require('./download-doc')();
       break;

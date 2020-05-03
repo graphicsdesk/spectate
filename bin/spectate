@@ -20,25 +20,26 @@ log_small() {
   echo -e "\n${CYAN}$1${NOCOLOR}"
 }
 
-# Download Google Doc and write .posthtmlrlc
+spectate_update() {
+  echo "Spectate has updated a lot."
+  echo "Please run `npm link` in the Spectate directory (~/spectate)."
+}
+
 spectate_download() {
-  log "Downloading and parsing Google Doc..."
-  node "$SPECTATE_ROOT"/bin/download-doc.js
+  echo "Spectate has updated a lot."
+  echo "Please run `npm link` in the Spectate directory (~/spectate)."
 }
 
-# Creates a Spectate project from scratch
 spectate_create() {
-  spectate_update
-  node "$SPECTATE_ROOT"/bin/spectate-create.js
+  echo "Spectate has updated a lot."
+  echo "Please run `npm link` in the Spectate directory (~/spectate)."
 }
 
-# Set remote links for a newly created project
 spectate_init() {
-  log "Prompting for remote links..."
-  node "$SPECTATE_ROOT"/bin/spectate-init.js
+  echo "Spectate has updated a lot."
+  echo "Please run `npm link` in the Spectate directory (~/spectate)."
 }
 
-# Clones a spectate project repository and installs node packages
 spectate_clone() {
   spectate_update
 
@@ -56,16 +57,14 @@ spectate_build() {
   npm run build
 }
 
-# Uploads assets to S3 using AWS Node SDK
 upload_assets() {
-  log "Uploading assets..."
-  node "$SPECTATE_ROOT"/bin/upload-assets.js
+  echo "Spectate has updated a lot."
+  echo "Please run `npm link` in the Spectate directory (~/spectate)."
 }
 
-# Builds and uploads assets
 publish() {
-  spectate_build
-  upload_assets
+  echo "Spectate has updated a lot."
+  echo "Please run `npm link` in the Spectate directory (~/spectate)."
 }
 
 # Uploads assets to S3 using AWS Node SDK
