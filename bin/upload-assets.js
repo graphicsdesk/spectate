@@ -26,7 +26,7 @@ const deleteObject = ({ Key }) =>
         console.log('delete:', Key);
         resolve(data);
       }
-    })
+    }),
   );
 
 /* Lists all objects prefixed by the package.json "name" key */
@@ -35,7 +35,7 @@ const listObjects = () =>
     s3.listObjectsV2({ Bucket, Prefix }, (err, data) => {
       if (err) reject(err);
       else resolve(data);
-    })
+    }),
   );
 
 /* Puts a file into a bucket */
