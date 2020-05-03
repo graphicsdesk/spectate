@@ -8,7 +8,9 @@ const asker = new Asker();
 
 async function prepublish() {
   const packageJSON = JSON.parse(await fs.readFile('package.json'));
-  const { scripts: { build } } = packageJSON;
+  const {
+    scripts: { build },
+  } = packageJSON;
 
   // Requires repo name to be slug.
   const slug = getRepoName();

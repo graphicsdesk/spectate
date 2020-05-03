@@ -47,7 +47,10 @@ async function create() {
     'Downloads the Google Doc and updates configuration files.',
   );
   console.log();
-  log.command('spectate init', 'Configures remotes for GitHub and Google Docs.');
+  log.command(
+    'spectate init',
+    'Configures remotes for GitHub and Google Docs.',
+  );
 
   console.log();
   console.log('Please check the Spectate README for further instructions.');

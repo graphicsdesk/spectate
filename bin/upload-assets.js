@@ -21,7 +21,11 @@ async function uploadAssets() {
   } = JSON.parse(await fs.readFile('package.json'));
 
   if (build.indexOf(S3_WEBSITE_BASE) < 0) {
-    log.error(`Build script does not have an S3 public URL. Did you forget to run ${chalk.cyan('spectate prepublish')}?`);
+    log.error(
+      `Build script does not have an S3 public URL. Did you forget to run ${chalk.cyan(
+        'spectate prepublish',
+      )}?`,
+    );
     return;
   }
 
@@ -75,7 +79,7 @@ async function uploadAssets() {
 
   try {
     console.log('Uploading build files to our static server...');
-    console.log()
+    console.log();
 
     // Remove all objects in current prefix
     await listObjects().then(({ Contents }) =>

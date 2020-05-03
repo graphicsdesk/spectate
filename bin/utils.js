@@ -104,7 +104,7 @@ const log = {
   command: (command, note, args = '') => {
     console.log('  ' + chalk.cyan(command), chalk.green(args));
     note && console.log('    ' + note);
-  }
+  },
 };
 
 module.exports = { Asker, setPackageKey, getRepoName, log };
