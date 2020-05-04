@@ -1,9 +1,9 @@
 const fs = require('fs-extra');
+const chalk = require('chalk');
 const { log, getRepoName } = require('./utils');
-
 const { S3_WEBSITE_BASE } = require('./constants');
 
-async function prepublish() {
+module.exports = async function () {
   const packageJSON = JSON.parse(await fs.readFile('package.json'));
   const {
     scripts: { build },
@@ -11,7 +11,10 @@ async function prepublish() {
 
   // Requires repo name to be slug.
   const slug = getRepoName();
-  console.log(`Using repo name "${slug}" as S3 slug...`);
+  if (!slug) {
+    return;
+  }
+  console.log(`Using repository name ${chalk.bold(slug)} as S3 slug.`);
 
   // Rewrite current build script with the S3 public URL
   const publicUrl = S3_WEBSITE_BASE + '/' + slug;
@@ -27,6 +30,4 @@ async function prepublish() {
 
   console.log();
   console.log("Don't forget to uncomment an Arc stylesheet!");
-}
-
-prepublish().catch(console.error);
+};

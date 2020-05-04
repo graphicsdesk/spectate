@@ -2,13 +2,10 @@
 
 const fs = require('fs-extra');
 const AWS = require('aws-sdk');
-const path = require('path');
 const mime = require('mime-types');
 const chalk = require('chalk');
 const { log, getRepoName } = require('./utils');
-const { S3_WEBSITE_BASE } = require('./constants');
-
-const DIST_DIR = path.join(process.cwd(), 'dist');
+const { S3_WEBSITE_BASE, DIST_DIR } = require('./constants');
 
 /* Uploads the contents of dist/ to S3 */
 async function uploadAssets() {

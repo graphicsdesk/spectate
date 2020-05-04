@@ -16,7 +16,7 @@ const PH_CONFIG = {
   },
 };
 
-async function downloadDoc() {
+module.exports = async function () {
   // Read in local Spectate config
   const packageContent = await fs.readFile(process.cwd() + '/package.json');
   const { spectate: config } = JSON.parse(packageContent);
@@ -54,7 +54,7 @@ async function downloadDoc() {
   // Write doc data again to data/doc.json. (Example use case: accessing
   // information in the doc in client-side JavaScript). Should probs remove.
   await writeLocalFile('./data/doc.json', data);
-}
+};
 
 /* Writes data to a file in the Spectate project */
 async function writeLocalFile(filename, data) {
@@ -64,5 +64,3 @@ async function writeLocalFile(filename, data) {
   );
   log.success('Wrote ' + filename);
 }
-
-module.exports = downloadDoc;

@@ -1,10 +1,10 @@
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
-const execSync = require('child_process').execSync;
+const { execSync } = require('child_process');
 const { log } = require('./utils');
 
-async function create() {
+module.exports = async function () {
   console.log();
   console.log(
     `Creating a new Spectate project in ${chalk.bold.magenta(process.cwd())}.`,
@@ -16,8 +16,11 @@ async function create() {
   // TODO: --is-embed (see config-project.js)
 
   // Use npm to install node packages
-  console.log('Installing packages. This might take a minute.');
-  console.log(chalk.bold('npm install'));
+  console.log(
+    `Installing packages with ${chalk.bold(
+      'npm install',
+    )}. This might take a minute.`,
+  );
   execSync('npm install', { stdio: 'inherit' });
 
   // Initialize git repository
@@ -54,7 +57,7 @@ async function create() {
 
   console.log();
   console.log('Please check the Spectate README for further instructions.');
-}
+};
 
 /* Returns whether we're in a git repo */
 function isInGitRepository() {
@@ -78,5 +81,3 @@ function tryGitCommit() {
     return false;
   }
 }
-
-create().catch(console.error);

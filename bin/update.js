@@ -1,6 +1,6 @@
 const path = require('path');
 const chalk = require('chalk');
-const execSync = require('child_process').execSync;
+const { execSync } = require('child_process');
 const { log } = require('./utils');
 
 module.exports = function () {

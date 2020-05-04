@@ -7,11 +7,10 @@ const { Asker, setPackageKey, log } = require('./utils');
 const TEMPLATE_DOC_URL =
   'https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit';
 
-const asker = new Asker();
-
-async function init() {
+module.exports = async function () {
   // Confirm repository name as default slug, or input a new one. Slug input
   // error should not be caught.
+  const asker = new Asker();
   const slug = await asker.confirmSlugOrAsk(path.basename(process.cwd()));
 
   // Set package name to slug
@@ -58,12 +57,19 @@ async function init() {
   if (url) {
     await setPackageKey('DOC_URL', url, true);
     log.success('Set DOC_URL in the "spectate" key in package.json.');
-  }
-}
 
-init()
-  .catch(console.error)
-  .finally(() => asker.close());
+    console.log();
+    console.log(
+      `Running ${chalk.cyan(
+        'spectate download',
+      )} since Google Docs link updated.`,
+    );
+    await require('./download-doc')();
+  }
+
+  // At the very end, close the asker
+  asker.close();
+};
 
 function isValidGoogleDocsURL(s) {
   if (/docs\.google\.com\/document(\/u\/\d)?\/d\/[-\w]{25,}/.test(s))

@@ -1,7 +1,18 @@
 const fs = require('fs-extra');
 const readline = require('readline');
 const chalk = require('chalk');
+const path = require('path');
 const { execSync } = require('child_process');
+
+const log = {
+  error: msg => console.error(chalk.red('error'), msg),
+  success: msg => console.log(chalk.green('success'), msg),
+  info: msg => console.log(chalk.blue('info'), msg),
+  command: (command, note, args = '') => {
+    console.log('  ' + chalk.cyan(command), chalk.green(args));
+    note && console.log('    ' + note);
+  },
+};
 
 class Asker {
   constructor() {
@@ -87,24 +98,18 @@ function nonEmpty(s) {
 }
 
 function getRepoName() {
-  return execSync('basename -s .git `git config --get remote.origin.url`')
-    .toString()
-    .trim();
+  try {
+    const remoteOrigin = execSync('git config --get remote.origin.url');
+    return path.basename(remoteOrigin.toString().trim(), '.git');
+  } catch (e) {
+    log.error(`Remote origin is not set. Have you run ${chalk.cyan('spectate init')}?`);
+    return false;
+  }
 }
 
 function isValidRepoName(s) {
   if (s.match(/^[A-Za-z0-9_.-]+$/)) return { success: true };
   return { error: 'Invalid GitHub repository name.' };
 }
-
-const log = {
-  error: msg => console.error(chalk.red('error'), msg),
-  success: msg => console.log(chalk.green('success'), msg),
-  info: msg => console.log(chalk.blue('info'), msg),
-  command: (command, note, args = '') => {
-    console.log('  ' + chalk.cyan(command), chalk.green(args));
-    note && console.log('    ' + note);
-  },
-};
 
 module.exports = { Asker, setPackageKey, getRepoName, log };
