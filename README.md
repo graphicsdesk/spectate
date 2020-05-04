@@ -56,11 +56,9 @@ $ spectate create
 
 4. Run `spectate init`. It will first prompt you for the article slug. If you leave the answer blank, it will use the project directory name by default. It will then ask you for a Google Docs link for the project. Open the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit) by inputting `o` into the prompt. Clone it. Paste the new Doc's link into the prompt.
 
-5. Add all the new files, create the first commit, and push it to GitHub.
+5. `spectate create` has already created an initial commit for you. Push it to GitHub:
 
 ```
-$ git add .
-$ git commit -m "Initial commit"
 $ git push -u origin master
 ```
 
@@ -92,7 +90,7 @@ To re-download the Google Doc or update the project's [configuration](https://gi
 $ spectate download
 ```
 
-For a detailed reference of the Spectate API, see the [API Documentation](https://github.com/graphicsdesk/spectate/wiki/API-Documentation).
+For an explanation of the project structure, see the [this page](https://github.com/graphicsdesk/spectate/wiki/Project-Structure). For a detailed reference of the Spectate API, see the [API Documentation](https://github.com/graphicsdesk/spectate/wiki/API-Documentation).
 
 ### Illustrator and [ai2html](http://ai2html.org/)
 
