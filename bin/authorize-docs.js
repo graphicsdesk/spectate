@@ -26,13 +26,10 @@ async function authorizeClient() {
     redirect_uris[0],
   );
 
-  let token;
-  try {
-    token = JSON.parse(await fs.readFile(TOKEN_PATH));
-  } catch (e) {
-    // Token file does not exist.
-    token = await getNewToken(oAuth2Client);
-  }
+  // Retrieve or generate a new token
+  const token = fs.pathExistsSync(TOKEN_PATH)
+    ? JSON.parse(await fs.readFile(TOKEN_PATH))
+    : await getNewToken(oAuth2Client);
   oAuth2Client.setCredentials(token);
 
   return google.docs({ version: 'v1', auth: oAuth2Client });
