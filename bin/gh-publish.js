@@ -22,12 +22,14 @@ module.exports = async function () {
   // Publish the build
   await require('./publish')(true);
 
-  // Push to gh-pages
+  // Move into dist and stage all changes
+  const oldWorkingDir = process.cwd();
   process.chdir(DIST_DIR);
   execSync('git add .', { stdio: 'ignore' });
 
   // Check if we actually staged anything
   if (execSync('git diff-index --cached HEAD').toString().length > 0) {
+    // Commit files and push to gh-pages
     execSync(
       `git commit -m 'Deploy to gh-pages' && git push origin gh-pages -f`,
       { stdio: 'inherit' },
@@ -35,5 +37,7 @@ module.exports = async function () {
   } else {
     console.log('Nothing new to commit.');
   }
-  process.chdir('..');
+
+  // Move back into old directory
+  process.chdir(oldWorkingDir);
 };
