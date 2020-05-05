@@ -5,9 +5,9 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const log = {
-  error: msg => console.error(chalk.red('error'), msg),
-  success: msg => console.log(chalk.green('success'), msg),
-  info: msg => console.log(chalk.blue('info'), msg),
+  error: (...msg) => console.error(chalk.red('error'), ...msg),
+  success: (...msg) => console.log(chalk.green('success'), ...msg),
+  info: (...msg) => console.log(chalk.blue('info'), ...msg),
   command: (command, note, args = '') => {
     console.log('  ' + chalk.cyan(command), chalk.green(args));
     note && console.log('    ' + note);
@@ -102,7 +102,9 @@ function getRepoName() {
     const remoteOrigin = execSync('git config --get remote.origin.url');
     return path.basename(remoteOrigin.toString().trim(), '.git');
   } catch (e) {
-    log.error(`Remote origin is not set. Have you run ${chalk.cyan('spectate init')}?`);
+    log.error(
+      `Remote origin is not set. Have you run ${chalk.cyan('spectate init')}?`,
+    );
     return false;
   }
 }

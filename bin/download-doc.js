@@ -62,5 +62,5 @@ async function writeLocalFile(filename, data) {
     path.join(process.cwd(), filename),
     JSON.stringify(data, null, 2),
   );
-  log.success('Wrote ' + filename);
+  log.success('Wrote', filename);
 }

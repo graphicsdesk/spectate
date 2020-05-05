@@ -18,12 +18,7 @@ async function uploadAssets() {
   } = JSON.parse(await fs.readFile('package.json'));
 
   if (build.indexOf(S3_WEBSITE_BASE) < 0) {
-    log.error(
-      `Build script does not have an S3 public URL. Did you forget to run ${chalk.cyan(
-        'spectate prepublish',
-      )}?`,
-    );
-    return;
+    throw 'Build script does not have an S3 public URL.';
   }
 
   const s3 = new AWS.S3();

@@ -26,7 +26,7 @@ module.exports = async function () {
     'package.json',
     JSON.stringify(packageJSON, null, 2) + '\n',
   );
-  log.success('Set public URL to ' + publicUrl);
+  log.success('Set public URL to', publicUrl);
 
   console.log();
   console.log("Don't forget to uncomment an Arc stylesheet!");

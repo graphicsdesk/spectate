@@ -38,8 +38,8 @@ module.exports = async function () {
       );
     } catch (e) {
       log.error(
-        'A remote origin already exists: ' +
-          execSync('git remote get-url origin').toString().trim(),
+        'A remote origin already exists:',
+        execSync('git remote get-url origin').toString().trim(),
       );
     }
   }
