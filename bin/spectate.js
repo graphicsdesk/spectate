@@ -34,7 +34,6 @@ async function spectate() {
   const update = require('./update');
 
   if (['create', 'clone'].includes(command)) {
-    console.log('Updating Spectate...');
     update();
   }
 

@@ -1,29 +1,47 @@
 const path = require('path');
 const chalk = require('chalk');
 const { execSync } = require('child_process');
-const { log } = require('./utils');
 
 module.exports = function () {
   // Go to Spectate directory
   const oldWorkingDir = process.cwd();
   process.chdir(path.join(__dirname, '..'));
 
-  // Fetch origin/master, and then check if package.json is different
-  execSync('git fetch origin master');
+  // Fetch origin/master
+  execSync('git fetch', { stdio: 'ignore' });
+
+  // If SHA1 hashes for HEAD and FETCH_HEAD are equal, no need to merge
+  // with origin/master
+  const [headHash, upstreamHash] = execSync(
+    'echo $(git rev-parse HEAD) $(git rev-parse @{u})',
+  )
+    .toString()
+    .trim()
+    .split(' ');
+  if (headHash === upstreamHash) {
+    return;
+  }
+
+  // Check if package.json has changed
   const shouldReinstall = execSync(
     'git diff --name-only origin/master package.json',
   )
     .toString()
     .includes('package.json');
 
-  // Merge local repository with origin/master
-  execSync('git pull', { stdio: 'inherit' });
+  // Merge local repository with FETCH_HEAD, the remote repo we just fetched
+  console.log();
+  console.log('Spectate has updated. Merging with origin/master.');
+  execSync('git merge FETCH_HEAD', { stdio: 'inherit' });
 
   // If package.json changed, npm install again
   if (shouldReinstall) {
     console.log();
-    log.info('Re-installing dependencies because package.json updated.');
-    console.log(chalk.bold('npm install'));
+    console.log(
+      `Re-installing dependencies with ${chalk.bold(
+        'npm install',
+      )} because package.json updated.`,
+    );
     execSync('npm install', { stdio: 'inherit' });
   }
 
