@@ -3,6 +3,9 @@
 echo "Spectate just changed a lot."
 echo ""
 echo "Please go into the Spectate directory (cd ~/spectate),"
-echo 'run "spectate update", and then run "npm link".'
+echo "and do these three commands:"
+echo '  1. spectate update'
+echo '  2. npm link'
+echo '  3. npm install'
 echo ""
 echo "If this worked, you should never see this message again."
