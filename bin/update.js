@@ -2,11 +2,7 @@ const path = require('path');
 const chalk = require('chalk');
 const { execSync } = require('child_process');
 
-module.exports = function () {
-  // Go to Spectate directory
-  const oldWorkingDir = process.cwd();
-  process.chdir(path.join(__dirname, '..'));
-
+function update() {
   // Fetch origin/master
   execSync('git fetch', { stdio: 'ignore' });
 
@@ -44,6 +40,16 @@ module.exports = function () {
     );
     execSync('npm install', { stdio: 'inherit' });
   }
+}
 
+module.exports = function () {
+  // Store current directory and go to Spectate directory
+  const oldWorkingDir = process.cwd();
+  process.chdir(path.join(__dirname, '..'));
+
+  // Execute main update function
+  update();
+
+  // Go back to old directory
   process.chdir(oldWorkingDir);
 };

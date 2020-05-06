@@ -18,12 +18,14 @@ const PH_CONFIG = {
 
 module.exports = async function () {
   // Read in local Spectate config
-  const packageContent = await fs.readFile(process.cwd() + '/package.json');
+  const packageContent = await fs.readFile(
+    path.join(process.cwd(), '/package.json'),
+  );
   const { spectate: config } = JSON.parse(packageContent);
   const { DOC_URL } = config;
 
   // Read in possible config for ArchieML, store default locals and formatter
-  const docConfigPath = process.cwd() + '/docs.config.js';
+  const docConfigPath = path.join(process.cwd(), '/docs.config.js');
   const { defaultLocals, formatter } = fs.pathExistsSync(docConfigPath)
     ? require(docConfigPath)
     : {};

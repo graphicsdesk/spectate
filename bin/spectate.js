@@ -32,32 +32,31 @@ async function spectate() {
   const command = process.argv[2];
 
   const update = require('./update');
-
   if (['create', 'clone'].includes(command)) {
     update();
   }
 
   switch (command) {
     case 'create':
-      require('./create')();
+      await require('./create')();
       break;
     case 'init':
-      require('./init')();
+      await require('./init')();
       break;
     case 'clone':
-      require('./clone')();
+      await require('./clone')();
       break;
     case 'download':
       await require('./download-doc')();
       break;
     case 'prepublish':
-      require('./prepublish')();
+      await require('./prepublish')();
       break;
     case 'publish':
       await require('./publish')();
       break;
     case 'gh-publish':
-      require('./gh-publish')();
+      await require('./gh-publish')();
       break;
     case 'update':
       update();

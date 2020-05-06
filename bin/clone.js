@@ -30,8 +30,11 @@ module.exports = function () {
   console.log();
 
   // Install packages
-  console.log('Installing packages. This might take a minute.');
-  console.log(chalk.bold('npm install'));
+  console.log(
+    `Installing packages with ${chalk.bold(
+      'npm install',
+    )}. This might take a minute.`,
+  );
   execSync(`npm --prefix ${repoName} install ${repoName}`, {
     stdio: 'inherit',
   });
@@ -45,7 +48,7 @@ module.exports = function () {
   console.log();
   log.command(
     'spectate download',
-    'Downloads the Google Doc and updates configuration files.',
+    'Downloads the Google Doc, updating the PostHTML configuration.',
   );
 
   console.log();
