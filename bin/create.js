@@ -5,17 +5,21 @@ const { execSync } = require('child_process');
 const { log } = require('./utils');
 
 module.exports = async function () {
+  const currentDir = process.cwd();
+
   console.log();
   console.log(
-    `Creating a new Spectate project in ${chalk.bold.magenta(process.cwd())}.`,
+    `Creating a new Spectate project in ${chalk.bold.magenta(currentDir)}.`,
   );
-  console.log();
 
   // Copy template into current directory
-  await fs.copy(path.join(__dirname, '../templates/default'), './');
-  // TODO: --is-embed (see config-project.js)
+  await fs.copy(path.join(__dirname, '../templates/default'), currentDir);
+
+  // Run config-project to capture flags (currently only supports --is-embed)
+  await require('./config-project')();
 
   // Use npm to install node packages
+  console.log();
   console.log(
     `Installing packages with ${chalk.bold(
       'npm install',
