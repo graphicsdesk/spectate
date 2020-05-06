@@ -1,11 +1,12 @@
 #!/bin/bash
 
-echo "Spectate just changed a lot."
-echo ""
-echo "Please go into the Spectate directory (cd ~/spectate),"
-echo "and do these three commands:"
-echo '  1. spectate update'
-echo '  2. npm link'
-echo '  3. npm install'
-echo ""
-echo "If this worked, you should never see this message again."
+echo 'Spectate just changed a lot.'
+echo ''
+echo 'Please go into the Spectate directory (cd ~/spectate),'
+echo 'and do these four commands:'
+echo '  1. git fetch --all'
+echo '  2. git reset --hard origin/master'
+echo '  3. npm link'
+echo '  4. npm install'
+echo ''
+echo 'If this worked, you should never see this message again.'
