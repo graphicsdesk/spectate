@@ -4,7 +4,7 @@ const { log, getRepoName } = require('./utils');
 const { S3_WEBSITE_BASE } = require('./constants');
 
 module.exports = async function () {
-  const packageJSON = JSON.parse(await fs.readFile('package.json'));
+  const packageJSON = require('./package.json');
   const {
     scripts: { build },
   } = packageJSON;

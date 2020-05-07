@@ -4,9 +4,9 @@ const chalk = require('chalk');
 const { execSync } = require('child_process');
 const { log } = require('./utils');
 
-module.exports = async function () {
-  const currentDir = process.cwd();
+const currentDir = process.cwd();
 
+module.exports = async function () {
   console.log();
   console.log(
     `Creating a new Spectate project in ${chalk.bold.magenta(currentDir)}.`,
@@ -14,6 +14,9 @@ module.exports = async function () {
 
   // Copy template into current directory
   await fs.copy(path.join(__dirname, '../templates/default'), currentDir);
+
+  // Write Spectate's version number into README
+  await writeReadmeVersion();
 
   // Run config-project to capture flags (currently only supports --is-embed)
   await require('./config-project')();
@@ -84,4 +87,13 @@ function tryGitCommit() {
   } catch (e) {
     return false;
   }
+}
+
+/* Writes Spectate's current version into a new project's README */
+async function writeReadmeVersion() {
+  const { version } = require(path.join(__dirname, '../package.json'));
+  const newContents = (await fs.readFile('README.md'))
+    .toString()
+    .replace('%VERSION%', version);
+  await fs.writeFile('README.md', newContents);
 }

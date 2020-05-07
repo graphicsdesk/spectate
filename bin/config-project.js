@@ -18,7 +18,7 @@ module.exports = async function init() {
 
   if (setting in flagToKey) {
     const key = flagToKey[setting];
-    const packageJSON = JSON.parse(await fs.readFile('package.json'));
+    const packageJSON = require('./package.json');
     packageJSON.spectate[key] = true;
     await fs.writeFile(
       'package.json',
