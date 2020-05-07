@@ -48,9 +48,14 @@ module.exports = async function () {
 
   // Ask for Google Doc
   const url = await asker.questionWithRetries({
-    message: 'Enter the Google Docs URL',
+    message: 'Enter a Google Docs URL',
     validate: isValidGoogleDocsURL,
-    commands: { o: async () => await open(TEMPLATE_DOC_URL) },
+    commands: {
+      o: {
+        description: 'open template',
+        action: async () => await open(TEMPLATE_DOC_URL),
+      },
+    },
   });
 
   // Set google doc url in config

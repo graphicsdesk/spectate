@@ -30,12 +30,16 @@ class Asker {
         message += ' ' + chalk.gray(options);
       }
       if (commands) {
-        message += ' ' + chalk.gray(`[${Object.keys(commands).join('|')}]`);
+        const letters = Object.keys(commands);
+        const descriptions = letters
+          .map(ltr => `${ltr} = ${commands[ltr].description}`)
+          .join(', ');
+        message += ' ' + chalk.gray(`[${letters.join('/')} (${descriptions})]`);
       }
 
       this.rl.question(chalk.green('? ') + message + ' ', line => {
         if (commands && line in commands) {
-          commands[line]();
+          commands[line]['action']();
           return resolve();
         }
         const validation = validate(line);

@@ -6,6 +6,7 @@ const { DIST_DIR } = require('./constants');
 module.exports = async function () {
   // Create worktree if none exists
   if (!execSync('git worktree list').toString().includes('gh-pages')) {
+    console.log();
     console.log('Creating worktree for gh-pages...');
     console.log();
 
@@ -34,6 +35,7 @@ module.exports = async function () {
       `git commit -m 'Deploy to gh-pages' && git push origin gh-pages -f`,
       { stdio: 'inherit' },
     );
+    console.log();
   } else {
     console.log('Nothing new to commit.');
   }
