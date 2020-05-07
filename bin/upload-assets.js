@@ -70,6 +70,7 @@ async function uploadAssets() {
     });
 
   try {
+    console.log();
     console.log('Uploading build files to our static server...');
     console.log();
 

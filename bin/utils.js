@@ -90,9 +90,8 @@ async function setPackageKey(key, value, isSpectateKey) {
   const file = JSON.parse((await fs.readFile(filename)).toString());
   let fileRoot = file;
   if (isSpectateKey) {
-    fileRoot = file.spectate;
     // Accommodating older Spectate projects that don't have a "spectate" key
-    if (fileRoot === undefined) fileRoot = {};
+    fileRoot = file.spectate || (file.spectate = {});
   }
   fileRoot[key] = value;
   await fs.writeFile(filename, JSON.stringify(file, null, 2) + '\n');
