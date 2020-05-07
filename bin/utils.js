@@ -91,16 +91,20 @@ async function setPackageKey(key, value, isSpectateKey) {
   let fileRoot = file;
   if (isSpectateKey) {
     fileRoot = file.spectate;
+    // Accommodating older Spectate projects that don't have a "spectate" key
+    if (fileRoot === undefined) fileRoot = {};
   }
   fileRoot[key] = value;
   await fs.writeFile(filename, JSON.stringify(file, null, 2) + '\n');
 }
 
+// Validator for whether a string is empty
 function nonEmpty(s) {
   if (s.length > 0) return { success: true };
   return { error: 'User gave empty string.' };
 }
 
+// Getse repo name of a project
 function getRepoName() {
   try {
     const remoteOrigin = execSync('git config --get remote.origin.url');
@@ -113,6 +117,7 @@ function getRepoName() {
   }
 }
 
+// Validator for whether a string is a valid GitHub repository name
 function isValidRepoName(s) {
   if (s.match(/^[A-Za-z0-9_.-]+$/)) return { success: true };
   return { error: 'Invalid GitHub repository name.' };
