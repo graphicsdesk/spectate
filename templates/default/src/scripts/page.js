@@ -6,6 +6,9 @@ import initAi2html from './ai2html-resizer';
  */
 
 function init() {
+  // Your scripts here...
+
+  // Ai2html resizer
   initAi2html();
 }
 
