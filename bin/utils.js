@@ -53,6 +53,7 @@ class Asker {
     const confirmation = await this.question({
       message: `Use "${defaultSlug}" as slug?`,
       options: '(y/n)',
+      validate: () => ({ success: true }),
     });
     if (confirmation === 'y') {
       return defaultSlug;
