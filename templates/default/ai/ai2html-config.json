@@ -1,5 +1,6 @@
 {
   "html_output_path": "../src/",
+  "img_output_path": "../assets/",
   "fonts": [
     {
       "aifont": "Roboto-Regular",
