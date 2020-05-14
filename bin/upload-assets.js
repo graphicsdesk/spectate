@@ -15,7 +15,7 @@ async function uploadAssets() {
   });
   const {
     scripts: { build },
-  } = require('./package.json');
+  } = require(process.cwd() + '/package.json');
 
   if (build.indexOf(S3_WEBSITE_BASE) < 0) {
     throw 'Build script does not have an S3 public URL.';
