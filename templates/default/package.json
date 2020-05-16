@@ -18,12 +18,17 @@
     "sass": "^1.26.5"
   },
   "dependencies": {
-    "enter-view": "^2.0.0",
+    "intersection-observer": "^0.10.0",
     "text-balancer": "^1.0.5"
   },
   "browserslist": [
     "defaults"
   ],
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "avoid"
+  },
   "spectate": {
     "USE_NEWS_NAV": false,
     "USE_EYE_NAV": false,

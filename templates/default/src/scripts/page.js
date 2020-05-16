@@ -56,14 +56,14 @@ function hoistArticle() {
 // Stops after 5 seconds of trying.
 const TRY_TIME = 5000;
 let start = null;
-function ready(timestamp) {
+function prepareHoist(timestamp) {
   if (document.body && document.querySelector(SECTION_MAIN_SELECTOR)) {
     hoistArticle();
     return;
   }
   if (timestamp - (start || (start = timestamp)) < TRY_TIME) {
     // If the body element isn't found, run ready() again at the next frame
-    window.requestAnimationFrame(ready);
+    window.requestAnimationFrame(prepareHoist);
   } else {
     // After 5 seconds, stop requesting frames and just use window.onload
     console.log(
@@ -75,12 +75,24 @@ function ready(timestamp) {
   }
 }
 
-// Replace main page section with this project if we are on a Spectator story
-// page and the project is not an embed
-if (isOnSpectatorPage && !isOnContributorPage && !spectateConfig.IS_EMBED) {
-  window.requestAnimationFrame(ready);
-} else {
-  init();
+export default function () {
+  // If IntersectionObserver and IntersectionObserverEntry are not natively
+  // supported, load the polyfill.
+  if (
+    !('IntersectionObserver' in window) ||
+    !('IntersectionObserverEntry' in window) ||
+    !('isIntersecting' in window.IntersectionObserverEntry.prototype)
+  ) {
+    import('intersection-observer').then();
+  }
+
+  // Replace main page section with this project if we are on a Spectator story
+  // page and the project is not an embed
+  if (isOnSpectatorPage && !isOnContributorPage && !spectateConfig.IS_EMBED) {
+    window.requestAnimationFrame(prepareHoist);
+  } else {
+    init();
+  }
 }
 
 /**

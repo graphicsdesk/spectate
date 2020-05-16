@@ -163,7 +163,7 @@ header {
     font-weight: 400;
   }
 
-  .headline {
+  #headline {
     margin: 50px 0 20px;
     font-size: 45px;
     line-height: 1.15;
@@ -197,7 +197,7 @@ header {
 }
 
 @media (max-width: 500px) {
-  header .headline {
+  header #headline {
     font-size: 38px;
     margin-bottom: 10px;
   }
