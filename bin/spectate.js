@@ -58,6 +58,9 @@ async function spectate() {
     case 'gh-publish':
       await require('./gh-publish')();
       break;
+    case 'open-doc':
+      require('./open-doc')();
+      break;
     case 'update':
       update();
       break;
