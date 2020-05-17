@@ -8,7 +8,7 @@ const { log } = require('./utils');
  *
  * @param {boolean} serverIsGithubPages - Whether we are publishing to GitHub.
  */
-async function publish(serverIsGithubPages) {
+module.exports = async function (serverIsGithubPages) {
   // Create production build
   console.log();
   console.log('Creating a production build...');
@@ -24,6 +24,4 @@ async function publish(serverIsGithubPages) {
         `Did you forget to run ${chalk.cyan('spectate prepublish')}?`,
       );
   }
-}
-
-module.exports = publish;
+};

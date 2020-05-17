@@ -9,7 +9,7 @@ const flagToKey = {
  * Write to a Spectate project's config (as keys stored inside package.json in
  * the "spectate" key). Currently only supports --is-embed.
  */
-module.exports = async function init() {
+module.exports = async function () {
   if (process.argv.length < 4) {
     return;
   }

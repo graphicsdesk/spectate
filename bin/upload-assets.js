@@ -8,7 +8,7 @@ const { log, getRepoName } = require('./utils');
 const { S3_WEBSITE_BASE, DIST_DIR } = require('./constants');
 
 /* Uploads the contents of dist/ to S3 */
-async function uploadAssets() {
+module.exports = async function () {
   // Configure bucket
   AWS.config.credentials = new AWS.SharedIniFileCredentials({
     profile: 'spectate',
@@ -85,6 +85,4 @@ async function uploadAssets() {
   } catch (e) {
     log.error(e);
   }
-}
-
-module.exports = uploadAssets;
+};
