@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const chalk = require('chalk');
+
 const USAGE_TEXT = `
 usage: spectate <command> [<args>]
 
@@ -66,6 +68,7 @@ async function spectate() {
       break;
     default:
       console.error('Unknown command:', command);
+      console.error(`Try running ${chalk.cyan('spectate update')}?`);
       return;
   }
 }

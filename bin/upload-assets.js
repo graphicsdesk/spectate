@@ -82,6 +82,7 @@ module.exports = async function () {
     // Upload all objects in dist to prefix
     const distFiles = await fs.readdir(DIST_DIR);
     await Promise.all(distFiles.map(putObject));
+    console.log();
   } catch (e) {
     log.error(e);
   }

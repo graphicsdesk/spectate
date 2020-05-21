@@ -15,6 +15,7 @@ function update() {
     .trim()
     .split(' ');
   if (headHash === upstreamHash) {
+    console.log('Spectate is already up to date.');
     return;
   }
 
