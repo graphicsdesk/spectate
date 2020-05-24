@@ -1,8 +1,8 @@
 import textBalancer from 'text-balancer';
 import initiatePage from './scripts/page';
+import { intersectTop } from './scripts/utils';
 
 import { spectate as spectateConfig } from '../package.json';
-const { USE_NEWS_NAV, USE_EYE_NAV, USE_COVER_HED } = spectateConfig;
 
 // Main page initiation
 
@@ -12,27 +12,20 @@ initiatePage();
 
 const navbar = document.getElementById('navbar');
 
+const { USE_NEWS_NAV, USE_EYE_NAV, USE_COVER_HED } = spectateConfig;
 if (USE_NEWS_NAV || USE_EYE_NAV || USE_COVER_HED) {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      const {
-        isIntersecting,
-        boundingClientRect: { top },
-      } = entry;
-      if (!isIntersecting && top < 0) {
-        // Enter headline on the top
-        navbar.classList.remove('only-eye-logo');
-        navbar.classList.remove('hide-news-navbar');
-      } else if (isIntersecting && top < window.innerHeight / 2) {
-        // Exit headline from the top
-        navbar.classList.remove('show-nav-links');
-        navbar.classList.add('only-eye-logo');
-        navbar.classList.add('hide-news-navbar');
-      }
+  intersectTop({
+    node: document.getElementById('headline'),
+    onEnter: () => {
+      navbar.classList.remove('only-eye-logo');
+      navbar.classList.remove('hide-news-navbar');
     },
-    { threshold: 1 },
-  );
-  observer.observe(document.getElementById('headline'));
+    onExit: () => {
+      navbar.classList.remove('show-nav-links');
+      navbar.classList.add('only-eye-logo');
+      navbar.classList.add('hide-news-navbar');
+    },
+  });
 }
 
 // Mobile navbar hamburger trigger

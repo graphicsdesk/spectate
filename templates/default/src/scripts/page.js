@@ -1,5 +1,4 @@
 import { spectate as spectateConfig } from '../../package.json';
-import initAi2html from './ai2html-resizer';
 
 /**
  * Put all initializer scripts into this init() function
@@ -8,8 +7,10 @@ import initAi2html from './ai2html-resizer';
 function init() {
   // Your scripts here...
 
-  // Ai2html resizer
-  initAi2html();
+  // If an artboard is on the page, load the ai2html resizer
+  if (document.querySelector('.g-artboard[data-min-width]')) {
+    import('./ai2html-resizer').then(p => p.default());
+  }
 }
 
 /**
