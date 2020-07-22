@@ -12,7 +12,7 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 3. Install [Node](https://nodejs.org/en/).
 
-4. Install a code editor. [Visual Studio Code](https://code.visualstudio.com) is a great option. (If you use VS Code, I highly recommend going through the First Steps in the [documentation](https://code.visualstudio.com/docs).
+4. Install a code editor. [Visual Studio Code](https://code.visualstudio.com) is a great option. (If you use VS Code, I highly recommend going through the First Steps in the [documentation](https://code.visualstudio.com/docs)).
 
 ## Setup
 
