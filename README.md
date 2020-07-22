@@ -6,7 +6,7 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 ## Prerequisites
 
-1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and make a [GitHub](https://github.com) account. Ask Jason, Charlotte, or Raeedah to add you to the `graphicsdesk` organization.
+1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and make a [GitHub](https://github.com) account. Ask Jason, Charlotte, Jessica, Jenny or Raeedah to add you to the `graphicsdesk` organization.
 
 2. To be able to write to our repositories, set up an SSH key. Follow the instructions in the first five sections of [Connecting to GitHub with SSH](https://help.github.com/en/articles/connecting-to-github-with-ssh).
 
