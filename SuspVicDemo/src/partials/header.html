@@ -1,0 +1,14 @@
+<header class="g-body">
+  <h1 id="headline">{{ headline }}</h1>
+  <if condition="typeof deck !== 'undefined'">
+    <p class="deck">{{ deck }}</p>
+  </if>
+  <p class="byline inline-credits">
+    <each
+      loop="item in typeof byline === 'undefined' ? [] : byline.split('\n')"
+    >
+      <span>{{{ item }}}</span>
+    </each>
+  </p>
+  <p class="pub-date">{{ date }}</p>
+</header>

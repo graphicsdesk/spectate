@@ -1,0 +1,39 @@
+{
+  "name": "",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "parcel src/index.html --global script",
+    "build": "parcel build src/index.html --global script --public-url . --no-content-hash",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "patch-package"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "eslint": "^7.0.0",
+    "parcel-bundler": "^1.12.4",
+    "patch-package": "^6.2.2",
+    "posthtml-expressions": "^1.4.0",
+    "posthtml-include": "^1.4.3",
+    "sass": "^1.26.5"
+  },
+  "dependencies": {
+    "intersection-observer": "^0.10.0",
+    "text-balancer": "^1.0.5"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "avoid"
+  },
+  "spectate": {
+    "USE_NEWS_NAV": false,
+    "USE_EYE_NAV": false,
+    "USE_COVER_HED": false,
+    "IS_EMBED": false,
+    "DOC_URL": null
+  }
+}

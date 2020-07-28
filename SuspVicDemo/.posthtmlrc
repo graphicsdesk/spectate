@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "posthtml-include": {
+      "root": "./src"
+    },
+    "posthtml-expressions": {
+      "root": "./src/partials",
+      "locals": {
+        "top": [],
+        "body": [],
+        "USE_NEWS_NAV": false,
+        "USE_EYE_NAV": false,
+        "USE_COVER_HED": false,
+        "IS_EMBED": false,
+        "DOC_URL": null
+      }
+    }
+  }
+}
