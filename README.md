@@ -39,7 +39,7 @@ $ npm link
 
 ## Creating a Spectate project
 
-1. In the terminal, create a new directory with the article slug as the name and move into it.
+1. In the terminal, create a new directory with the article slug as the name and move into it. (This directory should be outside of the `~/spectate` folder.)
 
 <pre>
 $ mkdir <var>SLUG</var>
