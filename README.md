@@ -102,6 +102,20 @@ When the ai2html script is run, the output HTML and images will be put into `src
 
 Assets like fonts and video should be kept in an `assets/` directory. All images should be uploaded to Arc's [Photo Center](https://spectator.arcpublishing.com/photo/). Their public links can then be put directly in the code or in the Spectate Doc.
 
+## Publishing on GitHub Pages
+
+Just run `spectate gh-publish`.
+
+Go to the Settings tab in the repository's GitHub page. Scroll down to the GitHub Pages section. You should see this:
+
+<img height="60px" src="https://i.imgur.com/EFYIIXa.png" />
+
+That means GitHub is starting up the page, but it's not ready yet. Keep refreshing the page. Once you see this screen…
+
+<img height="60px" src="https://i.imgur.com/UgxOXKJ.png" />
+
+…the link should work. It will show the build that was generated in the `dist/` directory.
+
 ## Publishing on Arc
 
 1. Run `spectate prepublish`, which will help you set up the S3 URL. Make sure you have completed the [AWS setup](https://github.com/graphicsdesk/spectate/wiki/API-Documentation#aws-setup). Uncomment the appropriate override stylesheet at the top of `src/styles.scss`.
@@ -109,17 +123,3 @@ Assets like fonts and video should be kept in an `assets/` directory. All images
 2. Run `spectate publish`. (Whenever you want to update JS or CSS assets after publication, just run this command again.)
 
 3. Copy the contents of `dist/index.html` into an HTML block in an Ellipsis story.
-
-## Publishing on GitHub Pages
-
-1. In the project directory, run `spectate gh-publish`.
-
-2. Go to the Settings tab in the repository's GitHub page. Scroll down to the GitHub Pages section. You should see this:
-
-<img height="60px" src="https://i.imgur.com/EFYIIXa.png" />
-
-That means GitHub is starting up the page, but it's not ready yet. Once you see this screen…
-
-<img height="60px" src="https://i.imgur.com/UgxOXKJ.png" />
-
-…the link should work. It will show the build that was generated in the `dist/` directory.
