@@ -5,7 +5,6 @@
   "scripts": {
     "start": "parcel src/index.html --global script",
     "build": "parcel build src/index.html --global script --public-url . --no-content-hash",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "patch-package"
   },
   "devDependencies": {
