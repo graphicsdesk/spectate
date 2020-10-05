@@ -108,11 +108,11 @@ Just run `spectate gh-publish`.
 
 Go to the Settings tab in the repository's GitHub page. Scroll down to the GitHub Pages section. You should see this:
 
-<img height="60px" src="https://i.imgur.com/EFYIIXa.png" />
+<img height="60px" src="https://i.imgur.com/PUywcxK.png" />
 
 That means GitHub is starting up the page, but it's not ready yet. Keep refreshing the page. Once you see this screen…
 
-<img height="60px" src="https://i.imgur.com/UgxOXKJ.png" />
+<img height="60px" src="https://i.imgur.com/YCMCrzu.png" />
 
 …the link should work. It will show the build that was generated in the `dist/` directory.
 
