@@ -14,6 +14,7 @@ starting on a project
 
 working with Google Docs
   download      Download the Google Doc and update the PostHTML config
+  open-doc      Open the Google Doc attached to this project
 
 publish a project
   prepublish    Set a project's URL in our static S3 server
