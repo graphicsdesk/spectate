@@ -16,7 +16,9 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 ## Setup
 
-1. Clone the Spectate repository and move into it:
+Spectate is a [command line](https://vgkits.org/blog/what-is-a-terminal) tool like `ls` and `javac`. The following steps download Spectate onto your computer and make it available on the command line.
+
+1. Clone the Spectate repository into your home directory and move into it:
 
 ```sh
 $ git clone git@github.com:graphicsdesk/spectate.git ~/spectate
@@ -35,11 +37,11 @@ $ npm install
 $ npm link
 ```
 
-4. Lastly, to authorize Spectate to download Google Docs, click the ["Enable the Google Docs API"](https://developers.google.com/docs/api/quickstart/nodejs) button. Click "Create", and save the client configuration as `credentials.json` inside the `~/spectate/keys/` directory.
+4. Lastly, to authorize Spectate to download Google Docs, click the ["Enable the Google Docs API"](https://developers.google.com/docs/api/quickstart/nodejs) button (make sure you're signed into Google with your Spec account). Click "Create", and save the client configuration as `credentials.json` inside the `~/spectate/keys/` directory.
 
 ## Creating a Spectate project
 
-1. In the terminal, create a new directory with the article slug as the name and move into it. (This directory should be outside of the `~/spectate` folder.)
+1. In the terminal, create a new directory with an [article slug](https://github.com/graphicsdesk/spectate/wiki/API-Documentation#slug) as the name. Move into it. (This directory should not be in the `~/spectate` folder.)
 
 <pre>
 $ mkdir <var>SLUG</var>
@@ -54,9 +56,9 @@ $ spectate create
 
 3. On GitHub, create a new repository in the `graphicsdesk` organization with _`SLUG`_ as the name.
 
-4. Run `spectate init`. It will first prompt you for the article slug. If you leave the answer blank, it will use the project directory name by default. It will then ask you for a Google Docs link for the project. Open the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit) by inputting `o` into the prompt. Clone it. Paste the new Doc's link into the prompt.
+4. Run `spectate init`. It will first prompt you for the article slug. If you leave the answer blank, it will use the project directory name by default. It will then ask you for a Google Docs link for the project. Open the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit) by inputting `o` into the prompt. Clone the Doc. Paste the new Doc's link into the prompt.
 
-5. `spectate create` has already created an initial commit for you. Push it to GitHub:
+5. `spectate create` has already created an initial commit for you. Push it to GitHub by doing:
 
 ```
 $ git push -u origin master
@@ -90,7 +92,13 @@ To re-download the Google Doc or update the project's [configuration](https://gi
 $ spectate download
 ```
 
-For an explanation of the project structure, see the [this page](https://github.com/graphicsdesk/spectate/wiki/Project-Structure). For a detailed reference of the Spectate API, see the [API Documentation](https://github.com/graphicsdesk/spectate/wiki/API-Documentation).
+Depending on your next steps, these resources may be helpful:
+* [Explanation of the directory structure of a Spectate project](https://github.com/graphicsdesk/spectate/wiki/Project-Structure)
+* [Add a graphic to your story](https://github.com/graphicsdesk/spectate/wiki/Adding-a-Graphic)
+  * [Convert Illustrator into HTML](#illustrator-and-ai2html)
+* [How does the Google Doc work?](https://github.com/graphicsdesk/spectate/wiki/Google-Docs-and-ArchieML)
+* [Detailed reference of the Spectate API](https://github.com/graphicsdesk/spectate/wiki/API-Documentation).
+* Publish a Spectate story (scroll down)
 
 ### Illustrator and [ai2html](http://ai2html.org/)
 
