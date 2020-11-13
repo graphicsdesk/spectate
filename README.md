@@ -97,6 +97,7 @@ Depending on your next steps, these resources may be helpful:
 * [Add a graphic to your story](https://github.com/graphicsdesk/spectate/wiki/Adding-a-Graphic)
   * [Convert Illustrator into HTML](#illustrator-and-ai2html)
 * [How does the Google Doc work?](https://github.com/graphicsdesk/spectate/wiki/Google-Docs-and-ArchieML)
+* [Scrollytelling](https://github.com/graphicsdesk/spectate/wiki/Scrollytelling)
 * [Detailed reference of the Spectate API](https://github.com/graphicsdesk/spectate/wiki/API-Documentation).
 * Publish a Spectate story (scroll down)
 
