@@ -1,0 +1,26 @@
+<div class="cover cover-hed">
+  <if condition="top.cover !== undefined">
+    <img src="{{ top.cover }}" />
+  </if>
+
+  <header>
+    <h1 id="headline">{{ headline }}</h1>
+    <if condition="typeof deck !== 'undefined'">
+      <p class="deck">{{ deck }}</p>
+    </if>
+    <p class="byline">{{{ byline }}}</p>
+    <p class="pub-date">{{ date }}</p>
+  </header>
+</div>
+
+<p class="cover-caption">{{ top.caption }}</p>
+
+<div class="g-body">
+  <p class="inline-credits">
+    <each
+      loop="item in typeof credits === 'undefined' ? [] : credits.split('\n')"
+    >
+      <span>{{{ item }}}</span>
+    </each>
+  </p>
+</div>

@@ -1,0 +1,58 @@
+<if condition="USE_NEWS_NAV">
+  <div id="navbar" class="news-navbar hide-news-navbar">
+    <a id="cds-logo-container" href="https://www.columbiaspectator.com">
+      <img
+        id="cds-logo"
+        src="https://s3.amazonaws.com/spec-imagehosting/spectator-logo.png"
+      />
+    </a>
+  </div>
+</if>
+
+<elseif condition="USE_EYE_NAV">
+  <div id="navbar" class="only-eye-logo">
+    <div id="eye-logo-container">
+      <a href="https://www.columbiaspectator.com/eye">
+        <img
+          id="eye-logo"
+          src="https://spectator-static-assets.s3.amazonaws.com/eye-logo-black.png"
+        />
+      </a>
+      <button onclick="script.hamburgerTrigger()" class="hamburger-btn">
+        <div class="hamburger"></div>
+      </button>
+    </div>
+    <div id="nav-links">
+      <each
+        loop="item in [
+        {
+          name: 'Leads',
+          link: 'http://columbiaspectator.com/eye/lead',
+        },
+        {
+          name: 'Features',
+          link: 'http://columbiaspectator.com/eye/features',
+        },
+        {
+          name: 'View From Here',
+          link: 'http://columbiaspectator.com/eye/view-from-here',
+        },
+        {
+          name: 'The Ear',
+          link: 'http://columbiaspectator.com/eye/the-ear',
+        },
+        {
+          name: 'Eyesights',
+          link: 'http://columbiaspectator.com/eye/eyesights',
+        },
+        {
+          name: 'Past Issues',
+          link: 'https://www.columbiaspectator.com/issues/eye',
+        },
+      ]"
+      >
+        <a href="{{ item.link }}">{{ item.name }}</a>
+      </each>
+    </div>
+  </div>
+</elseif>
