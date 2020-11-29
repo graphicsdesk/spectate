@@ -74,7 +74,7 @@ To clone a Spectate project, run:
 $ spectate clone <var>SLUG</var>
 </pre>
 
-This will clone the repository `git@github.com:graphicsdesk/SLUG.git` into a new directory named _`SLUG`_ and install the project's dependencies. See [Usage](#usage).
+This will clone the repository `git@github.com:graphicsdesk/SLUG.git` into a new directory named _`SLUG`_ and install the project's dependencies. See [Usage](#usage) for further instructions.
 
 ## Usage
 
@@ -94,7 +94,8 @@ $ spectate download
 
 Depending on your next steps, these resources may be helpful:
 * [Add a graphic to your story](https://github.com/graphicsdesk/spectate/wiki/Adding-a-Graphic)
-* [Put Illustrator work on your page](#illustrator-and-ai2html)
+* [Put Illustrator work on your page](https://github.com/graphicsdesk/spectate/wiki/Illustrator-and-ai2html)
+* [Import data to use in JavaScript](https://github.com/graphicsdesk/spectate/wiki/Importing-data)
 * [Scrollytelling](https://github.com/graphicsdesk/spectate/wiki/Scrollytelling)
 * [Detailed reference of the Spectate API](https://github.com/graphicsdesk/spectate/wiki/API-Documentation).
 * Publish a Spectate story (scroll down)
