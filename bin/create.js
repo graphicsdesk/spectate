@@ -8,6 +8,10 @@ const currentDir = process.cwd();
 
 module.exports = async function () {
   console.log();
+  if (__dirname.includes(currentDir)) {
+    console.log('Do not create projects in the Spectate directory.');
+    return;
+  }
   console.log(
     `Creating a new Spectate project in ${chalk.bold.magenta(currentDir)}.`,
   );
