@@ -41,6 +41,8 @@ $ npm link
 
 ## Creating a Spectate project
 
+Spectate requires comfortability with [HTML and CSS](https://docs.google.com/document/d/1qC8zC7lfk4TyNe2XIGwAVOa-oVDxmbnvwOGkqkguaZA/edit#heading=h.3gi99aop4c9n). Before beginning a Spectate project, you should also read about [how a Spectate project works](https://github.com/graphicsdesk/spectate/wiki/How-a-Spectate-project-works).
+
 1. In the terminal, create a new directory with an [article slug](https://github.com/graphicsdesk/spectate/wiki/API-Documentation#slug) as the name (e.g. `property-acquisition`, `nypd-complaints-data`). The slug you choose will hereafter be referred to as _`SLUG`_. Move into the directory.
 
 <pre>
@@ -48,7 +50,7 @@ $ mkdir <var>SLUG</var>
 $ cd <var>SLUG</var>
 </pre>
 
-2. Next, run `$ spectate create`. This puts all of Spectate's template files, which includes boilerplate HTML/CSS and ai2html configuration, into your directory. [This page](https://github.com/graphicsdesk/spectate/wiki/Project-Structure) explains the structure of these template files.
+2. Next, run `$ spectate create`. This puts all of Spectate's template files, which includes boilerplate HTML/CSS and ai2html configuration, into your directory.
 
 3. On GitHub, create a new repository in the `graphicsdesk` organization with _`SLUG`_ as the name.
 
@@ -60,7 +62,7 @@ $ cd <var>SLUG</var>
 $ git push -u origin master
 ```
 
-6. It's highly recommended that you [read about](https://github.com/graphicsdesk/spectate/wiki/Google-Docs-and-ArchieML) how Spectate, Google Docs, and `src/index.html` works. After that, see [Usage](#usage) for further instructions.
+6. See [Usage](#usage) for further instructions.
 
 ## Cloning a Spectate project
 
@@ -91,7 +93,6 @@ $ spectate download
 ```
 
 Depending on your next steps, these resources may be helpful:
-* [How does the Google Doc and `index.html` work?](https://github.com/graphicsdesk/spectate/wiki/Google-Docs-and-ArchieML)
 * [Add a graphic to your story](https://github.com/graphicsdesk/spectate/wiki/Adding-a-Graphic)
 * [Put Illustrator work on your page](#illustrator-and-ai2html)
 * [Scrollytelling](https://github.com/graphicsdesk/spectate/wiki/Scrollytelling)
