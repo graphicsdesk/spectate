@@ -41,7 +41,7 @@ $ npm link
 
 ## Creating a Spectate project
 
-Spectate requires comfortability with [HTML and CSS](https://docs.google.com/document/d/1qC8zC7lfk4TyNe2XIGwAVOa-oVDxmbnvwOGkqkguaZA/edit#heading=h.3gi99aop4c9n). Before beginning a Spectate project, you should also read about [how a Spectate project works](https://github.com/graphicsdesk/spectate/wiki/How-a-Spectate-project-works).
+0. Read about [how a Spectate project works](https://github.com/graphicsdesk/spectate/wiki/How-a-Spectate-project-works).
 
 1. In the terminal, create a new directory with an [article slug](https://github.com/graphicsdesk/spectate/wiki/API-Documentation#slug) as the name (e.g. `property-acquisition`, `nypd-complaints-data`). The slug you choose will hereafter be referred to as _`SLUG`_. Move into the directory.
 
