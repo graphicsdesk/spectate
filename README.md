@@ -95,8 +95,9 @@ $ spectate download
 Depending on your next steps, these resources may be helpful:
 * [Add a graphic to your story](https://github.com/graphicsdesk/spectate/wiki/Adding-a-Graphic)
 * [Put Illustrator work on your page](https://github.com/graphicsdesk/spectate/wiki/Illustrator-and-ai2html)
-* [Import data to use in JavaScript](https://github.com/graphicsdesk/spectate/wiki/Importing-data)
+* [Import data to use in JavaScript](https://github.com/graphicsdesk/spectate/wiki/Importing-data))
 * [Scrollytelling](https://github.com/graphicsdesk/spectate/wiki/Scrollytelling)
+* [Add a cover image to the story](https://github.com/graphicsdesk/spectate/wiki/Add-a-cover)
 * [Detailed reference of the Spectate API](https://github.com/graphicsdesk/spectate/wiki/API-Documentation).
 * Publish a Spectate story (scroll down)
 
