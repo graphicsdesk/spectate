@@ -1,7 +1,5 @@
 <div class="cover cover-hed">
-  <if condition="top.cover !== undefined">
-    <img src="{{ top.cover }}" />
-  </if>
+  <img src="{{ cover_asset }}" />
 
   <header>
     <h1 id="headline">{{ headline }}</h1>
@@ -13,7 +11,7 @@
   </header>
 </div>
 
-<p class="cover-caption">{{ top.caption }}</p>
+<p class="cover-caption">{{ cover_caption }}</p>
 
 <div class="g-body">
   <p class="inline-credits">

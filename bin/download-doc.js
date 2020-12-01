@@ -39,6 +39,9 @@ module.exports = async function () {
       documentId: DOC_URL.match(/[-\w]{25,}/)[0],
       formatter,
     });
+    if (data.cover_asset && data.cover_asset.includes('<a href="')) {
+      data.cover_asset = data.cover_asset.match(/">(.*)<\//)[1];
+    }
   }
 
   // Set locals for PostHTML expressions. Some default locals should always exist

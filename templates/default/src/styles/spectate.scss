@@ -126,6 +126,7 @@ b {
     p,
     h1 {
       color: #fff;
+      text-align: center;
     }
 
     .byline {
@@ -201,6 +202,10 @@ header {
     font-size: 38px;
     margin-bottom: 10px;
   }
+}
+
+.cover-hed #headline {
+  margin-top: 10px;
 }
 
 .inline-credits {
