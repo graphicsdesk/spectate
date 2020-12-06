@@ -5,8 +5,6 @@ import { spectate as spectateConfig } from '../../package.json';
  */
 
 function init() {
-  // Your scripts here...
-
   // If an artboard is on the page, load the ai2html resizer
   if (document.querySelector('.g-artboard[data-min-width]')) {
     import('./ai2html-resizer').then(p => p.default());
@@ -14,19 +12,23 @@ function init() {
 }
 
 /**
- * Replace the section#main node with the article content
+ * Do article hoisting: eeplace the section#main node with the article content.
+ * Explanation at https://github.com/graphicsdesk/spectate/wiki/API-Documentation#article-hoisting
  */
 
-const isOnSpectatorPage = window.location.host === 'www.columbiaspectator.com';
-const isOnContributorPage =
-  window.location.pathname.indexOf('/contributors') === 0;
+/* These are selectors for important elements */
 
+// SECTION_MAIN_SELECTOR is the node on the page we want to replace
 const SECTION_MAIN_SELECTOR = 'section#main';
+
+// ARTICLE_SELECTOR is where Arc Publishing puts the actual article content
 const ARTICLE_SELECTOR =
   '.pb-f-article-article-body > .row > .col-xs-12 > .ab-article-body > .ab-article-content > article';
+
+// The comment section is accidentally destroyed in the hoisting process, so
+// we want to store it away and add it back later
 const COMMENTS_SELECTOR = '.pb-f-article-disqus-new';
 
-// Replaces section#main with article
 function hoistArticle() {
   // Store nodes of interest
   const sectionMain = document.querySelector(SECTION_MAIN_SELECTOR);
@@ -39,8 +41,8 @@ function hoistArticle() {
   // Append comment section after article
   article.parentNode.insertBefore(comments, article.nextSibling);
 
-  // Arc SSRs elements like links and meta tags in Spectate's index.html <head>
-  // into a paragraph, which takes up unwanted space thanks to Arc's CSS
+  // Arc server-side-renders elements like links and meta tags in Spectate's index.html <head>
+  // into a paragraph, which takes up unwanted space thanks to Arc's CSS. Let's remove it.
   const suspectParagraph = article.firstElementChild;
   if (
     [...suspectParagraph.children].some(el =>
@@ -75,6 +77,10 @@ function prepareHoist(timestamp) {
     window.onload = hoistArticle;
   }
 }
+
+const isOnSpectatorPage = window.location.host === 'www.columbiaspectator.com';
+const isOnContributorPage =
+  window.location.pathname.indexOf('/contributors') === 0;
 
 export default function () {
   // If IntersectionObserver and IntersectionObserverEntry are not natively
