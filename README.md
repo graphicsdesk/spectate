@@ -1,6 +1,6 @@
 # Spectate
 
-Spectate provides a workflow for building freeform stories. It allows reporters to code locally while writing stories in Google Docs, and it can bundle several kinds of visual assets.
+Spectate provides a workflow for building and publishing freeform stories. It allows reporters to code locally while writing stories in Google Docs.
 
 Check out these examples: [University responses to COVID-19](https://www.columbiaspectator.com/news/2020/04/13/the-us-and-ivy-league-schools-were-late-to-respond-to-covid-19-data-shows-international-universities-did-better/); [EOAA investigation](https://www.columbiaspectator.com/eye-lead/2019/11/15/students-and-faculty-say-gender-based-harassment-and-discrimination-at-columbia-is-systemic-why-are-they-turning-away-from-the-system-built-to-address-it/); [Union Theological Seminary](https://github.com/graphicsdesk/uts).
 
@@ -14,7 +14,7 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 4. Install a code editor. [Visual Studio Code](https://code.visualstudio.com) is a great option. (If you use VS Code, I highly recommend going through the First Steps in the [documentation](https://code.visualstudio.com/docs)).
 
-## Setup
+## Install Spectate
 
 Spectate is a [command line tool](https://vgkits.org/blog/what-is-a-terminal) (just like `ls` and `javac`). The following steps download Spectate onto your computer and make it available on the command line.
 
@@ -77,6 +77,8 @@ $ spectate clone <var>SLUG</var>
 This will clone the repository `git@github.com:graphicsdesk/SLUG.git` into a new directory named _`SLUG`_ and install the project's dependencies. See [Usage](#usage) for further instructions.
 
 ## Usage
+
+Read about [how a Spectate project works](https://github.com/graphicsdesk/spectate/wiki/How-a-Spectate-project-works).
 
 To start developing, run:
 
