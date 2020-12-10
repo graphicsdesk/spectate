@@ -1,4 +1,10 @@
-.DS_Store
+# NPM
+node_modules
+
+# Parcel
 .cache
 dist
-node_modules
+
+# Other
+.DS_Store
+.vscode
