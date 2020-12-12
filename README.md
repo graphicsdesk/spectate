@@ -111,7 +111,7 @@ Assets like fonts and video should be kept in an `assets/` directory. All images
 
 Just run `spectate gh-publish`.
 
-Go to the Settings tab in the repository's GitHub page. Scroll down to the GitHub Pages section. You should see this:
+Go to the Settings tab in the repository's GitHub page. Make sure the repository visibility is set to Public. Scroll down to the GitHub Pages section. You should see this:
 
 <img height="60px" src="https://i.imgur.com/PUywcxK.png" />
 
