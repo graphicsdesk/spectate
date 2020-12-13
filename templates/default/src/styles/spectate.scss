@@ -441,43 +441,12 @@ header {
       color: #999;
     }
   }
-
-  .overlay-container {
-    position: relative;
-  }
-
-  .image-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.4);
-
-    .caption-text-container {
-      max-width: 960px;
-    }
-
-    .image-caption-text {
-      color: #fff;
-      font-size: 40px;
-      line-height: 1.4;
-    }
-  }
 }
 
 @media (max-width: 660px) {
-  .image .image-overlay .image-caption-text {
+  .image .image-caption-text {
     font-size: 25px;
   }
-}
-
-#overlay {
-  transition-duration: 0.35s;
-  opacity: 0;
 }
 
 .width-full-width {
