@@ -39,9 +39,19 @@ module.exports = async function () {
       documentId: DOC_URL.match(/[-\w]{25,}/)[0],
       formatter,
     });
-    if (data.cover_asset && data.cover_asset.includes('<a href="')) {
+
+    // Google Docs may automatically add a link to an image, even when we don't want
+    // it to. This code removes it from sections and fields that may be affected.
+    if (data.cover_asset && data.cover_asset.includes('<a href=')) {
       data.cover_asset = data.cover_asset.match(/">(.*)<\//)[1];
     }
+    ['top', 'body'].forEach(section =>
+      data[section].forEach(({ type, value }, i) => {
+        if (type === 'image' && value.asset.includes('<a href=')) {
+          data[section][i].value.asset = value.asset.match(/">(.*)<\//)[1];
+        }
+      }),
+    );
   }
 
   // Set locals for PostHTML expressions. Some default locals should always exist
