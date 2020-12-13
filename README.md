@@ -127,4 +127,4 @@ That means GitHub is starting up the page, but it's not ready yet. Keep refreshi
 
 2. Run `spectate publish`. (Whenever you want to update JS or CSS assets after publication, just run this command again.)
 
-3. Copy the contents of `dist/index.html` into an HTML block in an Ellipsis story.
+3. Copy the contents of `dist/index.html` into an HTML block in an Ellipsis story. (More detailed instructions [here](https://github.com/graphicsdesk/spectate/wiki/Putting-a-Spectate-project-on-Arc).)
