@@ -46,7 +46,7 @@ module.exports = async function () {
       data.cover_asset = data.cover_asset.match(/">(.*)<\//)[1];
     }
     ['top', 'body'].forEach(section =>
-      data[section].forEach(({ type, value }, i) => {
+      section in data && data[section].forEach(({ type, value }, i) => {
         if (type === 'image' && value.asset.includes('<a href=')) {
           data[section][i].value.asset = value.asset.match(/">(.*)<\//)[1];
         }
