@@ -6,7 +6,7 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 ## Prerequisites
 
-1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and make a [GitHub](https://github.com) account. Ask Charlotte, Jessica, Jenny or Hong to add you to the `graphicsdesk` organization.
+1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and make a [GitHub](https://github.com) account. Ask Charlotte, Jessica, Jenny or Hong to add you to the graphicsdesk organization.
 
 2. To be able to write to our repositories, set up an SSH key. Follow the instructions in the first five sections of [Connecting to GitHub with SSH](https://help.github.com/en/articles/connecting-to-github-with-ssh).
 
@@ -25,7 +25,7 @@ $ git clone git@github.com:graphicsdesk/spectate.git ~/spectate
 $ cd ~/spectate
 ```
 
-2. Install the necessary dependencies:
+2. Install the necessary Node packages:
 
 ```
 $ npm install
@@ -41,32 +41,32 @@ $ npm link
 
 ## Creating a Spectate project
 
-0. Read about [how a Spectate project works](https://github.com/graphicsdesk/spectate/wiki/How-a-Spectate-project-works).
+Read about [how a Spectate project works](https://github.com/graphicsdesk/spectate/wiki/How-a-Spectate-project-works).
 
-1. In the terminal, create a new directory with an [article slug](https://github.com/graphicsdesk/spectate/wiki/API-Documentation#slug) as the name (e.g. `property-acquisition`, `nypd-complaints-data`). The slug you choose will hereafter be referred to as _`SLUG`_. Move into the directory.
+1. In the terminal, create a new directory for your project. The name of the directory should be [the slug of your article]((https://github.com/graphicsdesk/spectate/wiki/API-Documentation#slug)). The slug you choose will hereafter be referred to as _`SLUG`_. Move into the directory.
 
 <pre>
 $ mkdir <var>SLUG</var>
 $ cd <var>SLUG</var>
 </pre>
 
-2. Next, run `$ spectate create`. This puts all of Spectate's template files, which includes boilerplate HTML/CSS and ai2html configuration, into your directory.
+2. Next, run `$ spectate create`. This copies the template files of a Spectate project, like boilerplate HTML/CSS and ai2html configuration, into your directory.
 
 3. On GitHub, create a new repository in the `graphicsdesk` organization with _`SLUG`_ as the name.
 
-4. Run `spectate init`. It will first prompt you for the article slug. (If you leave the answer blank, it will use the name of your project directory by default.) It will then ask you for a Google Docs link for the project. Open the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit) by inputting `o` into the prompt. Clone the Doc. Paste the new Doc's link into the prompt.
+4. Run `$ spectate init`, which helps set up the remote connections necessary to your project. It will first prompt you for the article slug. If you leave the answer blank, it will use the name of your project directory by default. It will then ask you for a Google Docs link for the project. To create a Spectate template Google Doc, open the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit) by inputting `o` into the prompt. Clone the Doc. Paste the new Doc's link into the prompt.
 
 5. `spectate create` has already created an initial commit for you. Push it to GitHub by doing:
 
 ```
-$ git push -u origin master
+$ git push -u origin main
 ```
 
 6. See [Usage](#usage) for further instructions.
 
 ## Cloning a Spectate project
 
-Make sure you have first completed the [prerequisites and setup instructions](#prerequisites).
+Make sure you have first completed the [prerequisites and installation instructions](#prerequisites).
 
 To clone a Spectate project, run:
 
@@ -103,9 +103,7 @@ Depending on your next steps, these resources may be helpful:
 * [Detailed reference of the Spectate API](https://github.com/graphicsdesk/spectate/wiki/API-Documentation).
 * Publish a Spectate story (scroll down)
 
-### Assets
-
-Assets like fonts and video should be kept in an `assets/` directory. All images should be uploaded to Arc's [Photo Center](https://spectator.arcpublishing.com/photo/). Their public links can then be put directly in the code or in the Spectate Doc.
+Note: All images and videos should be uploaded to Arc's [Photo Center](https://spectator.arcpublishing.com/photo/). Their public links can then be put directly in the code or in the Spectate Doc.
 
 ## Publishing on GitHub Pages
 
