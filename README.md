@@ -14,6 +14,8 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 4. Install a code editor. [Visual Studio Code](https://code.visualstudio.com) is a great option. (If you use VS Code, I highly recommend going through the First Steps in the [documentation](https://code.visualstudio.com/docs)).
 
+5. You should be [comfortable](https://docs.google.com/document/d/1qC8zC7lfk4TyNe2XIGwAVOa-oVDxmbnvwOGkqkguaZA/edit#) coding in HTML, CSS, and JavaScript.
+
 ## Install Spectate
 
 Spectate is a [command line tool](https://vgkits.org/blog/what-is-a-terminal) (just like `ls` and `javac`). The following steps download Spectate onto your computer and make it available on the command line.
@@ -81,24 +83,29 @@ This will clone the repository `git@github.com:graphicsdesk/SLUG.git` into a new
 Read about [how a Spectate project works](https://github.com/graphicsdesk/spectate/wiki/How-a-Spectate-project-works).
 
 To start developing, run:
-
 ```
 $ npm start
 ```
-
-This starts a local web server on http://localhost:1234 that shows you what your page looks like. If you edit and save any code, the page will automatically update.
+This starts a local web server at http://localhost:1234 that shows you what your page looks like. If you edit and save any code, the page automatically rebuilds and refreshes.
 
 To re-download the Google Doc or update the project's [configuration](https://github.com/graphicsdesk/spectate/wiki/API-Documentation#spectate-config), run:
-
 ```
 $ spectate download
 ```
+Running this command in a terminal tab other than the one you ran `npm start` in also automatically refreshes the page with the updated content.
 
-Depending on your next steps, these resources may be helpful:
-* [Add a graphic to your story](https://github.com/graphicsdesk/spectate/wiki/Adding-a-Graphic)
-* [Put Illustrator work on your page](https://github.com/graphicsdesk/spectate/wiki/Illustrator-and-ai2html)
+To add a graphic to your story (i.e. custom HTML), read [this](https://github.com/graphicsdesk/spectate/wiki/Adding-a-Graphic). To add Illustrator artwork (using ai2html), read [this](https://github.com/graphicsdesk/spectate/wiki/Illustrator-and-ai2html).
+
+To add a scrollytelling interactive, read [this](https://github.com/graphicsdesk/spectate/wiki/Scrollytelling).
+
+The primary file for [SCSS](https://sass-lang.com/) goes into `src/styles.scss` (SCSS is just CSS with better features, like nested selectors and variables). `style.scss` can reference/import other styling files from the `src/styles/` directory. It's highly recommended that you make a separate styling file for each major chunk of your project. (For instance, if your story has two big graphics that don't have much to do with each other, your code is more organized/navigable if the styling for those graphics are in separate files.) If you have a stylesheet `src/styles/scatter-plot.scss`, you can import it in `src/styles.scss` with the line `@import styles/scatter-plot`.
+
+The primary file for JavaScript is `src/script.js`. Again, it's recommended that you make separate files for each major feature of your project, and that you organize all these files in the `src/scripts/` folder. Don't forget to import it in the main `script.js` file by adding `import './scripts/file-name.js` somewhere at the top of `script.js`. If you're using D3, rather than loading all of D3 as a script or package, opt to install the different libraries of d3 individually. For instance, if you only need `select`, install just the `d3-selection` library. This makes JavaScript builds much smaller.
+
+A well-organized project will minimally modify `src/index.html`, `src/styles.scss`, and `src/script.js`. Instead, those files should import/reference small, feature-bounded components.
+
+Here are some other resources:
 * [Import data to use in JavaScript](https://github.com/graphicsdesk/spectate/wiki/Importing-data))
-* [Scrollytelling](https://github.com/graphicsdesk/spectate/wiki/Scrollytelling)
 * [Add a cover image to the story](https://github.com/graphicsdesk/spectate/wiki/Add-a-cover)
 * [Detailed reference of the Spectate API](https://github.com/graphicsdesk/spectate/wiki/API-Documentation).
 * Publish a Spectate story (scroll down)
