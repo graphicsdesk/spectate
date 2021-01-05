@@ -14,7 +14,7 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 4. Install a code editor. [Visual Studio Code](https://code.visualstudio.com) is a great option. (If you use VS Code, I highly recommend going through the First Steps in the [documentation](https://code.visualstudio.com/docs)).
 
-5. You should be [comfortable](https://docs.google.com/document/d/1qC8zC7lfk4TyNe2XIGwAVOa-oVDxmbnvwOGkqkguaZA/edit#) coding in HTML, CSS, and JavaScript.
+5. You should be [comfortable](https://docs.google.com/document/d/1qC8zC7lfk4TyNe2XIGwAVOa-oVDxmbnvwOGkqkguaZA/edit#) coding in HTML, CSS, and JavaScript. You should also be familiar with using `git` and version control.
 
 ## Install Spectate
 
