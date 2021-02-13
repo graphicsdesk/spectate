@@ -1,0 +1,10 @@
+# NPM
+node_modules
+
+# Parcel
+.cache
+dist
+
+# Other
+.DS_Store
+.vscode
