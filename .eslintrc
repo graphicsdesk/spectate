@@ -12,5 +12,6 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
+  "rules": {},
   "extends": "eslint:recommended"
 }
