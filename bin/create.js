@@ -8,6 +8,10 @@ const currentDir = process.cwd();
 
 module.exports = async function () {
   console.log();
+  // select a template to use for the project.
+  const asker = new Asker();
+
+  const template = await asker.selectTemplate(path.basename(process.cwd()));
   if (__dirname.includes(currentDir)) {
     console.log('Do not create projects in the Spectate directory.');
     return;

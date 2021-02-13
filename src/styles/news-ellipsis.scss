@@ -1,0 +1,71 @@
+/* These styles help hide default site elements for a News story */
+
+// Unset Arc's Bootstrap box-sizing: border-box;
+#pb-root > article,
+#pb-root > article * {
+  box-sizing: unset;
+}
+
+#top {
+  // UNCOMMENT next line to hide navbar
+  display: none;
+
+  float: none;
+  padding: 0;
+}
+
+#bottom {
+  // UNCOMMENT next line to hide footer
+  // display: none
+}
+
+.pb-f-article-disqus-new {
+  // UNCOMMENT next line to hide comment section
+  // display: none;
+
+  max-width: 960px;
+  margin: 0 auto 20px;
+}
+
+#article-tags {
+  // UNCOMMENT next line to hide article tags
+  // display: none;
+}
+
+// Hide mobile share buttons at the bottom
+.at-share-dock-outer {
+  display: none;
+}
+
+// Hide advertisements that get server-side-rendered into the middle of the page
+#hor-in-article-ad-placement,
+#ver-in-article-ad-placement {
+  display: none;
+}
+
+// Hide section#main before it is replaced
+#main {
+  display: none;
+}
+
+// Prevents scrollama from complaining about overflow error
+html {
+  overflow-x: visible;
+}
+
+// The only reason why html needed overflow-x hidden in the first place
+.bottom-footer {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+
+  .pb-f-global-footer .footer {
+    // Just for styling
+    margin: 0;
+  }
+}
+
+// Overflows the page
+.pb-f-global-leaderboard-ad {
+  display: none;
+}

@@ -14,6 +14,8 @@ const log = {
   },
 };
 
+const templates = ["Default", "Series"]
+
 class Asker {
   constructor() {
     this.rl = readline.createInterface(process.stdin, process.stdout);
@@ -61,6 +63,21 @@ class Asker {
     return await this.questionWithRetries({
       message: 'Enter a slug',
       validate: isValidRepoName,
+    });
+  }
+
+  async selectTemplate() {
+    const templates = askTemplates()
+    const confirmation = await this.question({
+      message: `Please input your selection`,
+      options: '(Input a number)',
+      validate: () => ({ success: true }),
+    });
+    if (confirmation <= templates.length)
+      return templates[confirmation]
+    return await this.questionWithRetries({
+      message: `Please input a number less than or equal to ${templates.length}`,
+      validate: isValidTemplateSelection,
     });
   }
 
@@ -121,6 +138,18 @@ function getRepoName() {
 function isValidRepoName(s) {
   if (s.match(/^[A-Za-z0-9_.-]+$/)) return { success: true };
   return { error: 'Invalid GitHub repository name.' };
+}
+
+function askTemplates() {
+  templates.forEach((item, index) => {
+    console.log(`${index + 1}. ${item}`)
+  })
+  return templates;
+}
+
+function isValidTemplateSelection(i) {
+  if (!isNaN(i) && i >= 1 && i <= templates.length) return { success: true };
+  return { error: 'Invalid Template Selection.' };
 }
 
 module.exports = { Asker, setPackageKey, getRepoName, log };

@@ -1,0 +1,14 @@
+<div class="footer g-body">
+  <div class="article-credits">
+    <each
+      loop="item in (typeof footer === 'undefined' ? [] : footer.split('\n'))"
+    >
+      <p>{{{ item }}}</p>
+    </each>
+    <p>
+      Produced with
+      <a href="https://github.com/graphicsdesk/spectate">Spectate</a> by the
+      <a href="https://graphicsdesk.github.io">Spectator Graphics</a> team.
+    </p>
+  </div>
+</div>

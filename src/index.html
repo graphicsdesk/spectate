@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{ headline }}</title>
+    <link rel="stylesheet" href="./styles.scss" />
+    <link
+      rel="shortcut icon"
+      href="https://www.columbiaspectator.com/pb/resources/img/CDS_Favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <include src="partials/navbar.html"></include>
+
+    <div class="story-top">
+      <each loop="item in top">
+        <switch expression="item.type">
+          <case n="'image'">
+            <include src="partials/image.html"></include>
+          </case>
+          <case n="'graphic'">
+            <div class="graphic">
+              <if condition="item.value.asset === 'graphic-name.html'">
+                <include src="graphic-name.html"></include>
+              </if>
+            </div>
+          </case>
+        </switch>
+      </each>
+    </div>
+
+    <if condition="USE_COVER_HED">
+      <include src="partials/header-cover.html"></include>
+    </if>
+    <else>
+      <include src="partials/header.html"></include>
+    </else>
+
+    <div class="story">
+      <each loop="item in body">
+        <switch expression="item.type">
+          <case n="'text'">
+            <include src="partials/paragraph.html"></include>
+          </case>
+          <case n="'subhed'">
+            <include src="partials/subhed.html"></include>
+          </case>
+          <case n="'image'">
+            <include src="partials/image.html"></include>
+          </case>
+          <case n="'graphic'">
+            <div class="graphic">
+              <if condition="item.value.asset === 'graphic-name.html'">
+                <include src="graphic-name.html"></include>
+              </if>
+            </div>
+          </case>
+        </switch>
+      </each>
+    </div>
+
+    <include src="partials/footer.html"></include>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

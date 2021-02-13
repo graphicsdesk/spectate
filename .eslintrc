@@ -1,8 +1,7 @@
 {
   "env": {
     "es6": true,
-    "browser": true,
-    "node": true
+    "browser": true
   },
   "globals": {
     "Atomics": "readonly",
@@ -12,6 +11,5 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "rules": {},
   "extends": "eslint:recommended"
 }

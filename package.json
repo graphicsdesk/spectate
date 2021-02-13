@@ -1,27 +1,38 @@
 {
-  "name": "spectate",
-  "version": "1.3.3",
-  "description": "A tool for developing freeform Spectator stories.",
-  "license": "MIT",
-  "homepage": "https://github.com/graphicsdesk/spectate",
-  "bin": {
-    "spectate": "./bin/spectate.js"
-  },
-  "dependencies": {
-    "archieml": "^0.4.2",
-    "aws-sdk": "^2.672.0",
-    "chalk": "^4.0.0",
-    "fs-extra": "^9.0.0",
-    "googleapis": "^50.0.0",
-    "mime-types": "^2.1.27",
-    "open": "^7.0.3"
+  "name": "",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "parcel src/index.html --global script",
+    "build": "parcel build src/index.html --global script --public-url . --no-content-hash",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
-    "eslint": "^7.0.0"
+    "cssnano": "^4.1.10",
+    "eslint": "^7.0.0",
+    "parcel-bundler": "^1.12.4",
+    "patch-package": "^6.2.2",
+    "posthtml-expressions": "^1.4.0",
+    "posthtml-include": "^1.4.3",
+    "sass": "^1.26.5"
   },
+  "dependencies": {
+    "intersection-observer": "^0.10.0",
+    "text-balancer": "^1.0.5"
+  },
+  "browserslist": [
+    "defaults"
+  ],
   "prettier": {
-    "trailingComma": "all",
     "singleQuote": true,
+    "trailingComma": "all",
     "arrowParens": "avoid"
+  },
+  "spectate": {
+    "USE_NEWS_NAV": true,
+    "USE_EYE_NAV": false,
+    "USE_COVER_HED": false,
+    "IS_EMBED": false,
+    "DOC_URL": null
   }
 }
