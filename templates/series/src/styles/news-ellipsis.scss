@@ -50,7 +50,7 @@
 
 // Prevents scrollama from complaining about overflow error
 html {
-  overflow-x: visible;
+  overflow-x: hidden;
 }
 
 // The only reason why html needed overflow-x hidden in the first place

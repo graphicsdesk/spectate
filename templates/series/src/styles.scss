@@ -1,0 +1,47 @@
+@import "styles/spectate";
+
+// Uncomment the following line before publishing a News story
+// @import "styles/news-ellipsis";
+
+#body-page-container.body-page-0{
+    .cover-hed header {
+        transform: translateY(-150%);
+    }
+}
+
+
+#body-page-container.body-page-1 {
+    .cover-hed header {
+        transform: translateY(-140%);
+    }
+    .cover>img {
+        object-position: 90% 0;
+    }
+}
+
+#body-page-container.body-page-2 {
+    .cover-hed header {
+        transform: translateY(-200%);
+    }
+    .cover>img {
+        object-position: 90% 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .portrait-container img {
+        object-fit: contain;
+    }
+
+    #body-page-container.body-page-0{
+        .cover-hed header {
+            transform: translateY(-150%) !important;
+        }
+    }
+
+    #body-page-container.body-page-1 {
+        .cover-hed header {
+            transform: translateY(-120%) !important;
+        }
+    }
+}

@@ -2,7 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
 const { execSync } = require('child_process');
-const { log } = require('./utils');
+const { Asker, log } = require('./utils');
 
 const currentDir = process.cwd();
 
@@ -11,17 +11,18 @@ module.exports = async function () {
   // select a template to use for the project.
   const asker = new Asker();
 
-  const template = await asker.selectTemplate(path.basename(process.cwd()));
+  const template = await asker.selectTemplate();
   if (__dirname.includes(currentDir)) {
     console.log('Do not create projects in the Spectate directory.');
     return;
   }
+
   console.log(
     `Creating a new Spectate project in ${chalk.bold.magenta(currentDir)}.`,
   );
 
   // Copy template into current directory
-  await fs.copy(path.join(__dirname, '../templates/default'), currentDir);
+  await fs.copy(path.join(__dirname, `../templates/${template}`), currentDir);
 
   // Write Spectate's version number into README
   await writeReadmeVersion();
@@ -72,6 +73,8 @@ module.exports = async function () {
 
   console.log();
   console.log('Please check the Spectate README for further instructions.');
+  // At the very end, close the asker
+  asker.close();
 };
 
 /* Returns whether we're in a git repo */

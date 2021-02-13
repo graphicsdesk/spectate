@@ -11,7 +11,7 @@ starting on a project
   create        Create a Spectate project in the current directory
   init          Set remote links for GitHub and Google Docs
   clone         Clone an existing Spectate project
-
+  test
 working with Google Docs
   download      Download the Google Doc and update the PostHTML config
   open-doc      Open the Google Doc attached to this project

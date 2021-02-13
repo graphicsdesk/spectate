@@ -14,7 +14,7 @@ const log = {
   },
 };
 
-const templates = ["Default", "Series"]
+const templates = ["default", "series"]
 
 class Asker {
   constructor() {
@@ -67,18 +67,19 @@ class Asker {
   }
 
   async selectTemplate() {
-    const templates = askTemplates()
+    askTemplates();
     const confirmation = await this.question({
       message: `Please input your selection`,
       options: '(Input a number)',
       validate: () => ({ success: true }),
     });
-    if (confirmation <= templates.length)
-      return templates[confirmation]
-    return await this.questionWithRetries({
+    if (validNum(confirmation))
+      return templates[confirmation - 1]
+    const retry = await this.questionWithRetries({
       message: `Please input a number less than or equal to ${templates.length}`,
       validate: isValidTemplateSelection,
     });
+    return templates[retry - 1]
   }
 
   async questionWithRetries(questionObj, numTries = 3) {
@@ -144,12 +145,15 @@ function askTemplates() {
   templates.forEach((item, index) => {
     console.log(`${index + 1}. ${item}`)
   })
-  return templates;
 }
 
 function isValidTemplateSelection(i) {
-  if (!isNaN(i) && i >= 1 && i <= templates.length) return { success: true };
+  if (validNum(i)) return { success: true };
   return { error: 'Invalid Template Selection.' };
+}
+
+function validNum(i) {
+  return (!isNaN(i) && i >= 1 && i <= templates.length);
 }
 
 module.exports = { Asker, setPackageKey, getRepoName, log };
