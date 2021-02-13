@@ -1,10 +1,6 @@
-# NPM
-node_modules
-
-# Parcel
-.cache
-dist
-
-# Other
 .DS_Store
 .vscode
+
+node_modules
+keys/credentials.json
+keys/token.json
