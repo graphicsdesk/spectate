@@ -3,6 +3,7 @@ const readline = require('readline');
 const chalk = require('chalk');
 const path = require('path');
 const { execSync } = require('child_process');
+const { TEMPLATES } = require('./constants');
 
 const log = {
   error: (...msg) => console.error(chalk.red('error'), ...msg),
@@ -14,7 +15,6 @@ const log = {
   },
 };
 
-const templates = ["default", "series"]
 
 class Asker {
   constructor() {
@@ -74,12 +74,12 @@ class Asker {
       validate: () => ({ success: true }),
     });
     if (validNum(confirmation))
-      return templates[confirmation - 1]
+      return TEMPLATES[confirmation - 1]
     const retry = await this.questionWithRetries({
-      message: `Please input a number less than or equal to ${templates.length}`,
+      message: `Please input a number less than or equal to ${TEMPLATES.length}`,
       validate: isValidTemplateSelection,
     });
-    return templates[retry - 1]
+    return TEMPLATES[retry - 1]
   }
 
   async questionWithRetries(questionObj, numTries = 3) {
@@ -142,7 +142,7 @@ function isValidRepoName(s) {
 }
 
 function askTemplates() {
-  templates.forEach((item, index) => {
+  TEMPLATES.forEach((item, index) => {
     console.log(`${index + 1}. ${item}`)
   })
 }
@@ -153,7 +153,7 @@ function isValidTemplateSelection(i) {
 }
 
 function validNum(i) {
-  return (!isNaN(i) && i >= 1 && i <= templates.length);
+  return (!isNaN(i) && i >= 1 && i <= TEMPLATES.length);
 }
 
 module.exports = { Asker, setPackageKey, getRepoName, log };

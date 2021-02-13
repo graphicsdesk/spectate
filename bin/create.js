@@ -21,9 +21,12 @@ module.exports = async function () {
     `Creating a new Spectate project in ${chalk.bold.magenta(currentDir)}.`,
   );
 
-  // Copy template into current directory
-  await fs.copy(path.join(__dirname, `../templates/${template}`), currentDir);
-
+  // Copy selected templates to current directory
+  await fs.remove(`${currentDir}/src`);
+  await fs.copy(path.join(__dirname, '../templates/default'), currentDir);
+  if (template != "default")
+    await fs.copy(path.join(__dirname, `../templates/${template}`), currentDir);
+    
   // Write Spectate's version number into README
   await writeReadmeVersion();
 
