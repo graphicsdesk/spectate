@@ -16,21 +16,24 @@ module.exports = async function () {
   // Set package name to slug
   await setPackageKey('name', slug);
 
+  const repo_choice = await asker.confirmPushDestination();
+  
+  
   // Check if repository exists
   let repositoryExists;
   try {
-    execSync(`git ls-remote git@github.com:graphicsdesk/${slug}.git`, {
+    execSync(`git ls-remote git@github.com:${repo_choice}/${slug}.git`, {
       stdio: 'ignore',
     });
     repositoryExists = true;
   } catch (err) {
-    log.error(`Repository graphicsdesk/${slug} doesn't exist.`);
+    log.error(`Repository ${repo_choice}/${slug} doesn't exist.`);
   }
 
   // Add remote origin if repository exists
   if (repositoryExists) {
     try {
-      const remoteOrigin = `git@github.com:graphicsdesk/${slug}.git`;
+      const remoteOrigin = `git@github.com:${repo_choice}/${slug}.git`;
       execSync('git remote add origin ' + remoteOrigin, { stdio: 'ignore' });
       console.log(
         chalk.green('success'),

@@ -49,6 +49,19 @@ class Asker {
     });
   }
 
+  async confirmPushDestination() {
+    const confirmation = await this.question({
+      message: `Type 0 for newsdev and 1 for graphicsdesk`,
+      options: '(0/1)',
+      validate: () => ({ success: true }),
+    });
+    if (confirmation === '0') {
+      return "NewsroomDevelopment";
+    } else {
+      return "graphicsdesk";
+    }
+  }
+
   async confirmSlugOrAsk(defaultSlug) {
     const confirmation = await this.question({
       message: `Use "${defaultSlug}" as slug?`,
