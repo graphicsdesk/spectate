@@ -3,6 +3,7 @@ const open = require('open');
 const chalk = require('chalk');
 const { execSync } = require('child_process');
 const { Asker, setPackageKey, log } = require('./utils');
+const { ORGANIZATIONS } = require('./constants');
 
 const TEMPLATE_DOC_URL =
   'https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit';
@@ -15,8 +16,10 @@ module.exports = async function () {
 
   // Set package name to slug
   await setPackageKey('name', slug);
-
-  const repo_choice = await asker.confirmPushDestination();
+  
+  console.log();
+  console.log("Please choose an github organization");
+  const repo_choice = await asker.selectFromChoices(ORGANIZATIONS);
   
   
   // Check if repository exists

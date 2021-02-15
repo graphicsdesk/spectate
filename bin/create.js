@@ -3,6 +3,7 @@ const path = require('path');
 const chalk = require('chalk');
 const { execSync } = require('child_process');
 const { Asker, log } = require('./utils');
+const { TEMPLATES } = require('./constants');
 
 const currentDir = process.cwd();
 
@@ -11,7 +12,10 @@ module.exports = async function () {
   // select a template to use for the project.
   const asker = new Asker();
 
-  const template = await asker.selectTemplate();
+  console.log();
+  console.log("Please choose a template");
+
+  const template = await asker.selectFromChoices(TEMPLATES);
   if (__dirname.includes(currentDir)) {
     console.log('Do not create projects in the Spectate directory.');
     return;

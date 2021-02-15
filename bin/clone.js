@@ -1,7 +1,8 @@
 const path = require('path');
 const chalk = require('chalk');
 const { execSync } = require('child_process');
-const { log } = require('./utils');
+const { Asker, log } = require('./utils');
+const { ORGANIZATIONS } = require('./constants');
 
 if (process.argv.length <= 3) {
   console.log('Please specify the repository name:');
@@ -13,10 +14,14 @@ if (process.argv.length <= 3) {
   process.exit(1);
 }
 
-module.exports = function () {
+module.exports = async function () {
+  const asker = new Asker();
+
+  console.log("Please choose an github to clone from");
+  const org = await asker.selectFromChoices(ORGANIZATIONS);
   // Check if the repository exists
   const repoName = process.argv[3];
-  const url = `git@github.com:graphicsdesk/${repoName}.git`;
+  const url = `git@github.com:${org}/${repoName}.git`;
   try {
     execSync(`git ls-remote ${url}`, { stdio: 'ignore' });
   } catch (err) {
@@ -58,4 +63,6 @@ module.exports = function () {
   log.command(`npm start`);
   console.log();
   console.log('Check out the Spectate README to see all available commands.');
+
+  asker.close();
 };

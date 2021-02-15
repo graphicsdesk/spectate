@@ -3,7 +3,7 @@ const path = require('path');
 const chalk = require('chalk');
 const { execSync } = require('child_process');
 const { DIST_DIR } = require('./constants');
-const { getRepoName } = require('./utils');
+const { getRepoName, getOrgName } = require('./utils');
 
 module.exports = async function () {
   // Create worktree if none exists
@@ -45,6 +45,6 @@ module.exports = async function () {
   // Move back into old directory
   process.chdir(oldWorkingDir);
 
-  const url = 'graphicsdesk.github.io/' + getRepoName();
+  const url = `${getOrgName()}.github.io/` + getRepoName();
   console.log(`Your preview should be ready at ${chalk.bold.green(url)} soon.`);
 };

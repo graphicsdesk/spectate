@@ -3,7 +3,6 @@ const readline = require('readline');
 const chalk = require('chalk');
 const path = require('path');
 const { execSync } = require('child_process');
-const { TEMPLATES } = require('./constants');
 
 const log = {
   error: (...msg) => console.error(chalk.red('error'), ...msg),
@@ -51,18 +50,22 @@ class Asker {
     });
   }
 
-  async confirmPushDestination() {
+  async selectFromChoices(selection) {
+    askChoices(selection);
     const confirmation = await this.question({
-      message: `Type 0 for newsdev and 1 for graphicsdesk`,
-      options: '(0/1)',
+      message: `Please input your selection`,
+      options: '(Input a number)',
       validate: () => ({ success: true }),
     });
-    if (confirmation === '0') {
-      return "NewsroomDevelopment";
-    } else {
-      return "graphicsdesk";
-    }
+    if (validNum(confirmation, selection))
+      return selection[confirmation - 1]
+    const retry = await this.questionWithRetries({
+      message: `Please input a number less than or equal to ${selection.length}`,
+      validate: isValidNumberSelection,
+    });
+    return selection[retry - 1]
   }
+
 
   async confirmSlugOrAsk(defaultSlug) {
     const confirmation = await this.question({
@@ -77,22 +80,6 @@ class Asker {
       message: 'Enter a slug',
       validate: isValidRepoName,
     });
-  }
-
-  async selectTemplate() {
-    askTemplates();
-    const confirmation = await this.question({
-      message: `Please input your selection`,
-      options: '(Input a number)',
-      validate: () => ({ success: true }),
-    });
-    if (validNum(confirmation))
-      return TEMPLATES[confirmation - 1]
-    const retry = await this.questionWithRetries({
-      message: `Please input a number less than or equal to ${TEMPLATES.length}`,
-      validate: isValidTemplateSelection,
-    });
-    return TEMPLATES[retry - 1]
   }
 
   async questionWithRetries(questionObj, numTries = 3) {
@@ -148,25 +135,37 @@ function getRepoName() {
   }
 }
 
+function getOrgName() {
+  try {
+    const remoteOrigin = execSync('git config --get remote.origin.url');
+    return remoteOrigin.toString().split('/')[0].split(':')[1];
+  } catch (e) {
+    log.error(
+      `Remote origin is not set. Have you run ${chalk.cyan('spectate init')}?`,
+    );
+    return false;
+  }
+}
 // Validator for whether a string is a valid GitHub repository name
 function isValidRepoName(s) {
   if (s.match(/^[A-Za-z0-9_.-]+$/)) return { success: true };
   return { error: 'Invalid GitHub repository name.' };
 }
 
-function askTemplates() {
-  TEMPLATES.forEach((item, index) => {
+function askChoices(selection) {
+  selection.forEach((item, index) => {
     console.log(`${index + 1}. ${item}`)
   })
 }
 
-function isValidTemplateSelection(i) {
+
+function isValidNumberSelection(i) {
   if (validNum(i)) return { success: true };
   return { error: 'Invalid Template Selection.' };
 }
 
-function validNum(i) {
-  return (!isNaN(i) && i >= 1 && i <= TEMPLATES.length);
+function validNum(i, selection) {
+  return (!isNaN(i) && i >= 1 && i <= selection.length);
 }
 
-module.exports = { Asker, setPackageKey, getRepoName, log };
+module.exports = { Asker, setPackageKey, getRepoName, getOrgName, log };
