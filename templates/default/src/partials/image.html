@@ -1,13 +1,13 @@
 <div class="image width-{{ item.value.width }}">
   <img src="{{ item.value.asset }}" />
-  <if condition="item.value.caption">
-    <p class="image-caption-text">
+  <p class="image-caption-text">
+     <if condition="item.value.caption">
       {{{ item.value.caption }}}
-      <!--
+     </if>
+     <if condition="item.value.credit">
       <span class="image-credit">
         Photography by {{ item.value.credit}}
       </span>
-      -->
-    </p>
-  </if>
+     </if>
+  </p>
 </div>

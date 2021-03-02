@@ -3,6 +3,7 @@ const readline = require('readline');
 const chalk = require('chalk');
 const path = require('path');
 const { execSync } = require('child_process');
+const { ORGANIZATIONS, TEMPLATES } = require('./constants');
 
 const log = {
   error: (...msg) => console.error(chalk.red('error'), ...msg),
@@ -51,12 +52,16 @@ class Asker {
   }
 
   async selectFromChoices(selection) {
-    askChoices(selection);
+    let askOrg = (selection == ORGANIZATIONS);
+    if (!askOrg)
+      askChoices(selection);
+
     const confirmation = await this.question({
-      message: `Please input your selection`,
-      options: '(Input a number)',
+      message: askOrg ? 'Please choose an organization' : `Please input your selection`,
+      options: askOrg ? askOrgs(selection) : '(Input a number)',
       validate: () => ({ success: true }),
     });
+
     if (validNum(confirmation, selection))
       return selection[confirmation - 1]
     const retry = await this.questionWithRetries({
@@ -65,6 +70,7 @@ class Asker {
     });
     return selection[retry - 1]
   }
+
 
 
   async confirmSlugOrAsk(defaultSlug) {
@@ -101,6 +107,7 @@ class Asker {
     this.rl.close();
   }
 }
+
 
 // Rewrites a file with an updated key value pair
 // Can set key inside "spectate" key if isSpectateKey
@@ -158,6 +165,15 @@ function askChoices(selection) {
   })
 }
 
+function askOrgs(orgs) {
+  var choices = '(';
+  orgs.forEach((item, index) => {
+    choices += `${index + 1} for ${item}`
+    choices += index + 1 != orgs.length ? ", " : "";
+  })
+  choices += ')';
+  return choices;
+}
 
 function isValidNumberSelection(i) {
   if (validNum(i)) return { success: true };
