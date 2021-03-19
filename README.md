@@ -52,11 +52,11 @@ $ mkdir <var>SLUG</var>
 $ cd <var>SLUG</var>
 </pre>
 
-2. Next, run `$ spectate create`. This copies the template files of a Spectate project, like boilerplate HTML/CSS and ai2html configuration, into your directory.
+2. Next, run `$ spectate create`. You will be prompted for your choice of a template. If your story is a single page, choose `default`. If your story is multiple pages, choose `series`. The command copies the relevant template files of a Spectate project, like boilerplate HTML/CSS and ai2html configuration, into your directory.
 
-3. On GitHub, create a new repository in the `NewsroomDevelopment` organization with _`SLUG`_ as the name.
+3. On GitHub, create a new repository in either the `graphicsdesk` or `NewsroomDevelopment` organization (depending on your department) with _`SLUG`_ as the name.
 
-4. Run `$ spectate init`, which helps set up the remote connections necessary to your project. It will first prompt you for the article slug. If you leave the answer blank, it will use the name of your project directory by default. It will then ask you for a Google Docs link for the project. To create a Spectate template Google Doc, open the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit) by inputting `o` into the prompt. Clone the Doc. Paste the new Doc's link into the prompt.
+4. Run `$ spectate init`, which helps set up the remote connections necessary to your project. It will first prompt you for the article slug. If you leave the answer blank, it will use the name of your project directory by default. It will then ask you for the GitHub organization the repository is at. Finally, it will ask for a Google Docs link for the project. To create a Spectate template Google Doc, open the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit) by inputting `o` into the prompt. Clone the Doc. Paste the new Doc's link into the prompt.
 
 5. `spectate create` has already created an initial commit for you. Push it to GitHub by doing:
 
