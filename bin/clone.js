@@ -17,7 +17,6 @@ if (process.argv.length <= 3) {
 module.exports = async function () {
   const asker = new Asker();
 
-  console.log("Please choose an github to clone from");
   const org = await asker.selectFromChoices(ORGANIZATIONS);
   // Check if the repository exists
   const repoName = process.argv[3];
