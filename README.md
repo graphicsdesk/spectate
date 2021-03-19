@@ -6,7 +6,7 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 ## Prerequisites
 
-1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and make a [GitHub](https://github.com) account. Ask Charlotte, Jessica, Jenny or Hong to add you to the graphicsdesk organization.
+1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and make a [GitHub](https://github.com) account. Ask Charlotte, Jessica, Jenny or Hong to add you to the graphicsdesk or newsdev organization.
 
 2. To be able to write to our repositories, set up an SSH key. Follow the instructions in the first five sections of [Connecting to GitHub with SSH](https://help.github.com/en/articles/connecting-to-github-with-ssh).
 
@@ -54,7 +54,7 @@ $ cd <var>SLUG</var>
 
 2. Next, run `$ spectate create`. This copies the template files of a Spectate project, like boilerplate HTML/CSS and ai2html configuration, into your directory.
 
-3. On GitHub, create a new repository in the `graphicsdesk` organization with _`SLUG`_ as the name.
+3. On GitHub, create a new repository in the `NewsroomDevelopment` organization with _`SLUG`_ as the name.
 
 4. Run `$ spectate init`, which helps set up the remote connections necessary to your project. It will first prompt you for the article slug. If you leave the answer blank, it will use the name of your project directory by default. It will then ask you for a Google Docs link for the project. To create a Spectate template Google Doc, open the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit) by inputting `o` into the prompt. Clone the Doc. Paste the new Doc's link into the prompt.
 
@@ -76,7 +76,7 @@ To clone a Spectate project, run:
 $ spectate clone <var>SLUG</var>
 </pre>
 
-This will clone the repository `git@github.com:graphicsdesk/SLUG.git` into a new directory named _`SLUG`_ and install the project's dependencies. See [Usage](#usage) for further instructions.
+This will clone the repository `git@github.com:NewsroomDevelopment/SLUG.git` into a new directory named _`SLUG`_ and install the project's dependencies. See [Usage](#usage) for further instructions.
 
 ## Usage
 
