@@ -18,10 +18,8 @@ module.exports = async function () {
   await setPackageKey('name', slug);
   
   console.log();
-  console.log("Please choose an github organization");
   const repo_choice = await asker.selectFromChoices(ORGANIZATIONS);
-  
-  
+    
   // Check if repository exists
   let repositoryExists;
   try {
