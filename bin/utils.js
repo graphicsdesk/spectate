@@ -3,6 +3,7 @@ const readline = require('readline');
 const chalk = require('chalk');
 const path = require('path');
 const { execSync } = require('child_process');
+const { ORGANIZATIONS, TEMPLATES } = require('./constants');
 
 const log = {
   error: (...msg) => console.error(chalk.red('error'), ...msg),
@@ -13,6 +14,7 @@ const log = {
     note && console.log('    ' + note);
   },
 };
+
 
 class Asker {
   constructor() {
@@ -49,6 +51,28 @@ class Asker {
     });
   }
 
+  async selectFromChoices(selection) {
+    let askOrg = (selection == ORGANIZATIONS);
+    if (!askOrg)
+      askChoices(selection);
+
+    const confirmation = await this.question({
+      message: askOrg ? 'Please choose an organization' : `Please input your selection`,
+      options: askOrg ? askOrgs(selection) : '(Input a number)',
+      validate: () => ({ success: true }),
+    });
+
+    if (validNum(confirmation, selection))
+      return selection[confirmation - 1]
+    const retry = await this.questionWithRetries({
+      message: `Please input a number less than or equal to ${selection.length}`,
+      validate: isValidNumberSelection,
+    });
+    return selection[retry - 1]
+  }
+
+
+
   async confirmSlugOrAsk(defaultSlug) {
     const confirmation = await this.question({
       message: `Use "${defaultSlug}" as slug?`,
@@ -84,6 +108,7 @@ class Asker {
   }
 }
 
+
 // Rewrites a file with an updated key value pair
 // Can set key inside "spectate" key if isSpectateKey
 async function setPackageKey(key, value, isSpectateKey) {
@@ -117,10 +142,46 @@ function getRepoName() {
   }
 }
 
+function getOrgName() {
+  try {
+    const remoteOrigin = execSync('git config --get remote.origin.url');
+    return remoteOrigin.toString().split('/')[0].split(':')[1];
+  } catch (e) {
+    log.error(
+      `Remote origin is not set. Have you run ${chalk.cyan('spectate init')}?`,
+    );
+    return false;
+  }
+}
 // Validator for whether a string is a valid GitHub repository name
 function isValidRepoName(s) {
   if (s.match(/^[A-Za-z0-9_.-]+$/)) return { success: true };
   return { error: 'Invalid GitHub repository name.' };
 }
 
-module.exports = { Asker, setPackageKey, getRepoName, log };
+function askChoices(selection) {
+  selection.forEach((item, index) => {
+    console.log(`${index + 1}. ${item}`)
+  })
+}
+
+function askOrgs(orgs) {
+  var choices = '(';
+  orgs.forEach((item, index) => {
+    choices += `${index + 1} for ${item}`
+    choices += index + 1 != orgs.length ? ", " : "";
+  })
+  choices += ')';
+  return choices;
+}
+
+function isValidNumberSelection(i) {
+  if (validNum(i)) return { success: true };
+  return { error: 'Invalid Template Selection.' };
+}
+
+function validNum(i, selection) {
+  return (!isNaN(i) && i >= 1 && i <= selection.length);
+}
+
+module.exports = { Asker, setPackageKey, getRepoName, getOrgName, log };

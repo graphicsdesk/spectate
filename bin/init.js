@@ -3,6 +3,7 @@ const open = require('open');
 const chalk = require('chalk');
 const { execSync } = require('child_process');
 const { Asker, setPackageKey, log } = require('./utils');
+const { ORGANIZATIONS } = require('./constants');
 
 const TEMPLATE_DOC_URL =
   'https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit';
@@ -15,22 +16,27 @@ module.exports = async function () {
 
   // Set package name to slug
   await setPackageKey('name', slug);
-
+  
+  console.log();
+  console.log("Please choose an github organization");
+  const repo_choice = await asker.selectFromChoices(ORGANIZATIONS);
+  
+  
   // Check if repository exists
   let repositoryExists;
   try {
-    execSync(`git ls-remote git@github.com:graphicsdesk/${slug}.git`, {
+    execSync(`git ls-remote git@github.com:${repo_choice}/${slug}.git`, {
       stdio: 'ignore',
     });
     repositoryExists = true;
   } catch (err) {
-    log.error(`Repository graphicsdesk/${slug} doesn't exist.`);
+    log.error(`Repository ${repo_choice}/${slug} doesn't exist.`);
   }
 
   // Add remote origin if repository exists
   if (repositoryExists) {
     try {
-      const remoteOrigin = `git@github.com:graphicsdesk/${slug}.git`;
+      const remoteOrigin = `git@github.com:${repo_choice}/${slug}.git`;
       execSync('git remote add origin ' + remoteOrigin, { stdio: 'ignore' });
       console.log(
         chalk.green('success'),
