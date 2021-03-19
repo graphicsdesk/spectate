@@ -57,7 +57,7 @@ class Asker {
       askChoices(selection);
 
     const confirmation = await this.question({
-      message: askOrg ? 'Please choose an organization' : `Please input your selection`,
+      message: askOrg ? 'Choose an organization' : 'Input your selection',
       options: askOrg ? askOrgs(selection) : '(Input a number)',
       validate: () => ({ success: true }),
     });
