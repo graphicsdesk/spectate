@@ -23,7 +23,7 @@ Spectate is a [command line tool](https://vgkits.org/blog/what-is-a-terminal) (j
 1. Clone the Spectate repository into your home directory and move into it:
 
 ```sh
-$ git clone git@github.com:graphicsdesk/spectate.git ~/spectate
+$ git clone git@github.com:NewsroomDevelopment/spectate.git ~/spectate
 $ cd ~/spectate
 ```
 
