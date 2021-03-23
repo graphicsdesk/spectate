@@ -41,6 +41,9 @@ function defaultFormatter(textRun) {
   if (textRun.textStyle.bold) {
     content = content.replace(/([^\n]+)(\n)?/, '<b>$1</b>$2');
   }
+  if (textRun.textStyle.strikethrough) {
+    content = content.replace(/([^\n]+)(\n)?/, '<strike>$1</strike>$2');
+  }
   return content;
 }
 
