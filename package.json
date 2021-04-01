@@ -1,11 +1,11 @@
 {
   "name": "spectate",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "A tool for developing freeform Spectator stories.",
   "license": "MIT",
   "homepage": "https://github.com/graphicsdesk/spectate",
   "bin": {
-    "spectate": "./bin/spectate.js"
+    "spectate": "bin/spectate.js"
   },
   "dependencies": {
     "archieml": "^0.4.2",
