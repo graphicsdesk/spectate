@@ -23,5 +23,6 @@
     "trailingComma": "all",
     "singleQuote": true,
     "arrowParens": "avoid"
-  }
+  },
+  "private": true
 }
