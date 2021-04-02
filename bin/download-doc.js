@@ -65,10 +65,6 @@ module.exports = async function () {
 
   // Write config to .posthtmlrc, the only config file that triggers live reload
   await writeLocalFile('.posthtmlrc', PH_CONFIG);
-
-  // Write doc data again to data/doc.json. (Example use case: accessing
-  // information in the doc in client-side JavaScript). Should probs remove.
-  await writeLocalFile('./data/doc.json', data);
 };
 
 /* Writes data to a file in the Spectate project */
