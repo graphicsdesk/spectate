@@ -63,8 +63,15 @@ module.exports = async function () {
     ...config,
   };
 
-  // Write config to .posthtmlrc, the only config file that triggers live reload
-  await writeLocalFile('.posthtmlrc', PH_CONFIG);
+  if (process.argv.includes('v2')) {
+    // For SvelteKit projects
+    const SVELTEKIT_DATA_DIR = './src/lib/data/';
+    await fs.mkdirp(SVELTEKIT_DATA_DIR);
+    await writeLocalFile(SVELTEKIT_DATA_DIR + 'copy.json', data)
+  } else {
+    // Write config to .posthtmlrc, the only config file that triggers live reload
+    await writeLocalFile('.posthtmlrc', PH_CONFIG);
+  }
 };
 
 /* Writes data to a file in the Spectate project */
