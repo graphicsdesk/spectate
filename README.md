@@ -23,7 +23,7 @@ Spectate is a [command line tool](https://vgkits.org/blog/what-is-a-terminal) (j
 1. Clone the Spectate repository into your home directory and move into it:
 
 ```sh
-$ git clone git@github.com:NewsroomDevelopment/spectate.git ~/spectate
+$ git clone https://github.com/graphicsdesk/spectate.git ~/spectate
 $ cd ~/spectate
 ```
 
@@ -39,7 +39,7 @@ $ npm install
 $ npm link
 ```
 
-4. Lastly, to authorize Spectate to download Google Docs, click the ["Enable the Google Docs API"](https://developers.google.com/docs/api/quickstart/nodejs) button (make sure you're signed into Google with your Spec account). Click "Create", and save the client configuration as `credentials.json` inside the `~/spectate/keys/` directory.
+4. Lastly, to authorize Spectate to download Google Docs, click the ["Enable the Google Docs API"](https://docs.google.com/document/d/1NoqeU_Bf8tbALJZWSVGUTk7KIphHI3FdZsP2pv7SsNo/edit) button (make sure you're signed into Google with your Spec account). Click "Create", and save the client configuration as `credentials.json` inside the `~/spectate/keys/` directory.
 
 ## Creating a Spectate project
 
@@ -76,7 +76,7 @@ To clone a Spectate project, run:
 $ spectate clone <var>SLUG</var>
 </pre>
 
-This will clone the repository `git@github.com:NewsroomDevelopment/SLUG.git` into a new directory named _`SLUG`_ and install the project's dependencies. See [Usage](#usage) for further instructions.
+This will clone the repository `https://github.com/graphicsdesk/SLUG.git` into a new directory named _`SLUG`_ and install the project's dependencies. See [Usage](#usage) for further instructions.
 
 ## Usage
 
