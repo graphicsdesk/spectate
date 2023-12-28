@@ -6,7 +6,7 @@ Check out these examples: [University responses to COVID-19](https://www.columbi
 
 ## Prerequisites
 
-1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and make a [GitHub](https://github.com) account. Ask Charlotte, Jessica, Jenny or Hong to add you to the graphicsdesk or newsdev organization.
+1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and make a [GitHub](https://github.com) account. Ask your Graphics editor or deputy editors to add you to the graphicsdesk organization.
 
 2. To be able to write to our repositories, set up an SSH key. Follow the instructions in the first five sections of [Connecting to GitHub with SSH](https://help.github.com/en/articles/connecting-to-github-with-ssh).
 
@@ -39,7 +39,7 @@ $ npm install
 $ npm link
 ```
 
-4. Lastly, to authorize Spectate to download Google Docs, click the ["Enable the Google Docs API"](https://docs.google.com/document/d/1NoqeU_Bf8tbALJZWSVGUTk7KIphHI3FdZsP2pv7SsNo/edit) button (make sure you're signed into Google with your Spec account). Click "Create", and save the client configuration as `credentials.json` inside the `~/spectate/keys/` directory.
+4. Lastly, to authorize Spectate to download Google Docs, you'll have to set up Google Docs API credentials (make sure you're signed into Google with your Spec account). Follow [this guide](https://docs.google.com/document/d/1BWCEMASvQ0J7Gc24IHgb7qMbHXyIusUZD4Ic13MwsPw/edit?usp=sharing) to finish this setup. 
 
 ## Creating a Spectate project
 
@@ -56,7 +56,7 @@ $ cd <var>SLUG</var>
 
 3. On GitHub, create a new repository in either the `graphicsdesk` or `NewsroomDevelopment` organization (depending on your department) with _`SLUG`_ as the name.
 
-4. Run `$ spectate init`, which helps set up the remote connections necessary to your project. It will first prompt you for the article slug. If you leave the answer blank, it will use the name of your project directory by default. It will then ask you for the GitHub organization the repository is at. Finally, it will ask for a Google Docs link for the project. To create a Spectate template Google Doc, open the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit) by inputting `o` into the prompt. Clone the Doc. Paste the new Doc's link into the prompt.
+4. Run `$ spectate init`, which helps set up the remote connections necessary to your project. It will first prompt you for the article slug. If you leave the answer blank, it will use the name of your project directory by default. It will then ask you for the GitHub organization the repository is at. Finally, it will ask for a Google Docs link for the project. To create a Spectate template Google Doc, open the [Spectate Doc template](https://docs.google.com/document/d/1JV2fVhKWMo1MHIJqL3oq10mRSOrWPO_iRnRkmD92N5g/edit) by inputting `o` into the prompt. Make a copy of the Doc (Make sure you DO NOT edit the original template). Paste the new Doc's link into the prompt.
 
 5. `spectate create` has already created an initial commit for you. Push it to GitHub by doing:
 

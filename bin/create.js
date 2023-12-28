@@ -17,7 +17,7 @@ module.exports = async function () {
 
   const template = await asker.selectFromChoices(TEMPLATES);
   if (__dirname.includes(currentDir)) {
-    console.log('Do not create projects in the Spectate directory.');
+    console.log('Do not create projects in the Spectate directory. Press Control+C to abort.');
     return;
   }
 
@@ -27,9 +27,12 @@ module.exports = async function () {
 
   // Copy selected templates to current directory
   await fs.remove(`${currentDir}/src`);
-  await fs.copy(path.join(__dirname, '../templates/default'), currentDir);
-  if (template != "default")
-    await fs.copy(path.join(__dirname, `../templates/${template}`), currentDir);
+  if (template == "embed")
+    await fs.copy(path.join(__dirname, '../templates/embed'), currentDir);
+  else
+    await fs.copy(path.join(__dirname, '../templates/default'), currentDir);
+    if (template != "default")
+      await fs.copy(path.join(__dirname, `../templates/${template}`), currentDir);
     
   // Write Spectate's version number into README
   await writeReadmeVersion();
@@ -54,8 +57,9 @@ module.exports = async function () {
   }
 
   // Run download-doc to generate default PostHTML config
-  await require('./download-doc')();
-  console.log();
+  if (template != "embed")
+    await require('./download-doc')();
+    console.log();
 
   // Stage everything and create the first commit
   if (tryGitCommit()) {
@@ -80,6 +84,9 @@ module.exports = async function () {
 
   console.log();
   console.log('Please check the Spectate README for further instructions.');
+
+  if(template == "embed")
+    console.log(`Learn more about using Spectate embeds at this link: https://docs.google.com/document/d/1-X2lGdHIw3f4W4Lgxs0avtcZBoNwTsyobh-e94lhYUQ/edit?usp=sharing`);    
   // At the very end, close the asker
   asker.close();
 };
@@ -115,3 +122,5 @@ async function writeReadmeVersion() {
     .replace('%VERSION%', version);
   await fs.writeFile('README.md', newContents);
 }
+
+

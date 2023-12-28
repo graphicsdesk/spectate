@@ -1,3 +1,4 @@
+const fs = require('fs-extra');
 const path = require('path');
 const open = require('open');
 const chalk = require('chalk');
@@ -13,6 +14,7 @@ module.exports = async function () {
   // error should not be caught.
   const asker = new Asker();
   const slug = await asker.confirmSlugOrAsk(path.basename(process.cwd()));
+  const currentDir = process.cwd();
 
   // Set package name to slug
   await setPackageKey('name', slug);
@@ -48,36 +50,37 @@ module.exports = async function () {
     }
   }
 
-  console.log();
+  console.log(path.join(currentDir,'.posthtmlrc'));
 
+  if (fs.existsSync(path.join(currentDir, '.posthtmlrc'))){
   // Ask for Google Doc
-  const url = await asker.questionWithRetries({
-    message: 'Enter a Google Docs URL',
-    validate: isValidGoogleDocsURL,
-    commands: {
-      o: {
-        description: 'open template',
-        action: async () => await open(TEMPLATE_DOC_URL),
+    const url = await asker.questionWithRetries({
+      message: 'Enter a Google Docs URL',
+      validate: isValidGoogleDocsURL,
+      commands: {
+        o: {
+          description: 'open template',
+          action: async () => await open(TEMPLATE_DOC_URL),
+        },
       },
-    },
-  });
+    })
+    if (url) {
+      await setPackageKey('DOC_URL', url, true);
+      log.success('Set DOC_URL in the "spectate" key in package.json.');
+  
+      console.log();
+      console.log(
+        `Running ${chalk.cyan(
+          'spectate download',
+        )} since Google Docs link updated.`,
+      );
+      await require('./download-doc')();
+    }
+  }
+    // At the very end, close the asker
+    asker.close();
 
   // Set google doc url in config
-  if (url) {
-    await setPackageKey('DOC_URL', url, true);
-    log.success('Set DOC_URL in the "spectate" key in package.json.');
-
-    console.log();
-    console.log(
-      `Running ${chalk.cyan(
-        'spectate download',
-      )} since Google Docs link updated.`,
-    );
-    await require('./download-doc')();
-  }
-
-  // At the very end, close the asker
-  asker.close();
 };
 
 function isValidGoogleDocsURL(s) {
