@@ -10,11 +10,13 @@
   "devDependencies": {
     "cssnano": "^4.1.10",
     "eslint": "^7.0.0",
-    "parcel-bundler": "^1.12.3",
+    "parcel-bundler": "1.12.3",
     "patch-package": "^6.2.2",
-    "posthtml-expressions": "^1.4.0",
+    "posthtml-expressions": "1.4.0",
     "posthtml-include": "^1.4.3",
-    "sass": "^1.26.5"
+    "sass": "^1.26.5",
+    "@babel/helper-create-regexp-features-plugin": "^7.21.8",
+    "@babel/core": "^7.21.8"
   },
   "dependencies": {
     "intersection-observer": "^0.10.0",
