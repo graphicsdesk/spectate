@@ -3,10 +3,12 @@
 
   <header>
     <h1 id="headline">{{ headline }}</h1>
+    <h1 id="dek">{{ dek }}</h1>
     <if condition="typeof deck !== 'undefined'">
-      <p class="deck">{{ deck }}</p>
+      <p id="dek">{{ dek }}</p>
     </if>
     <p class="byline">{{{ byline }}}</p>
+    
     <!-- To add more bylines, add this here & on google doc
       <p class="byline">{{{ byline2 }}}</p> 
     -->
@@ -14,7 +16,7 @@
   </header>
 </div>
 
-<p class="cover-caption">{{ cover_caption }}</p>
+<p class="cover-caption">{{{ cover_caption }}}</p>
 
 <div class="g-body">
   <p class="inline-credits">
