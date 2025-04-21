@@ -142,6 +142,24 @@ b {
   }
 }
 
+@media (max-width: 500px) {
+  .cover-hed header {
+    margin-top: 50%;
+    transform: translateY(-138%);
+  }  
+}
+
+@media (max-width: 400px) {
+  .cover-hed header {
+    margin-top: 50%;
+    transform: translateY(-130%);
+  }  
+}
+
+#headline {
+  max-width: unset !important;
+}
+
 .cover-caption {
   margin: 7px auto 60px;
   font-size: 15px;
@@ -179,6 +197,15 @@ header {
     margin-bottom: 14px;
     text-align: center;
   }
+
+  #dek {
+    font-family: Playfair Display;
+    font-size: 20px;
+    line-height: 1.45;
+    margin-bottom: 14px;
+    text-align: center;
+    font-weight: normal;
+    }   
 
   .byline {
     font-weight: 600;
@@ -426,16 +453,22 @@ header {
   margin: 30px auto 25px auto;
 
   img {
-    width: 100%;
+    display: block;
+   width: 80%;
+   max-width: 700px;
+   margin: auto;
   }
 
   .image-caption-text {
-    font-size: 15px;
-    font-family: $georgia;
-    color: #666;
-    margin: 7px 0 0 0;
-    padding: 0 $gbody-padding / 2;
-    line-height: 1.3;
+    text-align: left;
+   font-size: clamp(8px, 3vw, 18px) !important;
+   font-family: $georgia;
+   color: #666;
+   margin: auto;
+   padding: 0 $gbody-padding / 2;
+   line-height: 1.3;
+   max-width: 700px;
+   margin-left: auto;
 
     .image-credit {
       color: #999;
@@ -445,7 +478,7 @@ header {
 
 @media (max-width: 660px) {
   .image .image-caption-text {
-    font-size: 25px;
+    font-size: 10px;
   }
 }
 
@@ -474,6 +507,13 @@ header {
     padding: 0 $gbody-padding;
   }
 }
+
+@media (min-width: 767px) {
+  .image {
+    max-width: 50vw;
+  }
+ }
+ 
 
 .graphic {
   margin: 30px auto;
