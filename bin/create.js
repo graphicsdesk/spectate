@@ -3,7 +3,7 @@ const path = require('path');
 const chalk = require('chalk');
 const { execSync } = require('child_process');
 const { Asker, log } = require('./utils');
-const { TEMPLATES } = require('./constants');
+const { TEMPLATES, EMBED_SHARED_FILES } = require('./constants');
 
 const currentDir = process.cwd();
 
@@ -28,11 +28,14 @@ module.exports = async function () {
   // Copy selected templates to current directory
   await fs.remove(`${currentDir}/src`);
   if (template == "embed") {
-    // dereference: embed's template contains symlinks into templates/default
-    // for files shared between the two templates
-    await fs.copy(path.join(__dirname, '../templates/embed'), currentDir, {
-      dereference: true,
-    });
+    await fs.copy(path.join(__dirname, '../templates/embed'), currentDir);
+    // Copy files from templates/default to templates/embed
+    // for Windows support (instead of symlinking them)
+    for (const file of EMBED_SHARED_FILES)
+      await fs.copy(
+        path.join(__dirname, '../templates/default', file),
+        path.join(currentDir, file),
+      );
   } else {
     await fs.copy(path.join(__dirname, '../templates/default'), currentDir);
     if (template != "default")

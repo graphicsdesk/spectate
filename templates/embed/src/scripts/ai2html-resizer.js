@@ -1,1 +1,0 @@
-../../../default/src/scripts/ai2html-resizer.js
